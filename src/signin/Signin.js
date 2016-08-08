@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import {
