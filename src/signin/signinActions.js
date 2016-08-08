@@ -1,8 +1,8 @@
 import { Action } from 'react-native-router-flux';
 
-export function loginUserRequest() {
+export function signinUserRequest() {
   return {
-    type: 'LOGIN_USER_REQUEST',
+    type: 'SIGNIN_USER_REQUEST',
   };
 }
 
@@ -13,13 +13,20 @@ export function signinUserSuccess(token) {
   };
 }
 
+export function signinUserFail(statusMessage) {
+  return {
+    type: 'SIGNIN_USER_FAIL',
+    statusMessage,
+  };
+}
+
 export function signinUser(name, password) {
   return (dispatch) => {
-    dispatch(loginUserRequest());
+    dispatch(signinUserRequest());
     return fetch('http://localhost:3000/iosAuth/local/signin', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -32,6 +39,7 @@ export function signinUser(name, password) {
       if (response.statusMessage) {
         // respond with error messages such as
         // incorrect user name and email
+        dispatch(signinUserFail(response.statusMessage));
       } else if (response.token) {
         dispatch(signinUserSuccess(response.token));
         // change to homepage
@@ -39,7 +47,7 @@ export function signinUser(name, password) {
       }
     })
     .catch((e) => {
-      console.log(e);
+      dispatch(signinUserFail('connection error', e));
     });
   };
 }

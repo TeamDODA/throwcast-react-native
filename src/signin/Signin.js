@@ -31,21 +31,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 120,
     padding: 20,
-    backgroundColor: 'transparent',
-  },
-  stretch: {
-    flex: 1,
-    width: null,
-    height: 350
   },
   title: {
     fontFamily: 'HelveticaNeue-Light',
     fontSize: 72,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'black',
     backgroundColor: 'transparent',
     alignSelf: 'center',
     marginBottom: 30,
-    marginTop: 135
+    marginTop: 30,
   },
   buttonText: {
     fontSize: 18,
@@ -88,6 +82,9 @@ class SignIn extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.row}>
+          <Text style={styles.title}>Throwcast</Text>
+        </View>
+        <View style={styles.row}>
           <Form
             ref="form"
             type={Person}
@@ -100,7 +97,7 @@ class SignIn extends Component {
             style={styles.button}
             underlayColor="#99d9f4"
           >
-            <Text style={styles.buttonText}>Login</Text>
+            <Text style={styles.buttonText}>Sign in</Text>
           </TouchableHighlight>
           <Text style={styles.signup} onPress={Actions.signUp}>Sign Up</Text>
           {statusMessage && <Text style={styles.notification}>{statusMessage}</Text>}
