@@ -1,12 +1,13 @@
 import { Scene, Router } from 'react-native-router-flux';
 import { Provider, connect } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import React, { Component } from 'react';
+import thunk from 'redux-thunk';
 import reducers from './reducers';
-import Test from './components/test';
+import SignIn from '../signin/signin.js';
 
 const RouterWithRedux = connect()(Router);
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunk));
 
 class App extends Component {
   render() {
@@ -14,7 +15,7 @@ class App extends Component {
       <Provider store={store}>
         <RouterWithRedux>
           <Scene key="root">
-            <Scene key="test" component={Test} />
+            <Scene key="signin" component={SignIn} />
           </Scene>
         </RouterWithRedux>
       </Provider>

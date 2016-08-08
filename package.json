@@ -11,7 +11,9 @@
     "react-native": "0.30.0",
     "react-native-router-flux": "^3.33.2",
     "react-redux": "^4.4.5",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
+    "tcomb-form-native": "^0.6.0"
   },
   "devDependencies": {
     "eslint": "^3.2.2",
