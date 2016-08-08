@@ -1,28 +1,41 @@
-import { Action } from 'react-native-router-flux';
-import { signinUserSuccess } from '../signin/signinActions';
+import { Actions } from 'react-native-router-flux';
+import { signinSuccess } from '../signin/signinActions';
 
-export function signupUserRequest() {
+export function signupInitialize() {
   return {
-    type: 'SIGNUP_USER_REQUEST',
+    type: 'SIGNUP_INITIALIZE',
   };
 }
 
-export function signupUserSuccess() {
+export function signupRequest() {
   return {
-    type: 'SIGNUP_USER_SUCCESS',
+    type: 'SIGNUP_REQUEST',
   };
 }
 
-export function signupUserFail(statusMessage) {
+export function signupSuccess() {
   return {
-    type: 'SIGNUP_USER_FAIL',
+    type: 'SIGNUP_SUCCESS',
+  };
+}
+
+export function signupFail(statusMessage) {
+  return {
+    type: 'SIGNUP_FAIL',
     statusMessage,
   };
 }
 
-export function signupUser(name, password) {
+export function toSignin() {
   return (dispatch) => {
-    dispatch(signupUserRequest());
+    dispatch(signupInitialize());
+    Actions.signin();
+  };
+}
+
+export function signup(name, password) {
+  return (dispatch) => {
+    dispatch(signupRequest());
     return fetch('http://localhost:3000/iosAuth/local/signup', {
       method: 'POST',
       headers: {
@@ -38,16 +51,16 @@ export function signupUser(name, password) {
     .then((response) => {
       if (response.statusMessage) {
         // respond with error messages
-        dispatch(signupUserFail(response.statusMessage));
+        dispatch(signupFail(response.statusMessage));
       } else if (response.token) {
         // change to homepage
-        dispatch(signupUserSuccess());
-        dispatch(signinUserSuccess(response.token));
-        Action.playlist();
+        dispatch(signupSuccess());
+        dispatch(signinSuccess(response.token));
+        Actions.playlist();
       }
     })
     .catch((e) => {
-      dispatch(signupUserFail('connection error', e));
+      dispatch(signupFail('connection error', e));
     });
   };
 }

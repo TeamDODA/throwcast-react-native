@@ -1,19 +1,18 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import { Actions } from 'react-native-router-flux';
 import React, { Component } from 'react';
 import t from 'tcomb-form-native';
 import {
-  StyleSheet,
   Text,
   View,
   TouchableHighlight,
 } from 'react-native';
 import * as actionCreators from './signupActions';
+import styles from './styles';
 
 const Form = t.form.Form;
 const Person = t.struct({
-  name: t.string,
+  name: t.String,
   password: t.String,
 });
 
@@ -26,40 +25,11 @@ const options = {
   },
 };
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    marginTop: 120,
-    padding: 20,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center',
-  },
-  button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
-  notification: {
-    fontFamily: 'HelveticaNeue-Light',
-    fontSize: 15,
-    alignSelf: 'center',
-    marginBottom: 30,
-  },
-});
-
 class SignUp extends Component {
   signUp() {
     const value = this.refs.form.getValue();
     if (value) {
-      this.props.actions.signupUser(value.name, value.password);
+      this.props.actions.signup(value.name, value.password);
     }
   }
 
@@ -82,6 +52,7 @@ class SignUp extends Component {
           >
             <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableHighlight>
+          <Text style={styles.signin} onPress={this.props.actions.toSignin}>Sign In</Text>
           {statusMessage && <Text style={styles.notification}>{statusMessage}</Text>}
         </View>
       </View>

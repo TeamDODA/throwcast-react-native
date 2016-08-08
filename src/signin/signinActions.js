@@ -1,28 +1,41 @@
-import { Action } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 
-export function signinUserRequest() {
+export function signinInitialize() {
   return {
-    type: 'SIGNIN_USER_REQUEST',
+    type: 'SIGNIN_INITIALIZE',
   };
 }
 
-export function signinUserSuccess(token) {
+export function signinRequest() {
   return {
-    type: 'SIGNIN_USER_SUCCESS',
+    type: 'SIGNIN_REQUEST',
+  };
+}
+
+export function signinSuccess(token) {
+  return {
+    type: 'SIGNIN_SUCCESS',
     token,
   };
 }
 
-export function signinUserFail(statusMessage) {
+export function signinFail(statusMessage) {
   return {
-    type: 'SIGNIN_USER_FAIL',
+    type: 'SIGNIN_FAIL',
     statusMessage,
   };
 }
 
-export function signinUser(name, password) {
+export function toSignup() {
   return (dispatch) => {
-    dispatch(signinUserRequest());
+    dispatch(signinInitialize());
+    Actions.signup();
+  };
+}
+
+export function signin(name, password) {
+  return (dispatch) => {
+    dispatch(signinRequest());
     return fetch('http://localhost:3000/iosAuth/local/signin', {
       method: 'POST',
       headers: {
@@ -39,15 +52,14 @@ export function signinUser(name, password) {
       if (response.statusMessage) {
         // respond with error messages such as
         // incorrect user name and email
-        dispatch(signinUserFail(response.statusMessage));
+        dispatch(signinFail(response.statusMessage));
       } else if (response.token) {
-        dispatch(signinUserSuccess(response.token));
-        // change to homepage
-        Action.playlist();
+        dispatch(signinSuccess(response.token));
+        Actions.playlist();
       }
     })
     .catch((e) => {
-      dispatch(signinUserFail('connection error', e));
+      dispatch(signinFail('connection error', e));
     });
   };
 }

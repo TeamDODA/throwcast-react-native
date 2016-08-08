@@ -11,7 +11,6 @@ const routes = function routes(state = initialState, action = {}) {
       return Object.assign({}, state, {
         scene: action.scene,
       });
-
     default:
       return state;
   }
