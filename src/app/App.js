@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import React, { Component } from 'react';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import SignIn from '../signin/signin.js';
+import SignIn from '../signin/Signin.js';
 
 const RouterWithRedux = connect()(Router);
 const store = createStore(reducers, applyMiddleware(thunk));

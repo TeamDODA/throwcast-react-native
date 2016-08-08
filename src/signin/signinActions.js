@@ -38,6 +38,8 @@ export function signinUser(name, password) {
         Action.playlist();
       }
     })
-    .done();
+    .catch((e) => {
+      console.log(e);
+    });
   };
 }

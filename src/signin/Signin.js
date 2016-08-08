@@ -2,6 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import React, { Component } from 'react';
+import t from 'tcomb-form-native';
 import {
   StyleSheet,
   Text,
@@ -9,8 +10,6 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import * as actionCreators from './signinActions';
-
-const t = require('tcomb-form-native');
 
 const Form = t.form.Form;
 const Person = t.struct({
@@ -77,25 +76,15 @@ const styles = StyleSheet.create({
 });
 
 class SignIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: '',
-    };
-  }
-
   signIn() {
     const value = this.refs.form.getValue();
     if (value) { // if validation fails, value will be null
-      this.props.actions.loginUserRequest();
+      this.props.actions.signinUser(value.name, value.password);
     }
   }
 
   render() {
-    let statusMessage;
-    if (this.props.auth.statusMessage) {
-      statusMessage = <Text style={styles.notification}>{this.props.auth.statusMessage}</Text>;
-    }
+    const statusMessage = this.props.auth.statusMessage;
     return (
       <View style={styles.container}>
         <View style={styles.row}>
@@ -114,7 +103,7 @@ class SignIn extends Component {
             <Text style={styles.buttonText}>Login</Text>
           </TouchableHighlight>
           <Text style={styles.signup} onPress={Actions.signUp}>Sign Up</Text>
-          {statusMessage}
+          {statusMessage && <Text style={styles.notification}>{statusMessage}</Text>}
         </View>
       </View>
     );
