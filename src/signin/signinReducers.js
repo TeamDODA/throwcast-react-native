@@ -24,7 +24,6 @@ export default function (state = initialState, action) {
         isAuthenticating: false,
         isAuthenticated: false,
         token: null,
-        userName: null,
         statusMessage: action.statusMessage,
       });
     default:
