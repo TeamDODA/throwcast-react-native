@@ -30,7 +30,7 @@ const options = {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 120,
     padding: 20,
     backgroundColor: 'transparent',
   },
@@ -87,11 +87,15 @@ class SignIn extends Component {
   signIn() {
     const value = this.refs.form.getValue();
     if (value) { // if validation fails, value will be null
-      this.props.actions.signinUser(value.name, value.password);
+      this.props.actions.loginUserRequest();
     }
   }
 
   render() {
+    let statusMessage;
+    if (this.props.auth.statusMessage) {
+      statusMessage = <Text style={styles.notification}>{this.props.auth.statusMessage}</Text>;
+    }
     return (
       <View style={styles.container}>
         <View style={styles.row}>
@@ -110,7 +114,7 @@ class SignIn extends Component {
             <Text style={styles.buttonText}>Login</Text>
           </TouchableHighlight>
           <Text style={styles.signup} onPress={Actions.signUp}>Sign Up</Text>
-          <Text style={styles.notification}>{this.state.message}</Text>
+          {statusMessage}
         </View>
       </View>
     );
