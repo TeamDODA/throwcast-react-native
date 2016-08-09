@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 const playlistStyles = StyleSheet.create({
+  container: {
+    marginTop: 80,
+  },
 });
 
-const entryStyles = StyleSheet.create({
-});
-
-export { playlistStyles, entryStyles };
+export default playlistStyles;

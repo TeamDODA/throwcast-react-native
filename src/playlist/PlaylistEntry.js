@@ -3,11 +3,11 @@ import {
   Text,
   View,
 } from 'react-native';
-// import { entryStyles } from './styles';
+import styles from './playlistEntryStyles';
 
-const PlaylistEntry = (props) => (
-  <View>
-    <Text>{props.title}</Text>
+const PlaylistEntry = ({ title }) => (
+  <View style={styles.container}>
+    <Text>{title}</Text>
   </View>
 );
 

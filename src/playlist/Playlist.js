@@ -5,11 +5,11 @@ import {
   View,
 } from 'react-native';
 import * as actionCreators from './playlistActions';
-// import { playlistStyles } from './styles';
+import styles from './playlistStyles';
 import PlaylistEntry from './PlaylistEntry';
 
 const Playlist = ({ playlist }) => (
-  <View>
+  <View style={styles.container}>
     {playlist.map((podcast) =>
       <PlaylistEntry
         key={podcast.id}
@@ -20,7 +20,7 @@ const Playlist = ({ playlist }) => (
 );
 
 const mapStateToProps = (state) => ({
-  playlist: state.playlist,
+  playlist: state.playlist.podcastList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
