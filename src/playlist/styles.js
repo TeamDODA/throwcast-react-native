@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const playlistStyles = StyleSheet.create({
 });
 
-export default styles;
+const entryStyles = StyleSheet.create({
+});
+
+export { playlistStyles, entryStyles };
