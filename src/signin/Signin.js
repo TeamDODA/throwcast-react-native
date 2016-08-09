@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import * as actionCreators from './signinActions';
+import { toSignup } from '../signup/signupActions';
 import styles from './styles';
 
 const Form = t.form.Form;
@@ -68,7 +69,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(actionCreators, dispatch),
+  actions: bindActionCreators({toSignup, ...actionCreators}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
