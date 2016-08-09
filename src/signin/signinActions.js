@@ -36,7 +36,7 @@ export function toSignup() {
 export function signin(name, password) {
   return (dispatch) => {
     dispatch(signinRequest());
-    return fetch('http://localhost:3000/iosAuth/local/signin', {
+    return fetch('http://localhost:8888/user/signin', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
