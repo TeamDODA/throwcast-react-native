@@ -26,10 +26,10 @@ export function signupFail(statusMessage) {
   };
 }
 
-export function toSignin() {
+export function toSignup() {
   return (dispatch) => {
     dispatch(signupInitialize());
-    Actions.signin();
+    Actions.signup();
   };
 }
 
