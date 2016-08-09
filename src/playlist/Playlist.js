@@ -2,23 +2,25 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React from 'react';
 import {
-  Text,
   View,
 } from 'react-native';
 import * as actionCreators from './playlistActions';
-import styles from './styles';
+import styles from './playlistStyles';
+import PlaylistEntry from './PlaylistEntry';
 
-const Playlist = () => (
+const Playlist = ({ playlist }) => (
   <View style={styles.container}>
-    <Text>Song</Text>
-    <Text>Song</Text>
-    <Text>Song</Text>
-    <Text>Song</Text>
+    {playlist.map((podcast) =>
+      <PlaylistEntry
+        key={podcast.id}
+        {...podcast}
+      />
+    )}
   </View>
 );
 
 const mapStateToProps = (state) => ({
-  playlist: state.playlist,
+  playlist: state.playlist.podcastList,
 });
 
 const mapDispatchToProps = (dispatch) => ({

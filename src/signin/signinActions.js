@@ -36,6 +36,7 @@ export function toSignup() {
 export function signin(name, password) {
   return (dispatch) => {
     dispatch(signinRequest());
+    Actions.playlist();
     return fetch('http://localhost:8888/user/signin', {
       method: 'POST',
       headers: {
