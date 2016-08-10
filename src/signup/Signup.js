@@ -13,7 +13,7 @@ import styles from './styles';
 
 const Form = t.form.Form;
 const Person = t.struct({
-  name: t.String,
+  username: t.String,
   password: t.String,
 });
 
@@ -28,9 +28,9 @@ const options = {
 
 class SignUp extends Component {
   signUp() {
-    const value = this.refs.form.getValue();
-    if (value) {
-      this.props.actions.signup(value.name, value.password);
+    const userCredentials = this.refs.form.getValue();
+    if (userCredentials) {
+      this.props.actions.signup(userCredentials);
     }
   }
 
