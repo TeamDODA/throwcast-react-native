@@ -1,4 +1,4 @@
-import { Scene, Router, Actions } from 'react-native-router-flux';
+import { Scene, Router } from 'react-native-router-flux';
 import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import React from 'react';
