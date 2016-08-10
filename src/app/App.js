@@ -19,9 +19,10 @@ const App = () => (
         <Scene key="signin" component={SignIn} type="reset" hideNavBar />
         <Scene key="signup" component={SignUp} hideNavBar direction="vertical" />
         <Scene
+          initial
+          hideNavBar
           key="playlist"
           component={Playlist}
-          hideNavBar={false}
           backTitle="Log out"
           onBack={() => store.dispatch(toSignin())}
         />
