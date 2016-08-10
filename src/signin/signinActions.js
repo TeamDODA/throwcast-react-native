@@ -33,20 +33,16 @@ export function toSignin() {
   };
 }
 
-export function signin(name, password) {
+export function signin(userCredentials) {
   return (dispatch) => {
     dispatch(signinRequest());
-    Actions.playlist();
-    return fetch('http://localhost:8888/user/signin', {
+    return fetch('http://localhost:8888/user/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        name,
-        password,
-      }),
+      body: JSON.stringify(userCredentials),
     })
     .then((response) => response.json())
     .then((response) => {

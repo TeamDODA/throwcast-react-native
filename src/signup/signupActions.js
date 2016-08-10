@@ -33,7 +33,7 @@ export function toSignup() {
   };
 }
 
-export function signup(name, password) {
+export function signup(userCredentials) {
   return (dispatch) => {
     dispatch(signupRequest());
     return fetch('http://localhost:8888/user/signup', {
@@ -42,10 +42,7 @@ export function signup(name, password) {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        name,
-        password,
-      }),
+      body: JSON.stringify(userCredentials),
     })
     .then((response) => response.json())
     .then((response) => {
