@@ -7,6 +7,7 @@ import reducers from './reducers';
 import SignIn from '../signin/Signin';
 import SignUp from '../signup/Signup';
 import Playlist from '../playlist/Playlist';
+import Player from '../player/Player';
 import { toSignin } from '../signin/signinActions';
 
 const RouterWithRedux = connect()(Router);
@@ -18,8 +19,8 @@ const App = () => (
       <Scene key="root" >
         <Scene key="signin" component={SignIn} type="reset" hideNavBar />
         <Scene key="signup" component={SignUp} hideNavBar direction="vertical" />
+        <Scene key="player" component={Player} hideNavBar initial />
         <Scene
-          initial
           hideNavBar
           key="playlist"
           component={Playlist}
