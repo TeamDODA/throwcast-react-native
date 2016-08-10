@@ -4,6 +4,7 @@ import { Player } from 'react-native-audio-streaming';
 import React from 'react';
 import {
   View,
+  ScrollView,
 } from 'react-native';
 import * as actionCreators from './playlistActions';
 import styles from './playlistStyles';
@@ -11,12 +12,16 @@ import PlaylistEntry from './PlaylistEntry';
 
 const Playlist = ({ playlist }) => (
   <View style={styles.container}>
-    {playlist.map((podcast) =>
-      <PlaylistEntry
-        key={podcast.id}
-        {...podcast}
-      />
-    )}
+    <View style={styles.playlist}>
+      <ScrollView>
+        {playlist.map((podcast) =>
+          <PlaylistEntry
+            key={podcast.id}
+            {...podcast}
+          />
+        )}
+      </ScrollView>
+    </View>
     <Player url={"https://drive.google.com/uc?export=download&id=0Bw8E9Z6qkpq3TTBuSW9vY1lUOVk"} />
   </View>
 );
