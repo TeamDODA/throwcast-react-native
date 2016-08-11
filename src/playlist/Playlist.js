@@ -7,12 +7,12 @@ import {
 } from 'react-native';
 import * as actionCreators from './playlistActions';
 import { selectPodcast } from '../player/playerActions';
-import styles from './playlistStyles';
+import s from './playlistStyles';
 import PlaylistEntry from './PlaylistEntry';
 
 const Playlist = ({ playlist, actions }) => (
-  <View style={styles.container}>
-    <View style={styles.playlist}>
+  <View style={s.container}>
+    <View style={s.playlist}>
       <ScrollView>
         {playlist.map((podcast, index) =>
           <PlaylistEntry
@@ -33,7 +33,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({selectPodcast, ...actionCreators}, dispatch),
+  actions: bindActionCreators(Object.assign(actionCreators, { selectPodcast }), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

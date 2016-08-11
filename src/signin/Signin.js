@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import * as actionCreators from './signinActions';
 import { toSignup } from '../signup/signupActions';
-import styles from './styles';
+import s from './styles';
 
 const Form = t.form.Form;
 const Person = t.struct({
@@ -37,27 +37,27 @@ class SignIn extends Component {
   render() {
     const statusMessage = this.props.auth.statusMessage;
     return (
-      <View style={styles.container}>
-        <View style={styles.row}>
-          <Text style={styles.title}>Throwcast</Text>
+      <View style={s.container}>
+        <View style={s.row}>
+          <Text style={s.title}>Throwcast</Text>
         </View>
-        <View style={styles.row}>
+        <View style={s.row}>
           <Form
             ref="form"
             type={Person}
             options={options}
           />
         </View>
-        <View style={styles.row}>
+        <View style={s.row}>
           <TouchableHighlight
             onPress={() => this.signIn()}
-            style={styles.button}
+            style={s.button}
             underlayColor="#99d9f4"
           >
-            <Text style={styles.buttonText}>Sign in</Text>
+            <Text style={s.buttonText}>Sign in</Text>
           </TouchableHighlight>
-          <Text style={styles.signup} onPress={this.props.actions.toSignup}>Sign Up</Text>
-          {statusMessage && <Text style={styles.notification}>{statusMessage}</Text>}
+          <Text style={s.signup} onPress={this.props.actions.toSignup}>Sign Up</Text>
+          {statusMessage && <Text style={s.notification}>{statusMessage}</Text>}
         </View>
       </View>
     );
@@ -69,7 +69,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({toSignup, ...actionCreators}, dispatch),
+  actions: bindActionCreators(Object.assign(actionCreators, { toSignup }), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
