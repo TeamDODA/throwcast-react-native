@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Player } from 'react-native-audio-streaming';
 import React from 'react';
 import {
   View,
@@ -22,7 +21,6 @@ const Playlist = ({ playlist }) => (
         )}
       </ScrollView>
     </View>
-    <Player url={"https://drive.google.com/uc?export=download&id=0Bw8E9Z6qkpq3TTBuSW9vY1lUOVk"} />
   </View>
 );
 
