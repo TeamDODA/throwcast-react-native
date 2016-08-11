@@ -4,16 +4,16 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
-import styles from './playlistEntryStyles';
+import s from './playlistEntryStyles';
 
 const PlaylistEntry = ({ podcast, index, playlist, selectPodcast }) => (
   <TouchableHighlight
-    style={styles.container}
+    style={s.container}
     onPress={() => selectPodcast(podcast, playlist, index)}
   >
-    <View style={styles.box}>
-      <Text style={styles.title} >{podcast.title}</Text>
-      <Text style={styles.artist}>{podcast.artist}</Text>
+    <View style={s.box}>
+      <Text style={s.title} >{podcast.title}</Text>
+      <Text style={s.artist}>{podcast.artist}</Text>
     </View>
   </TouchableHighlight>
 );
