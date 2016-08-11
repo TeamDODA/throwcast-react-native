@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 const playlistEntryStyles = StyleSheet.create({
+  container: {
+    paddingLeft: 12,
+    paddingRight: 12,
+  },
   box: {
     borderColor: '#303030',
     borderBottomWidth: 0.4,

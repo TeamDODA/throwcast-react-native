@@ -11,12 +11,14 @@ import styles from './styles';
 
 class Player extends Component {
   render() {
-    let playButton;
+    let pP;
+    const tP = this.props.actions.togglePlay;
     if (this.props.player.playing) {
-      playButton = <Icon onPress={this.props.actions.togglePlay} style={styles.play} name="ios-pause" size={70} color="#fff" />;
+      pP = <Icon onPress={tP} style={styles.play} name="ios-pause" size={70} color="#fff" />;
     } else {
-      playButton = <Icon onPress={this.props.actions.togglePlay} style={styles.play} name="ios-play" size={70} color="#fff" />;
+      pP = <Icon onPress={tP} style={styles.play} name="ios-play" size={70} color="#fff" />;
     }
+
     return (
       <View style={styles.container}>
         <Video
@@ -29,7 +31,7 @@ class Player extends Component {
           repeat={false}
         />
         <View style={styles.controller}>
-          {playButton}
+          {pP}
         </View>
       </View>
     );

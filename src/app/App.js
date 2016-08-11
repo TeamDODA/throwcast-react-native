@@ -19,14 +19,15 @@ const App = () => (
       <Scene key="root" >
         <Scene key="signin" component={SignIn} type="reset" hideNavBar />
         <Scene key="signup" component={SignUp} hideNavBar direction="vertical" />
-        <Scene key="player" component={Player} hideNavBar initial />
         <Scene
+          initial
           hideNavBar
           key="playlist"
           component={Playlist}
           backTitle="Log out"
           onBack={() => store.dispatch(toSignin())}
         />
+        <Scene key="player" component={Player} hideNavBar={false} />
       </Scene>
     </RouterWithRedux>
   </Provider>

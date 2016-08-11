@@ -7,8 +7,6 @@ const playlistStyles = StyleSheet.create({
   },
   playlist: {
     marginTop: 30,
-    paddingLeft: 12,
-    paddingRight: 12,
     height: 600,
   },
 });
