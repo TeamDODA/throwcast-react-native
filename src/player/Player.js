@@ -1,7 +1,7 @@
+import React, { Component } from 'react';
 import {
   View,
 } from 'react-native';
-import React, { Component } from 'react';
 import Video from 'react-native-video';
 
 class Player extends Component {
