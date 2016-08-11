@@ -46,3 +46,15 @@ export function onProgress({ currentTime }) {
     dispatch(setCurrentTime(currentTime));
   };
 }
+
+export function toNextPodcast() {
+  return {
+    type: 'NEXT_PODCAST',
+  };
+}
+
+export function toPreviousPodcast() {
+  return {
+    type: 'PREVIOUS_PODCAST',
+  };
+}

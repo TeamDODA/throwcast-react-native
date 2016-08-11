@@ -10,8 +10,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   play: {
-    marginLeft: 50,
-    marginRight: 50,
+    marginLeft: 40,
+    marginRight: 40,
+  },
+  forward: {
+    marginTop: 12,
+    marginRight: 45,
+  },
+  rewind: {
+    marginTop: 12,
+    marginLeft: 45,
   },
   timeInfo: {
     marginTop: 100,
