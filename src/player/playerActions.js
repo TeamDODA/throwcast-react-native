@@ -21,3 +21,28 @@ export function togglePlay() {
     type: 'TOGGLE_PLAY',
   };
 }
+export function setDuration(duration) {
+  return {
+    type: 'SET_DURATION',
+    duration,
+  };
+}
+
+export function onLoad({ duration }) {
+  return (dispatch) => {
+    dispatch(setDuration(duration));
+  };
+}
+
+export function setCurrentTime(currentTime) {
+  return {
+    type: 'SET_CURRENT_TIME',
+    currentTime,
+  };
+}
+
+export function onProgress({ currentTime }) {
+  return (dispatch) => {
+    dispatch(setCurrentTime(currentTime));
+  };
+}

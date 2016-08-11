@@ -26,6 +26,14 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         playing: !state.playing,
       });
+    case 'SET_DURATION':
+      return Object.assign({}, state, {
+        duration: action.duration,
+      });
+    case 'SET_CURRENT_TIME':
+      return Object.assign({}, state, {
+        currentTime: action.currentTime,
+      });
     default:
       return state;
   }
