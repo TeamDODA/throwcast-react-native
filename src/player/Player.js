@@ -7,18 +7,29 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Video from 'react-native-video';
+import Slider from 'react-native-slider';
+
 import * as actionCreators from './playerActions';
 import { formattedTime } from './utils';
 import s from './styles';
 
 
 class Player extends Component {
+  slideChange(value) {
+    this.props.actions.setCurrentTime(Math.round(value * this.props.player.duration));
+  }
+
+  slideComplete() {
+    this.refs.audio.seek(this.props.player.currentTime);
+    this.props.actions.togglePlay();
+  }
+
   render() {
     const { player, actions } = this.props;
-    const { togglePlay, toNextPodcast, toPreviousPodcast } = actions;
+    const { togglePlay, nextPodcast, previousPodcast } = actions;
     const index = player.currentIndex;
     const prevButton = {
-      onPress: index > 0 ? toPreviousPodcast : null,
+      onPress: index > 0 ? previousPodcast : null,
       style: s.rewind,
       name: 'ios-rewind',
       size: 30,
@@ -35,7 +46,7 @@ class Player extends Component {
 
     const hasNext = index < player.podcastList.length - 1;
     const nextButton = {
-      onPress: hasNext ? toNextPodcast : null,
+      onPress: hasNext ? nextPodcast : null,
       style: s.forward,
       name: 'ios-fastforward',
       size: 30,
@@ -46,24 +57,37 @@ class Player extends Component {
       <View style={s.container}>
         <Video
           source={{ uri: player.podcastList[index].uri }}
-          ref='audio'
+          ref="audio"
           volume={1.0}
           muted={false}
           paused={!player.playing}
           resizeMode="cover"
-          repeat={false}
-          onProgress={actions.onProgress}
           onLoad={actions.onLoad}
+          onProgress={actions.onProgress}
+          onEnd={() => actions.onEnd(index, player.podcastList.length)}
+          repeat
         />
-        <View style={s.timeInfo}>
-          <Text style={s.time}>
-            {formattedTime(player.currentTime)}
-          </Text>
-          <Text style={s.timeRight}>
-            {formattedTime(player.duration)}
-          </Text>
+        <View style={s.sliderContainer}>
+          <Slider
+            onSlidingStart={actions.slide}
+            onValueChange={(value) => this.slideChange(value)}
+            onSlidingComplete={() => this.slideComplete()}
+            minimumTrackTintColor="#851c44"
+            style={s.slider}
+            trackStyle={s.sliderTrack}
+            thumbStyle={s.sliderThumb}
+            value={player.currentTime / player.duration}
+          />
+          <View style={s.timeInfo}>
+            <Text style={s.timeLeft}>
+              {formattedTime(player.currentTime)}
+            </Text>
+            <Text style={s.timeRight}>
+              {formattedTime(player.duration)}
+            </Text>
+          </View>
         </View>
-        <View style={s.controller}>
+        <View style={s.controlContainer}>
           <Icon {...prevButton} />
           <Icon {...toggleButton} />
           <Icon {...nextButton} />

@@ -45,6 +45,10 @@ export default function (state = initialState, action) {
         currentTime: 0,
         duration: 0,
       });
+    case 'SLIDE':
+      return Object.assign({}, state, {
+        playing: false,
+      });
     default:
       return state;
   }

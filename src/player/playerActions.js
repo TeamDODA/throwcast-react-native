@@ -28,9 +28,15 @@ export function setDuration(duration) {
   };
 }
 
-export function onLoad({ duration }) {
-  return (dispatch) => {
-    dispatch(setDuration(duration));
+export function nextPodcast() {
+  return {
+    type: 'NEXT_PODCAST',
+  };
+}
+
+export function previousPodcast() {
+  return {
+    type: 'PREVIOUS_PODCAST',
   };
 }
 
@@ -41,20 +47,30 @@ export function setCurrentTime(currentTime) {
   };
 }
 
+export function slide() {
+  return {
+    type: 'SLIDE',
+  };
+}
+
+export function onLoad({ duration }) {
+  return (dispatch) => {
+    dispatch(setDuration(duration));
+  };
+}
+
 export function onProgress({ currentTime }) {
   return (dispatch) => {
     dispatch(setCurrentTime(currentTime));
   };
 }
 
-export function toNextPodcast() {
-  return {
-    type: 'NEXT_PODCAST',
-  };
-}
-
-export function toPreviousPodcast() {
-  return {
-    type: 'PREVIOUS_PODCAST',
+export function onEnd(index, length) {
+  return (dispatch) => {
+    if (index < length - 1) {
+      dispatch(nextPodcast());
+    } else {
+      dispatch(togglePlay());
+    }
   };
 }

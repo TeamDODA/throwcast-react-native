@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -6,7 +8,43 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000',
   },
-  controller: {
+  sliderContainer: {
+    marginTop: 300,
+    width: window.width - 40,
+  },
+  slider: {
+    height: 20,
+  },
+  sliderTrack: {
+    height: 2,
+    backgroundColor: '#333',
+  },
+  sliderThumb: {
+    width: 10,
+    height: 10,
+    backgroundColor: '#f62976',
+    borderRadius: 10 / 2,
+    shadowColor: 'red',
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 2,
+    shadowOpacity: 1,
+  },
+  timeInfo: {
+    marginTop: 20,
+    flexDirection: 'row',
+  },
+  timeLeft: {
+    color: '#FFF',
+    flex: 1,
+    fontSize: 10,
+  },
+  timeRight: {
+    color: '#FFF',
+    textAlign: 'right',
+    flex: 1,
+    fontSize: 10,
+  },
+  controlContainer: {
     flexDirection: 'row',
   },
   play: {
@@ -20,21 +58,6 @@ const styles = StyleSheet.create({
   rewind: {
     marginTop: 12,
     marginLeft: 45,
-  },
-  timeInfo: {
-    marginTop: 100,
-    flexDirection: 'row',
-  },
-  time: {
-    color: '#FFF',
-    flex: 1,
-    fontSize: 10,
-  },
-  timeRight: {
-    color: '#FFF',
-    textAlign: 'right',
-    flex: 1,
-    fontSize: 10,
   },
 });
 
