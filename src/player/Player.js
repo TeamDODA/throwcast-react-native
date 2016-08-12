@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
   Text,
+  Image,
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Video from 'react-native-video';
 import Slider from 'react-native-slider';
+import { Actions } from 'react-native-router-flux';
 
 import * as actionCreators from './playerActions';
 import { formattedTime } from './utils';
@@ -28,6 +30,7 @@ class Player extends Component {
     const { player, actions } = this.props;
     const { togglePlay, nextPodcast, previousPodcast } = actions;
     const index = player.currentIndex;
+    const podcast = player.podcastList[index];
     const prevButton = {
       onPress: index > 0 ? previousPodcast : null,
       style: s.rewind,
@@ -56,7 +59,7 @@ class Player extends Component {
     return (
       <View style={s.container}>
         <Video
-          source={{ uri: player.podcastList[index].uri }}
+          source={{ uri: podcast.uri }}
           ref="audio"
           volume={1.0}
           muted={false}
@@ -67,6 +70,16 @@ class Player extends Component {
           onEnd={() => actions.onEnd(index, player.podcastList.length)}
           repeat
         />
+        <View style={s.header}>
+          <Icon onPress={Actions.pop} name="ios-arrow-back" size={30} color="#FFF" />
+        </View>
+        <Image style={s.image} source={{ uri: podcast.image }} />
+        <Text style={s.title}>
+          {podcast.title}
+        </Text>
+        <Text style={s.artist}>
+          {podcast.artist}
+        </Text>
         <View style={s.sliderContainer}>
           <Slider
             onSlidingStart={actions.slide}

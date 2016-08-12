@@ -9,8 +9,32 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   sliderContainer: {
-    marginTop: 300,
     width: window.width - 40,
+  },
+  header: {
+    marginTop: 30,
+    marginBottom: 30,
+    marginLeft: 30,
+    width: window.width,
+  },
+  image: {
+    marginTop: 20,
+    marginBottom: 20,
+    width: window.width - 40,
+    height: 280,
+  },
+  title: {
+    color: '#FFF',
+    fontFamily: 'HelveticaNeue',
+    marginBottom: 10,
+    marginTop: 13,
+    fontSize: 20,
+  },
+  artist: {
+    color: '#BBB',
+    fontFamily: 'HelveticaNeue',
+    fontSize: 14,
+    marginBottom: 16,
   },
   slider: {
     height: 20,
@@ -52,11 +76,11 @@ const styles = StyleSheet.create({
     marginRight: 40,
   },
   forward: {
-    marginTop: 12,
+    marginTop: 11,
     marginRight: 45,
   },
   rewind: {
-    marginTop: 12,
+    marginTop: 11,
     marginLeft: 45,
   },
 });

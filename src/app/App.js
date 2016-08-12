@@ -27,7 +27,7 @@ const App = () => (
           backTitle="Log out"
           onBack={() => store.dispatch(toSignin())}
         />
-        <Scene key="player" component={Player} hideNavBar={false} />
+        <Scene key="player" component={Player} />
       </Scene>
     </RouterWithRedux>
   </Provider>
