@@ -1,5 +1,6 @@
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import { Provider, connect } from 'react-redux';
+import { StatusBar } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import store from 'react-native-simple-store';
 import React, { Component } from 'react';
@@ -16,6 +17,7 @@ const reduxStore = createStore(reducers, applyMiddleware(thunk));
 
 class App extends Component {
   componentWillMount() {
+    StatusBar.setHidden(true, 'none');
     store.get('@Auth:token').then(token => {
       reduxStore.dispatch(signinSuccess(token));
       Actions.playlist();
