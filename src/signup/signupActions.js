@@ -36,7 +36,7 @@ export function toSignup() {
 export function signup(userCredentials) {
   return (dispatch) => {
     dispatch(signupRequest());
-    return fetch('http://localhost:8888/user/signup', {
+    return fetch('http://localhost:8888/api/users', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -46,9 +46,9 @@ export function signup(userCredentials) {
     })
     .then((response) => response.json())
     .then((response) => {
-      if (response.statusMessage) {
+      if (response.message) {
         // respond with error messages
-        dispatch(signupFail(response.statusMessage));
+        dispatch(signupFail(response.message));
       } else if (response.token) {
         // change to homepage
         dispatch(signupSuccess());

@@ -36,7 +36,7 @@ export function toSignin() {
 export function signin(userCredentials) {
   return (dispatch) => {
     dispatch(signinRequest());
-    return fetch('http://localhost:8888/user/login', {
+    return fetch('http://localhost:8888/auth/local', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -46,10 +46,10 @@ export function signin(userCredentials) {
     })
     .then((response) => response.json())
     .then((response) => {
-      if (response.statusMessage) {
+      if (response.message) {
         // respond with error messages such as
         // incorrect user name and email
-        dispatch(signinFail(response.statusMessage));
+        dispatch(signinFail(response.message));
       } else if (response.token) {
         dispatch(signinSuccess(response.token));
         Actions.playlist();
