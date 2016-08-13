@@ -1,36 +1,46 @@
-import { Scene, Router } from 'react-native-router-flux';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import React from 'react';
+import store from 'react-native-simple-store';
+import React, { Component } from 'react';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 import SignIn from '../signin/Signin';
 import SignUp from '../signup/Signup';
 import Playlist from '../playlist/Playlist';
 import Player from '../player/Player';
-import { toSignin } from '../signin/signinActions';
+import { toSignin, signinSuccess } from '../signin/signinActions';
 
 const RouterWithRedux = connect()(Router);
-const store = createStore(reducers, applyMiddleware(thunk));
+const reduxStore = createStore(reducers, applyMiddleware(thunk));
 
-const App = () => (
-  <Provider store={store}>
-    <RouterWithRedux>
-      <Scene key="root">
-        <Scene key="signin" component={SignIn} type="reset" hideNavBar />
-        <Scene key="signup" component={SignUp} hideNavBar direction="vertical" />
-        <Scene
-          initial
-          hideNavBar
-          key="playlist"
-          component={Playlist}
-          backTitle="Log out"
-          onBack={() => store.dispatch(toSignin())}
-        />
-        <Scene key="player" component={Player} />
-      </Scene>
-    </RouterWithRedux>
-  </Provider>
-);
+class App extends Component {
+  componentWillMount() {
+    store.get('@Auth:token').then(token => {
+      reduxStore.dispatch(signinSuccess(token));
+      Actions.playlist();
+    });
+  }
+  render() {
+    return (
+      <Provider store={reduxStore}>
+        <RouterWithRedux>
+          <Scene key="root" >
+            <Scene key="signin" component={SignIn} type="reset" hideNavBar initial />
+            <Scene key="signup" component={SignUp} hideNavBar direction="vertical" />
+            <Scene
+              key="playlist"
+              component={Playlist}
+              hideNavBar
+              backTitle="Log out"
+              onBack={() => reduxStore.dispatch(toSignin())}
+            />
+            <Scene key="player" component={Player} />
+          </Scene>
+        </RouterWithRedux>
+      </Provider>
+    );
+  }
+}
 
 export default App;

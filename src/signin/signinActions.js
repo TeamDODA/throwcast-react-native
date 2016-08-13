@@ -1,4 +1,5 @@
 import { Actions } from 'react-native-router-flux';
+import store from 'react-native-simple-store';
 
 export function signinInitialize() {
   return {
@@ -28,8 +29,11 @@ export function signinFail(statusMessage) {
 
 export function toSignin() {
   return (dispatch) => {
-    dispatch(signinInitialize());
-    Actions.signin();
+    store.delete('@Auth:token')
+    .then(() => {
+      dispatch(signinInitialize());
+      Actions.signin();
+    });
   };
 }
 
@@ -51,8 +55,11 @@ export function signin(userCredentials) {
         // incorrect user name and email
         dispatch(signinFail(response.message));
       } else if (response.token) {
-        dispatch(signinSuccess(response.token));
-        Actions.playlist();
+        store.save('@Auth:token', response.token)
+        .then(() => {
+          dispatch(signinSuccess(response.token));
+          Actions.playlist();
+        });
       }
     })
     .catch((e) => {
