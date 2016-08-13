@@ -13,7 +13,7 @@ const PlaylistEntry = ({ podcast, index, playlist, selectPodcast }) => (
   >
     <View style={s.box}>
       <Text style={s.title} >{podcast.title}</Text>
-      <Text style={s.description}>{podcast.artist}</Text>
+      <Text style={s.description}>{podcast.description}</Text>
     </View>
   </TouchableHighlight>
 );

@@ -18,7 +18,7 @@ const playlistEntryStyles = StyleSheet.create({
     paddingLeft: 10,
     paddingTop: 5,
   },
-  artist: {
+  description: {
     color: 'rgb(136, 136, 136)',
     fontFamily: 'HelveticaNeue-Medium',
     fontSize: 16,

@@ -59,7 +59,7 @@ class Player extends Component {
     return (
       <View style={s.container}>
         <Video
-          source={{ uri: podcast.uri }}
+          source={{ uri: podcast.link }}
           ref={c => (this.audio = c)}
           volume={1.0}
           muted={false}
@@ -73,7 +73,7 @@ class Player extends Component {
         <View style={s.header}>
           <Icon onPress={Actions.pop} name="ios-arrow-back" size={30} color="#FFF" />
         </View>
-        <Image style={s.image} source={{ uri: podcast.image }} />
+        <Image style={s.image} source={{ uri: podcast.imageUrl }} />
         <Text style={s.title}>
           {podcast.title}
         </Text>
