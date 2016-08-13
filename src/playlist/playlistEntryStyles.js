@@ -6,6 +6,7 @@ const playlistEntryStyles = StyleSheet.create({
     paddingRight: 12,
   },
   box: {
+    backgroundColor: '#121212',
     borderColor: '#303030',
     borderBottomWidth: 0.4,
     height: 60,

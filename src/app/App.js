@@ -16,7 +16,7 @@ const store = createStore(reducers, applyMiddleware(thunk));
 const App = () => (
   <Provider store={store}>
     <RouterWithRedux>
-      <Scene key="root" >
+      <Scene key="root">
         <Scene key="signin" component={SignIn} type="reset" hideNavBar />
         <Scene key="signup" component={SignUp} hideNavBar direction="vertical" />
         <Scene

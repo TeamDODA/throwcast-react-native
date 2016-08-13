@@ -1,4 +1,5 @@
 const initialState = {
+  background: 'http://www.fatcap.org/uploads/sht/18966/opct_987299d62dbb1d773b5c07fa2e97ab60d2e3b509.jpg',
   podcastList: [
     {
       id: 1,
