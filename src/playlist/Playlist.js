@@ -25,7 +25,18 @@ class Playlist extends Component {
     const { playlist } = this.props;
     return (
       <View style={s.stickySection}>
-        <Text style={s.stickySectionTitle}>{playlist.name}</Text>
+        <Text style={s.stickySectionTitle}>{playlist.title}</Text>
+      </View>
+    );
+  }
+
+  renderForeground() {
+    const { playlist } = this.props;
+    return (
+      <View key="parallax-header" style={s.parallaxHeader}>
+        <Text style={s.listTitle}>
+          {playlist.title}
+        </Text>
       </View>
     );
   }
@@ -33,7 +44,7 @@ class Playlist extends Component {
   renderBackground() {
     const { playlist } = this.props;
     const imageSource = {
-      uri: playlist.background,
+      uri: playlist.imageUrl,
       width: window.width,
       height: PARALLAX_HEADER_HEIGHT,
     };
@@ -56,6 +67,7 @@ class Playlist extends Component {
           parallaxHeaderHeight={PARALLAX_HEADER_HEIGHT}
           stickyHeaderHeight={STICKY_HEADER_HEIGHT}
           renderStickyHeader={() => this.renderStickyHeader()}
+          renderForeground={() => this.renderForeground()}
           renderBackground={() => this.renderBackground()}
         >
           <View style={s.background}>
@@ -70,7 +82,7 @@ class Playlist extends Component {
             )}
           </View>
         </ParallaxScrollView>
-        <View style={s.header}>
+        <View style={s.backButton}>
           <Icon onPress={Actions.pop} name="ios-arrow-back" size={30} color="#FFF" />
         </View>
       </View>

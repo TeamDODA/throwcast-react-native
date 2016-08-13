@@ -9,6 +9,13 @@ const playlistStyles = StyleSheet.create({
     backgroundColor: '#121212',
     flex: 1,
   },
+  backgroundOverlay: {
+    position: 'absolute',
+    top: 0,
+    width: window.width,
+    backgroundColor: 'rgba(0,0,0,.6)',
+    height: PARALLAX_HEADER_HEIGHT,
+  },
   parallaxView: {
     position: 'absolute',
     backgroundColor: '#000',
@@ -19,14 +26,18 @@ const playlistStyles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  backgroundOverlay: {
-    position: 'absolute',
-    top: 0,
-    width: window.width,
-    backgroundColor: 'rgba(0,0,0,.6)',
-    height: PARALLAX_HEADER_HEIGHT,
+  stickySection: {
+    height: STICKY_HEADER_HEIGHT,
+    backgroundColor: '#000',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  header: {
+  stickySectionTitle: {
+    color: '#FFF',
+    fontSize: 18,
+  },
+  backButton: {
     backgroundColor: 'transparent',
     position: 'absolute',
     top: 5,
@@ -36,12 +47,15 @@ const playlistStyles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
-  stickySection: {
-    height: STICKY_HEADER_HEIGHT,
-    backgroundColor: '#000',
-    flex: 1,
+  parallaxHeader: {
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 40,
+    width: window.width,
+  },
+  listTitle: {
+    fontSize: 24,
+    color: '#FFF',
+    fontFamily: 'Helvetica Neue',
   },
 });
 
