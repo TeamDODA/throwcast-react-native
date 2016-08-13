@@ -28,7 +28,7 @@ const options = {
 
 class SignUp extends Component {
   signUp() {
-    const userCredentials = this.refs.form.getValue();
+    const userCredentials = this.form.getValue();
     if (userCredentials) {
       this.props.actions.signup(userCredentials);
     }
@@ -40,7 +40,7 @@ class SignUp extends Component {
       <View style={s.container}>
         <View style={s.row}>
           <Form
-            ref="form"
+            ref={c => (this.form = c)}
             type={Person}
             options={options}
           />

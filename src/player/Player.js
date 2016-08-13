@@ -22,7 +22,7 @@ class Player extends Component {
   }
 
   slideComplete() {
-    this.refs.audio.seek(this.props.player.currentTime);
+    this.audio.seek(this.props.player.currentTime);
     this.props.actions.togglePlay();
   }
 
@@ -60,7 +60,7 @@ class Player extends Component {
       <View style={s.container}>
         <Video
           source={{ uri: podcast.uri }}
-          ref="audio"
+          ref={c => (this.audio = c)}
           volume={1.0}
           muted={false}
           paused={!player.playing}
