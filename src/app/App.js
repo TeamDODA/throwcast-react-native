@@ -20,8 +20,10 @@ class App extends Component {
   componentWillMount() {
     StatusBar.setHidden(true, 'none');
     store.get('@Auth:token').then(token => {
-      reduxStore.dispatch(signinSuccess(token));
-      Actions.homepage();
+      if (token) {
+        reduxStore.dispatch(signinSuccess(token));
+        Actions.homepage();
+      }
     });
   }
   render() {
