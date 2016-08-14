@@ -15,6 +15,7 @@
     "react/prop-types": 0,
     "import/no-named-as-default": 1,
     "import/no-named-as-default-member": 1,
+    "no-underscore-dangle": [2, { "allow": ["_id"] }],
   },
   "globals": {
     "fetch": true,

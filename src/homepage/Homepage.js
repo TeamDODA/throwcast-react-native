@@ -3,11 +3,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
+  Text,
   View,
+  ScrollView,
 } from 'react-native';
 
 import * as podcastActions from '../modules/podcast/podcastActions';
 import * as stationActions from '../modules/station/stationActions';
+import Entry from './Entry';
+import s from './homepageStyles';
+
 
 class Homepage extends Component {
   componentWillMount() {
@@ -17,15 +22,34 @@ class Homepage extends Component {
   }
 
   render() {
+    const { stations, podcasts } = this.props;
     return (
-      <View />
+      <View style={s.outerContainer}>
+        <View style={s.innerContainer}>
+          <Text style={s.listTitle}>Stations</Text>
+          <View style={s.scrollContainer}>
+            <ScrollView automaticallyAdjustContentInsets={false} horizontal>
+              {stations.list.map((entry) => <Entry key={entry._id} entry={entry} />)}
+            </ScrollView>
+          </View>
+          <Text style={s.listTitle}>Popular podcasts</Text>
+          <View style={s.scrollContainer}>
+            <ScrollView automaticallyAdjustContentInsets={false} horizontal>
+              {podcasts.list.map((entry) => <Entry key={entry._id} entry={entry} />)}
+            </ScrollView>
+          </View>
+        </View>
+        <View style={s.header}>
+          <Text style={s.headerTitle}>HOME</Text>
+        </View>
+      </View>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  station: state.station,
-  podcast: state.podcast,
+  stations: state.station,
+  podcasts: state.podcast,
 });
 
 const mapDispatchToProps = (dispatch) => ({
