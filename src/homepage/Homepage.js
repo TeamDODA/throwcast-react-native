@@ -10,6 +10,7 @@ import {
 
 import * as podcastActions from '../modules/podcast/podcastActions';
 import * as stationActions from '../modules/station/stationActions';
+import { getPlaylist } from '../playlist/playlistActions';
 import Entry from './Entry';
 import s from './homepageStyles';
 
@@ -22,20 +23,24 @@ class Homepage extends Component {
   }
 
   render() {
-    const { stations, podcasts } = this.props;
+    const { stations, podcasts, actions } = this.props;
     return (
       <View style={s.outerContainer}>
         <View style={s.innerContainer}>
           <Text style={s.listTitle}>Stations</Text>
           <View style={s.scrollContainer}>
             <ScrollView automaticallyAdjustContentInsets={false} horizontal>
-              {stations.list.map((entry) => <Entry key={entry._id} entry={entry} />)}
+              {stations.list.map((entry) =>
+                <Entry key={entry._id} {...actions} entry={entry} />
+              )}
             </ScrollView>
           </View>
           <Text style={s.listTitle}>Popular podcasts</Text>
           <View style={s.scrollContainer}>
             <ScrollView automaticallyAdjustContentInsets={false} horizontal>
-              {podcasts.list.map((entry) => <Entry key={entry._id} entry={entry} />)}
+              {podcasts.list.map((entry) =>
+                <Entry key={entry._id} {...actions} entry={entry} />
+              )}
             </ScrollView>
           </View>
         </View>
@@ -55,6 +60,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(Object.assign(
     {},
+    { getPlaylist },
     podcastActions,
     stationActions
   ), dispatch),

@@ -14,14 +14,14 @@ const playlistEntryStyles = StyleSheet.create({
   title: {
     color: '#fffaf0',
     fontFamily: 'HelveticaNeue-Medium',
-    fontSize: 18,
+    fontSize: 12,
     paddingLeft: 10,
     paddingTop: 5,
   },
   description: {
     color: 'rgb(136, 136, 136)',
     fontFamily: 'HelveticaNeue-Medium',
-    fontSize: 16,
+    fontSize: 10,
     paddingLeft: 10,
   },
 });

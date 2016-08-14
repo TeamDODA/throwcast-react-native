@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import s from './entryStyles';
 
-const PlaylistEntry = ({ entry }) => (
-  <TouchableHighlight>
+const Entry = ({ entry, getPlaylist }) => (
+  <TouchableHighlight onPress={() => getPlaylist(entry)}>
     <View style={s.box}>
       <Image source={{ uri: entry.imageUrl, height: 180 }} />
       <Text style={s.title}>{entry.title}</Text>
@@ -17,4 +17,4 @@ const PlaylistEntry = ({ entry }) => (
   </TouchableHighlight>
 );
 
-export default PlaylistEntry;
+export default Entry;

@@ -59,13 +59,14 @@ class Playlist extends Component {
 
   render() {
     const { playlist, actions } = this.props;
-    const podcastList = playlist.podcastList;
+    const podcastList = playlist.list;
     return (
       <View style={s.background}>
         <ParallaxScrollView
           style={s.parallaxView}
           parallaxHeaderHeight={PARALLAX_HEADER_HEIGHT}
           stickyHeaderHeight={STICKY_HEADER_HEIGHT}
+          contentBackgroundColor="#121212"
           renderStickyHeader={() => this.renderStickyHeader()}
           renderForeground={() => this.renderForeground()}
           renderBackground={() => this.renderBackground()}
@@ -73,7 +74,7 @@ class Playlist extends Component {
           <View style={s.background}>
             {podcastList.map((podcast, index) =>
               <PlaylistEntry
-                key={podcast.id}
+                key={podcast._id}
                 podcast={podcast}
                 index={index}
                 playlist={podcastList}
