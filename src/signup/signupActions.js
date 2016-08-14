@@ -53,7 +53,7 @@ export function signup(userCredentials) {
         // change to homepage
         dispatch(signupSuccess());
         dispatch(signinSuccess(response.token));
-        Actions.playlist();
+        Actions.homepage();
       }
     })
     .catch((e) => {

@@ -58,7 +58,7 @@ export function signin(userCredentials) {
         store.save('@Auth:token', response.token)
         .then(() => {
           dispatch(signinSuccess(response.token));
-          Actions.playlist();
+          Actions.homepage();
         });
       }
     })
