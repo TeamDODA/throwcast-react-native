@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
   },
-  signin: {
+  signIn: {
     color: 'black',
     alignSelf: 'center',
     fontSize: 24,

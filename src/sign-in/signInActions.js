@@ -6,6 +6,6 @@ export default function toSignIn() {
   return dispatch => store.delete('@Auth:token')
     .then(() => {
       dispatch(authInit());
-      Actions.signin();
+      Actions.signIn();
     });
 }

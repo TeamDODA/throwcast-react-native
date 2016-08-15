@@ -5,22 +5,22 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case 'SIGNUP_INITIALIZE':
+    case 'SIGN_UP_INITIALIZE':
       return Object.assign({}, state, {
         isSigningUp: false,
         statusMessage: null,
       });
-    case 'SIGNUP_REQUEST':
+    case 'SIGN_UP_REQUEST':
       return Object.assign({}, state, {
         isSigningUp: true,
         statusMessage: 'Signing up',
       });
-    case 'SIGNUP_SUCCESS':
+    case 'SIGN_UP_SUCCESS':
       return Object.assign({}, state, {
         isSigningUp: false,
         statusMessage: null,
       });
-    case 'SIGNUP_FAIL':
+    case 'SIGN_UP_FAIL':
       return Object.assign({}, state, {
         isSigningUp: false,
         statusMessage: action.statusMessage,

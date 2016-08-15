@@ -7,8 +7,8 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
-import * as actionCreators from './signupActions';
-import toSignIn from '../signin/signinActions';
+import * as actionCreators from './signUpActions';
+import toSignIn from '../sign-in/signInActions';
 import s from './styles';
 
 const Form = t.form.Form;
@@ -31,12 +31,12 @@ class SignUp extends Component {
   signUp() {
     const userCredentials = this.form.getValue();
     if (userCredentials) {
-      this.props.actions.signup(userCredentials);
+      this.props.actions.signUp(userCredentials);
     }
   }
 
   render() {
-    const statusMessage = this.props.signup.statusMessage;
+    const statusMessage = this.props.signUp.statusMessage;
     return (
       <View style={s.container}>
         <View style={s.row}>
@@ -54,7 +54,7 @@ class SignUp extends Component {
           >
             <Text style={s.buttonText}>Sign Up</Text>
           </TouchableHighlight>
-          <Text style={s.signin} onPress={this.props.actions.toSignIn}>Sign In</Text>
+          <Text style={s.signIn} onPress={this.props.actions.toSignIn}>Sign In</Text>
           {statusMessage && <Text style={s.notification}>{statusMessage}</Text>}
         </View>
       </View>
@@ -63,7 +63,7 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  signup: state.signup,
+  signUp: state.signUp,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,41 +1,41 @@
 import { Actions } from 'react-native-router-flux';
-import { signinSuccess } from '../signin/signinActions';
+import { authSuccess } from '../modules/auth/authActions';
 
-export function signupInitialize() {
+export function signUpInit() {
   return {
-    type: 'SIGNUP_INITIALIZE',
+    type: 'SIGN_UP_INITIALIZE',
   };
 }
 
-export function signupRequest() {
+export function signUpRequest() {
   return {
-    type: 'SIGNUP_REQUEST',
+    type: 'SIGN_UP_REQUEST',
   };
 }
 
-export function signupSuccess() {
+export function signUpSuccess() {
   return {
-    type: 'SIGNUP_SUCCESS',
+    type: 'SIGN_UP_SUCCESS',
   };
 }
 
-export function signupFail(statusMessage) {
+export function signUpFail(statusMessage) {
   return {
-    type: 'SIGNUP_FAIL',
+    type: 'SIGN_UP_FAIL',
     statusMessage,
   };
 }
 
-export function toSignup() {
+export function toSignUp() {
   return (dispatch) => {
-    dispatch(signupInitialize());
-    Actions.signup();
+    dispatch(signUpInit());
+    Actions.signUp();
   };
 }
 
 export function signup(userCredentials) {
   return (dispatch) => {
-    dispatch(signupRequest());
+    dispatch(signUpRequest());
     return fetch('http://localhost:8888/api/users', {
       method: 'POST',
       headers: {
@@ -48,16 +48,16 @@ export function signup(userCredentials) {
     .then((response) => {
       if (response.message) {
         // respond with error messages
-        dispatch(signupFail(response.message));
+        dispatch(signUpFail(response.message));
       } else if (response.token) {
         // change to homepage
-        dispatch(signupSuccess());
-        dispatch(signinSuccess(response.token));
+        dispatch(signUpSuccess());
+        dispatch(authSuccess(response.token));
         Actions.homepage();
       }
     })
     .catch((e) => {
-      dispatch(signupFail('connection error', e));
+      dispatch(signUpFail('connection error', e));
     });
   };
 }

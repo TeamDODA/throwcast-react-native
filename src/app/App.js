@@ -7,8 +7,8 @@ import React, { Component } from 'react';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 import Homepage from '../homepage/Homepage';
-import SignIn from '../signin/Signin';
-import SignUp from '../signup/Signup';
+import SignIn from '../sign-in/SignIn';
+import SignUp from '../sign-up/SignUp';
 import Playlist from '../playlist/Playlist';
 import Player from '../player/Player';
 import { authSuccess } from '../modules/auth/authActions';
@@ -31,8 +31,8 @@ class App extends Component {
       <Provider store={reduxStore}>
         <RouterWithRedux>
           <Scene key="root" >
-            <Scene key="signin" component={SignIn} type="reset" hideNavBar />
-            <Scene key="signup" component={SignUp} hideNavBar direction="vertical" />
+            <Scene key="signIn" component={SignIn} type="reset" hideNavBar />
+            <Scene key="signUp" component={SignUp} hideNavBar direction="vertical" />
             <Scene key="homepage" component={Homepage} hideNavBar />
             <Scene key="playlist" component={Playlist} hideNavBar />
             <Scene key="player" component={Player} />

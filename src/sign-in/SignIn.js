@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import * as authActions from '../modules/auth/authActions';
-import { toSignup } from '../signup/signupActions';
+import { toSignUp } from '../sign-up/signUpActions';
 import s from './styles';
 
 const Form = t.form.Form;
@@ -46,7 +46,7 @@ class SignIn extends Component {
           >
             <Text style={s.buttonText}>Sign in</Text>
           </TouchableHighlight>
-          <Text style={s.signup} onPress={actions.toSignup}>Sign Up</Text>
+          <Text style={s.signUp} onPress={actions.toSignUp}>Sign Up</Text>
           {auth.message && <Text style={s.notification}>{auth.message}</Text>}
         </View>
       </View>
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign({}, authActions, { toSignup }), dispatch),
+  actions: bindActionCreators(Object.assign({}, authActions, { toSignUp }), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

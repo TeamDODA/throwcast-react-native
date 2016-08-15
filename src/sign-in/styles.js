@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
   },
-  signup: {
+  signUp: {
     color: 'black',
     alignSelf: 'center',
     fontSize: 24,

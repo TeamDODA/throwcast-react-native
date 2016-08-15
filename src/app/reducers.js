@@ -4,7 +4,7 @@ import playlist from '../playlist/playlistReducers';
 import player from '../player/playerReducers';
 import podcast from '../modules/podcast/podcastReducers';
 import routes from './routes';
-import signup from '../signup/signupReducers';
+import signUp from '../sign-up/signUpReducers';
 import station from '../modules/station/stationReducers';
 
 export default combineReducers({
@@ -13,6 +13,6 @@ export default combineReducers({
   player,
   podcast,
   routes,
-  signup,
+  signUp,
   station,
 });
