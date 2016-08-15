@@ -27,7 +27,7 @@ class App extends Component {
     return (
       <Provider store={reduxStore}>
         <RouterWithRedux>
-          <Scene key="root" >
+          <Scene key="root">
             <Scene key="signIn" component={SignIn} type="reset" hideNavBar />
             <Scene key="signUp" component={SignUp} hideNavBar direction="vertical" />
             <Scene key="homepage" component={Homepage} hideNavBar />

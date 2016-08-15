@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import AuthForm, { actions as authFormActions } from '../auth-form';
 import { actions as authActions } from '../../modules/auth';
-import { actions as signUpActions } from '../sign-up';
 import s from './styles';
 
 const SignIn = props => {
@@ -43,7 +42,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...signUpActions, ...authActions, ...authFormActions }, dispatch),
+  actions: bindActionCreators({ ...authActions, ...authFormActions }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

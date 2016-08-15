@@ -76,3 +76,19 @@ export function signUp(userCredentials) {
       .catch(e => dispatch(authFailure(e.message || e)));
   };
 }
+
+export function toSignIn() {
+  return dispatch => store.delete('@Auth:token')
+    .then(() => {
+      dispatch(authInit());
+      Actions.signIn();
+    });
+}
+
+export function toSignUp() {
+  return dispatch => store.delete('@Auth:token')
+    .then(() => {
+      dispatch(authInit());
+      Actions.signUp();
+    });
+}
