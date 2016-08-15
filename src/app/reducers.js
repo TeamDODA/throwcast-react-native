@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import auth from '../signin/signinReducers';
+import auth from '../modules/auth/authReducers';
 import playlist from '../playlist/playlistReducers';
 import player from '../player/playerReducers';
 import podcast from '../modules/podcast/podcastReducers';

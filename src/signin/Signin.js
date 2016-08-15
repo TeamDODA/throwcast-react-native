@@ -7,7 +7,7 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
-import * as actionCreators from './signinActions';
+import * as authActions from '../modules/auth/authActions';
 import { toSignup } from '../signup/signupActions';
 import s from './styles';
 
@@ -27,37 +27,27 @@ const options = {
 };
 
 class SignIn extends Component {
-  signIn() {
-    const userCredentials = this.form.getValue();
-    if (userCredentials) {
-      this.props.actions.signin(userCredentials);
-    }
-  }
-
   render() {
-    const statusMessage = this.props.auth.statusMessage;
+    const { actions, auth } = this.props;
     return (
       <View style={s.container}>
         <View style={s.row}>
           <Text style={s.title}>Throwcast</Text>
         </View>
         <View style={s.row}>
-          <Form
-            ref={c => (this.form = c)}
-            type={Person}
-            options={options}
-          />
+          <Form ref={c => (this.form = c)} type={Person} options={options} />
         </View>
         <View style={s.row}>
           <TouchableHighlight
-            onPress={() => this.signIn()}
+            onPress={() => actions.signIn(this.form.getValue())}
+            disabled={auth.pending}
             style={s.button}
             underlayColor="#99d9f4"
           >
             <Text style={s.buttonText}>Sign in</Text>
           </TouchableHighlight>
-          <Text style={s.signup} onPress={this.props.actions.toSignup}>Sign Up</Text>
-          {statusMessage && <Text style={s.notification}>{statusMessage}</Text>}
+          <Text style={s.signup} onPress={actions.toSignup}>Sign Up</Text>
+          {auth.message && <Text style={s.notification}>{auth.message}</Text>}
         </View>
       </View>
     );
@@ -69,7 +59,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(actionCreators, { toSignup }), dispatch),
+  actions: bindActionCreators(Object.assign({}, authActions, { toSignup }), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

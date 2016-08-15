@@ -11,7 +11,7 @@ import SignIn from '../signin/Signin';
 import SignUp from '../signup/Signup';
 import Playlist from '../playlist/Playlist';
 import Player from '../player/Player';
-import { signinSuccess } from '../signin/signinActions';
+import { authSuccess } from '../modules/auth/authActions';
 
 const RouterWithRedux = connect()(Router);
 const reduxStore = createStore(reducers, applyMiddleware(thunk));
@@ -21,7 +21,7 @@ class App extends Component {
     StatusBar.setHidden(true, 'none');
     store.get('@Auth:token').then(token => {
       if (token) {
-        reduxStore.dispatch(signinSuccess(token));
+        reduxStore.dispatch(authSuccess(token));
         Actions.homepage();
       }
     });

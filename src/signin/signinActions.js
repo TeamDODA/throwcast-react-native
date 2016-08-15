@@ -1,69 +1,11 @@
-import { Actions } from 'react-native-router-flux';
 import store from 'react-native-simple-store';
+import { Actions } from 'react-native-router-flux';
+import { authInit } from '../modules/auth/authActions';
 
-export function signinInitialize() {
-  return {
-    type: 'SIGNIN_INITIALIZE',
-  };
-}
-
-export function signinRequest() {
-  return {
-    type: 'SIGNIN_REQUEST',
-  };
-}
-
-export function signinSuccess(token) {
-  return {
-    type: 'SIGNIN_SUCCESS',
-    token,
-  };
-}
-
-export function signinFail(statusMessage) {
-  return {
-    type: 'SIGNIN_FAIL',
-    statusMessage,
-  };
-}
-
-export function toSignin() {
-  return (dispatch) => {
-    store.delete('@Auth:token')
+export default function toSignIn() {
+  return dispatch => store.delete('@Auth:token')
     .then(() => {
-      dispatch(signinInitialize());
+      dispatch(authInit());
       Actions.signin();
     });
-  };
-}
-
-export function signin(userCredentials) {
-  return (dispatch) => {
-    dispatch(signinRequest());
-    return fetch('http://localhost:8888/auth/local', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userCredentials),
-    })
-    .then((response) => response.json())
-    .then((response) => {
-      if (response.message) {
-        // respond with error messages such as
-        // incorrect user name and email
-        dispatch(signinFail(response.message));
-      } else if (response.token) {
-        store.save('@Auth:token', response.token)
-        .then(() => {
-          dispatch(signinSuccess(response.token));
-          Actions.homepage();
-        });
-      }
-    })
-    .catch((e) => {
-      dispatch(signinFail('connection error', e));
-    });
-  };
 }
