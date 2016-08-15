@@ -1,4 +1,4 @@
-import * as types from './constants';
+import { types } from './';
 
 export function authFormInit() {
   return { type: types.AUTH_FORM_INIT };

@@ -1,4 +1,4 @@
-import * as types from './constants';
+import { types } from './';
 
 const initialState = {
   username: null,

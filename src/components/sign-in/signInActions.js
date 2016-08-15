@@ -1,11 +1,11 @@
 import store from 'react-native-simple-store';
 import { Actions } from 'react-native-router-flux';
-import { authInit } from '../modules/auth/authActions';
+import { actions as authActions } from '../../modules/auth';
 
-export default function toSignUp() {
+export default function toSignIn() {
   return dispatch => store.delete('@Auth:token')
     .then(() => {
-      dispatch(authInit());
-      Actions.signUp();
+      dispatch(authActions.authInit());
+      Actions.signIn();
     });
 }

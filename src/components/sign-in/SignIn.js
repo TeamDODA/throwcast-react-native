@@ -6,29 +6,31 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
-import * as authActions from '../modules/auth/authActions';
-import * as authFormActions from '../components/auth-form/authFormActions';
-import toSignIn from '../sign-in/signInActions';
-import AuthForm from '../components/auth-form/AuthForm';
+import AuthForm, { actions as authFormActions } from '../auth-form';
+import { actions as authActions } from '../../modules/auth';
+import { actions as signUpActions } from '../sign-up';
 import s from './styles';
 
-const SignUp = props => {
+const SignIn = props => {
   const { actions, auth, authForm } = props;
   return (
     <View style={s.container}>
+      <View style={s.row}>
+        <Text style={s.title}>Throwcast</Text>
+      </View>
       <View style={s.row}>
         <AuthForm authForm={authForm} {...actions} />
       </View>
       <View style={s.row}>
         <TouchableHighlight
           style={s.button}
-          onPress={() => actions.signUp(authForm)}
+          onPress={() => actions.signIn(authForm)}
           disabled={auth.pending}
           underlayColor="#99d9f4"
         >
-          <Text style={s.buttonText}>Sign Up</Text>
+          <Text style={s.buttonText}>Sign in</Text>
         </TouchableHighlight>
-        <Text style={s.signIn} onPress={actions.toSignIn}>Sign In</Text>
+        <Text style={s.signUp} onPress={actions.toSignUp}>Sign Up</Text>
         {auth.message && <Text style={s.notification}>{auth.message}</Text>}
       </View>
     </View>
@@ -41,7 +43,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ toSignIn, ...authActions, ...authFormActions }, dispatch),
+  actions: bindActionCreators({ ...signUpActions, ...authActions, ...authFormActions }, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

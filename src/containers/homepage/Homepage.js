@@ -1,4 +1,3 @@
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
@@ -8,8 +7,8 @@ import {
   ScrollView,
 } from 'react-native';
 
-import * as podcastActions from '../modules/podcast/podcastActions';
-import * as stationActions from '../modules/station/stationActions';
+import * as podcastActions from '../../modules/podcast/podcastActions';
+import * as stationActions from '../../modules/station/stationActions';
 import { getPlaylist } from '../playlist/playlistActions';
 import Entry from './Entry';
 import s from './homepageStyles';

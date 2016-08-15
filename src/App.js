@@ -6,12 +6,9 @@ import store from 'react-native-simple-store';
 import React, { Component } from 'react';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import Homepage from '../homepage/Homepage';
-import SignIn from '../sign-in/SignIn';
-import SignUp from '../sign-up/SignUp';
-import Playlist from '../playlist/Playlist';
-import Player from '../player/Player';
-import { authSuccess } from '../modules/auth/authActions';
+import { SignIn, SignUp } from './components';
+import { Homepage, Player, Playlist } from './containers';
+import { actions as authActions } from './modules/auth';
 
 const RouterWithRedux = connect()(Router);
 const reduxStore = createStore(reducers, applyMiddleware(thunk));
@@ -21,7 +18,7 @@ class App extends Component {
     StatusBar.setHidden(true, 'none');
     store.get('@Auth:token').then(token => {
       if (token) {
-        reduxStore.dispatch(authSuccess(token));
+        reduxStore.dispatch(authActions.authSuccess(token));
         Actions.homepage();
       }
     });

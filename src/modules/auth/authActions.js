@@ -1,7 +1,7 @@
 import { Actions } from 'react-native-router-flux';
 import store from 'react-native-simple-store';
 
-import * as types from './constants';
+import { types } from './';
 import { authFormInit } from '../../components/auth-form/authFormActions';
 
 export function authInit() {
