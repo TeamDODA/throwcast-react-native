@@ -70,7 +70,7 @@ class Player extends Component {
           onEnd={() => actions.onEnd(index, player.podcastList.length)}
           repeat
         />
-        <View style={s.header}>
+        <View style={s.backButton}>
           <Icon onPress={Actions.pop} name="ios-arrow-back" size={30} color="#FFF" />
         </View>
         <Image style={s.image} source={{ uri: podcast.imageUrl }} />

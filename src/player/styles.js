@@ -6,19 +6,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#000',
+    backgroundColor: '#121212',
+  },
+  backButton: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    top: 5,
+    left: 0,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   sliderContainer: {
     width: window.width - 40,
   },
-  header: {
-    marginTop: 30,
-    marginBottom: 30,
-    marginLeft: 30,
-    width: window.width,
-  },
   image: {
-    marginTop: 20,
+    marginTop: 80,
     marginBottom: 20,
     width: window.width - 40,
     height: 280,

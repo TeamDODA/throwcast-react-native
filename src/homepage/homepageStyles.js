@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   innerContainer: {
-    marginTop: 30,
+    marginTop: 50,
     flex: 1,
   },
   header: {
