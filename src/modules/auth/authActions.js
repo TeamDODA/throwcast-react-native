@@ -55,26 +55,40 @@ const handleAuthSuccess = function handleAuthSuccess(dispatch) {
   };
 };
 
-export function signIn(userCredentials) {
+const authPost = function authRequest(uri, credentials) {
   return dispatch => {
     dispatch(authPending());
-    return fetch('http://localhost:8888/auth/local', authRequestOptions(userCredentials))
+    return fetch(`http://localhost:8888${uri}`, authRequestOptions(credentials))
       .then(response => response.json())
       .then(handleResponseMessage())
       .then(handleAuthSuccess(dispatch))
       .catch(e => dispatch(authFailure(e.message || e)));
   };
+};
+
+export function signIn(credentials) {
+  return authPost('/auth/local', credentials);
 }
 
-export function signUp(userCredentials) {
-  return dispatch => {
-    dispatch(authPending());
-    return fetch('http://localhost:8888/api/users', authRequestOptions(userCredentials))
-      .then(response => response.json())
-      .then(handleResponseMessage())
-      .then(handleAuthSuccess(dispatch))
-      .catch(e => dispatch(authFailure(e.message || e)));
-  };
+export function signUp(credentials) {
+  return authPost('/api/users', credentials);
+}
+
+const navigateTo = function navigateTo(next) {
+  return dispatch => store.delete('@Auth:token')
+    .then(() => {
+      dispatch(authFormInit());
+      dispatch(authInit());
+      Actions[next]();
+    });
+};
+
+export function toSignIn() {
+  return navigateTo('signIn');
+}
+
+export function toSignUp() {
+  return navigateTo('signUp');
 }
 
 export function toSignIn() {
