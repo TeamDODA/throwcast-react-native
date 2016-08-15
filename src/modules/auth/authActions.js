@@ -66,3 +66,17 @@ export function signIn(userCredentials) {
       .catch(e => dispatch(authFailure(e.message || e)));
   };
 }
+
+export function signUp(userCredentials) {
+  if (!userCredentials) {
+    return { type: 'NOOP' };
+  }
+  return dispatch => {
+    dispatch(authPending());
+    return fetch('http://localhost:8888/api/users', authRequestOptions(userCredentials))
+      .then(response => response.json())
+      .then(handleResponseMessage())
+      .then(handleAuthSuccess(dispatch))
+      .catch(e => dispatch(authFailure(e.message || e)));
+  };
+}

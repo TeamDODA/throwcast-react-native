@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import * as authActions from '../modules/auth/authActions';
-import { toSignUp } from '../sign-up/signUpActions';
+import toSignUp from '../sign-up/signUpActions';
 import s from './styles';
 
 const Form = t.form.Form;
@@ -39,9 +39,9 @@ class SignIn extends Component {
         </View>
         <View style={s.row}>
           <TouchableHighlight
+            style={s.button}
             onPress={() => actions.signIn(this.form.getValue())}
             disabled={auth.pending}
-            style={s.button}
             underlayColor="#99d9f4"
           >
             <Text style={s.buttonText}>Sign in</Text>
@@ -54,11 +54,11 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(Object.assign({}, authActions, { toSignUp }), dispatch),
 });
 
