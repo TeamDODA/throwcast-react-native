@@ -2,10 +2,13 @@
   "extends": "airbnb",
   "plugins": [
     "react",
-    "react-native"
+    "react-native",
   ],
-  "ecmaFeatures": {
-    "jsx": true
+  "parserOptions":{
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
   },
   "rules": {
     "react-native/no-unused-styles": 2,

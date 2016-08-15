@@ -2,6 +2,7 @@ import { Actions } from 'react-native-router-flux';
 import store from 'react-native-simple-store';
 
 import * as types from './constants';
+import { authFormInit } from '../../components/auth-form/authFormActions';
 
 export function authInit() {
   return { type: types.AUTH_INIT };
@@ -49,14 +50,12 @@ const handleAuthSuccess = function handleAuthSuccess(dispatch) {
   return response => {
     store.save('@Auth:token', response.token);
     dispatch(authSuccess(response.token));
+    dispatch(authFormInit());
     Actions.homepage();
   };
 };
 
 export function signIn(userCredentials) {
-  if (!userCredentials) {
-    return { type: 'NOOP' };
-  }
   return dispatch => {
     dispatch(authPending());
     return fetch('http://localhost:8888/auth/local', authRequestOptions(userCredentials))
@@ -68,9 +67,6 @@ export function signIn(userCredentials) {
 }
 
 export function signUp(userCredentials) {
-  if (!userCredentials) {
-    return { type: 'NOOP' };
-  }
   return dispatch => {
     dispatch(authPending());
     return fetch('http://localhost:8888/api/users', authRequestOptions(userCredentials))
