@@ -30,6 +30,7 @@ export function togglePlay() {
     type: 'TOGGLE_PLAY',
   };
 }
+
 export function setDuration(duration) {
   return {
     type: 'SET_DURATION',

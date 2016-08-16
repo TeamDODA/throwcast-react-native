@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 import { SignIn, SignUp } from './components';
-import { Controller, Homepage, Player, Playlist } from './containers';
+import { Homepage, Player, Playlist, PlayerRemote } from './containers';
 import { actions as authActions } from './modules/auth';
 
 const RouterWithRedux = connect()(Router);
@@ -35,7 +35,7 @@ class App extends Component {
               <Scene key="signUp" component={SignUp} hideNavBar direction="vertical" />
               <Scene key="homepage" component={Homepage} hideNavBar />
               <Scene key="playlist" component={Playlist} hideNavBar />
-              <Scene key="controller" component={Controller} />
+              <Scene key="playerRemote" component={PlayerRemote} />
             </Scene>
             <Scene key="player" component={Player} />
           </Scene>

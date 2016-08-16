@@ -15,7 +15,7 @@ import { formattedTime } from './utils';
 import s from './styles';
 
 
-class Controller extends Component {
+class PlayerRemote extends Component {
   slideChange(value) {
     this.props.actions.setCurrentTime(Math.round(value * this.props.player.duration));
   }
@@ -105,4 +105,4 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(playerActions, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Controller);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerRemote);
