@@ -9,7 +9,7 @@ import {
 
 import * as podcastActions from '../../modules/podcast/podcastActions';
 import * as stationActions from '../../modules/station/stationActions';
-import { getPlaylist } from '../playlist/playlistActions';
+import { getQueue } from '../queue/queueActions';
 import Entry from './Entry';
 import s from './homepageStyles';
 
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(Object.assign(
     {},
-    { getPlaylist },
+    { getQueue },
     podcastActions,
     stationActions
   ), dispatch),

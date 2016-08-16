@@ -1,9 +1,9 @@
 import homepage from './homepage';
 import player from './player';
 import playerRemote from './playerRemote';
-import playlist from './playlist';
+import queue from './queue';
 
 export const Homepage = homepage;
 export const Player = player;
 export const PlayerRemote = playerRemote;
-export const Playlist = playlist;
+export const Queue = queue;

@@ -11,40 +11,40 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 
-import { actions as playlistActions } from './';
+import { actions as queueActions } from './';
 import { selectPodcast } from '../player/playerActions';
-import s from './playlistStyles';
-import PlaylistEntry from './PlaylistEntry';
+import s from './queueStyles';
+import QueueEntry from './QueueEntry';
 
 const window = Dimensions.get('window');
 const PARALLAX_HEADER_HEIGHT = 280;
 const STICKY_HEADER_HEIGHT = 50;
 
-class Playlist extends Component {
+class Queue extends Component {
   renderStickyHeader() {
-    const { playlist } = this.props;
+    const { queue } = this.props;
     return (
       <View style={s.stickySection}>
-        <Text style={s.stickySectionTitle}>{playlist.title}</Text>
+        <Text style={s.stickySectionTitle}>{queue.title}</Text>
       </View>
     );
   }
 
   renderForeground() {
-    const { playlist } = this.props;
+    const { queue } = this.props;
     return (
       <View key="parallax-header" style={s.parallaxHeader}>
-        <Text style={s.listTitle}>
-          {playlist.title}
+        <Text style={s.queueTitle}>
+          {queue.title}
         </Text>
       </View>
     );
   }
 
   renderBackground() {
-    const { playlist } = this.props;
+    const { queue } = this.props;
     const imageSource = {
-      uri: playlist.imageUrl,
+      uri: queue.imageUrl,
       width: window.width,
       height: PARALLAX_HEADER_HEIGHT,
     };
@@ -58,8 +58,8 @@ class Playlist extends Component {
   }
 
   render() {
-    const { playlist, player, actions } = this.props;
-    const podcastList = playlist.list;
+    const { queue, player, actions } = this.props;
+    const podcastList = queue.podcasts;
     return (
       <View style={s.background}>
         <ParallaxScrollView
@@ -73,13 +73,13 @@ class Playlist extends Component {
         >
           <View style={s.background}>
             {podcastList.map((podcast, index) =>
-              <PlaylistEntry
+              <QueueEntry
                 key={podcast._id}
-                podcast={podcast}
                 index={index}
-                podcastList={podcastList}
+                queue={queue}
+                podcast={podcast}
                 player={player}
-                actions={actions}
+                selectPodcast={actions.selectPodcast}
               />
             )}
           </View>
@@ -94,11 +94,11 @@ class Playlist extends Component {
 
 const mapStateToProps = (state) => ({
   player: state.player,
-  playlist: state.playlist,
+  queue: state.queue,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(playlistActions, { selectPodcast }), dispatch),
+  actions: bindActionCreators(Object.assign(queueActions, { selectPodcast }), dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Playlist);
+export default connect(mapStateToProps, mapDispatchToProps)(Queue);

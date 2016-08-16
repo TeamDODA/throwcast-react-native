@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import s from './entryStyles';
 
-const Entry = ({ entry, getPlaylist }) => (
-  <TouchableHighlight onPress={() => getPlaylist(entry)}>
+const Entry = ({ entry, getQueue }) => (
+  <TouchableHighlight onPress={() => getQueue(entry)}>
     <View style={s.box}>
       <Image source={{ uri: entry.imageUrl, height: 180 }} />
       <Text style={s.title}>{entry.title}</Text>

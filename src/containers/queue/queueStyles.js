@@ -4,7 +4,7 @@ const window = Dimensions.get('window');
 const PARALLAX_HEADER_HEIGHT = 280;
 const STICKY_HEADER_HEIGHT = 50;
 
-const playlistStyles = StyleSheet.create({
+const queueStyles = StyleSheet.create({
   background: {
     backgroundColor: '#121212',
     flex: 1,
@@ -52,11 +52,11 @@ const playlistStyles = StyleSheet.create({
     paddingTop: 40,
     width: window.width,
   },
-  listTitle: {
+  queueTitle: {
     fontSize: 24,
     color: '#FFF',
     fontFamily: 'Helvetica Neue',
   },
 });
 
-export default playlistStyles;
+export default queueStyles;

@@ -4,12 +4,12 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
-import s from './playlistEntryStyles';
+import s from './queueEntryStyles';
 
-const PlaylistEntry = ({ player, index, podcast, podcastList, actions }) => {
+const QueueEntry = ({ index, queue, podcast, player, selectPodcast }) => {
   let titleStyle;
   let changePodcast = false;
-  if (player.podcastList === podcastList && player.currentIndex === index) {
+  if (player.queueId === queue._id && player.currentIndex === index) {
     titleStyle = s.activeTitle;
   } else {
     titleStyle = s.inactiveTitle;
@@ -19,7 +19,7 @@ const PlaylistEntry = ({ player, index, podcast, podcastList, actions }) => {
   return (
     <TouchableHighlight
       style={s.container}
-      onPress={() => actions.selectPodcast(podcastList, index, changePodcast)}
+      onPress={() => selectPodcast(queue._id, queue.podcasts, index, changePodcast)}
     >
       <View style={s.box}>
         <Text style={titleStyle} >{podcast.title}</Text>
@@ -30,4 +30,4 @@ const PlaylistEntry = ({ player, index, podcast, podcastList, actions }) => {
 };
 
 
-export default PlaylistEntry;
+export default QueueEntry;

@@ -1,34 +1,36 @@
 const initialState = {
   fetching: null,
   message: null,
+  _id: null,
   title: null,
   imageUrl: null,
-  list: [],
+  podcasts: [],
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case 'PLAYLIST_DETAIL':
+    case 'QUEUE_DETAIL':
       return Object.assign({}, state, {
+        _id: action._id,
         title: action.title,
         imageUrl: action.imageUrl,
       });
-    case 'PLAYLIST_LOADING_INIT':
+    case 'QUEUE_LOADING_INIT':
       return Object.assign({}, state, {
         fetching: true,
         message: null,
       });
-    case 'PLAYLIST_LOADING_SUCC':
+    case 'QUEUE_LOADING_SUCC':
       return Object.assign({}, state, {
         fetching: null,
         message: null,
-        list: action.podcasts,
+        podcasts: action.podcasts,
       });
-    case 'PLAYLIST_LOADING_FAIL':
+    case 'QUEUE_LOADING_FAIL':
       return Object.assign({}, state, {
         fetching: null,
         message: null,
-        list: [],
+        podcasts: [],
       });
     default:
       return state;

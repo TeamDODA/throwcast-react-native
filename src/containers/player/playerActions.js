@@ -1,9 +1,10 @@
 import { Actions } from 'react-native-router-flux';
 
-export function select(podcastList, currentIndex) {
+export function select(queueId, podcasts, currentIndex) {
   return {
     type: 'SELECT_PODCAST',
-    podcastList,
+    queueId,
+    podcasts,
     currentIndex,
   };
 }
@@ -15,10 +16,10 @@ export function setAudio(audio) {
   };
 }
 
-export function selectPodcast(playlist, index, changePodcast) {
+export function selectPodcast(queueId, podcasts, index, changePodcast) {
   return (dispatch) => {
     if (changePodcast) {
-      dispatch(select(playlist, index));
+      dispatch(select(queueId, podcasts, index));
     }
 
     Actions.playerRemote();

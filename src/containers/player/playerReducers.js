@@ -1,4 +1,5 @@
 const initialState = {
+  queueId: null,
   currentIndex: 0,
   podcastList: [{
     title: null,
@@ -14,8 +15,9 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case 'SELECT_PODCAST':
       return Object.assign({}, state, {
+        queueId: action.queueId,
         currentIndex: action.currentIndex,
-        podcastList: action.podcastList,
+        podcastList: action.podcasts,
         playing: true,
         muted: false,
       });

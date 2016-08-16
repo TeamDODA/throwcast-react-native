@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const playlistEntryStyles = StyleSheet.create({
+const queueEntryStyles = StyleSheet.create({
   container: {
     paddingLeft: 12,
     paddingRight: 12,
@@ -33,4 +33,4 @@ const playlistEntryStyles = StyleSheet.create({
   },
 });
 
-export default playlistEntryStyles;
+export default queueEntryStyles;
