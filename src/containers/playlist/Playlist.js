@@ -11,7 +11,7 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 
-import * as actionCreators from './playlistActions';
+import { actions as playlistActions } from './';
 import { selectPodcast } from '../player/playerActions';
 import s from './playlistStyles';
 import PlaylistEntry from './PlaylistEntry';
@@ -58,7 +58,7 @@ class Playlist extends Component {
   }
 
   render() {
-    const { playlist, actions } = this.props;
+    const { playlist, player, actions } = this.props;
     const podcastList = playlist.list;
     return (
       <View style={s.background}>
@@ -77,8 +77,9 @@ class Playlist extends Component {
                 key={podcast._id}
                 podcast={podcast}
                 index={index}
-                playlist={podcastList}
-                selectPodcast={actions.selectPodcast}
+                podcastList={podcastList}
+                player={player}
+                actions={actions}
               />
             )}
           </View>
@@ -92,11 +93,12 @@ class Playlist extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  player: state.player,
   playlist: state.playlist,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(actionCreators, { selectPodcast }), dispatch),
+  actions: bindActionCreators(Object.assign(playlistActions, { selectPodcast }), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

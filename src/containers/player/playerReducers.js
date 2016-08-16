@@ -4,7 +4,7 @@ const initialState = {
     title: null,
     description: null,
     imageUrl: null,
-    link: 'https://api.soundcloud.com/tracks/254196631/stream?client_id=8a754483a114344c70ab15f20a5035ab',
+    link: 'https://',
   }],
   playing: false,
   muted: false,
@@ -18,7 +18,6 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case 'SELECT_PODCAST':
       return Object.assign({}, state, {
-        currentPodcast: action.currentPodcast,
         currentIndex: action.currentIndex,
         podcastList: action.podcastList,
         playing: true,

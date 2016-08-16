@@ -1,9 +1,8 @@
 import { Actions } from 'react-native-router-flux';
 
-export function select(currentPodcast, podcastList, currentIndex) {
+export function select(podcastList, currentIndex) {
   return {
     type: 'SELECT_PODCAST',
-    currentPodcast,
     podcastList,
     currentIndex,
   };
@@ -16,9 +15,12 @@ export function setAudio(audio) {
   };
 }
 
-export function selectPodcast(podcast, playlist, index) {
+export function selectPodcast(playlist, index, changePodcast) {
   return (dispatch) => {
-    dispatch(select(podcast, playlist, index));
+    if (changePodcast) {
+      dispatch(select(playlist, index));
+    }
+
     Actions.controller();
   };
 }

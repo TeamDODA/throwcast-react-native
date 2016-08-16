@@ -11,7 +11,14 @@ const playlistEntryStyles = StyleSheet.create({
     borderBottomWidth: 0.4,
     height: 60,
   },
-  title: {
+  activeTitle: {
+    color: 'green',
+    fontFamily: 'HelveticaNeue-Medium',
+    fontSize: 12,
+    paddingLeft: 10,
+    paddingTop: 5,
+  },
+  inactiveTitle: {
     color: '#fffaf0',
     fontFamily: 'HelveticaNeue-Medium',
     fontSize: 12,
