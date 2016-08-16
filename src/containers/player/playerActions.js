@@ -9,10 +9,17 @@ export function select(currentPodcast, podcastList, currentIndex) {
   };
 }
 
+export function setAudio(audio) {
+  return {
+    type: 'SET_AUDIO_REF',
+    audio,
+  };
+}
+
 export function selectPodcast(podcast, playlist, index) {
   return (dispatch) => {
     dispatch(select(podcast, playlist, index));
-    Actions.player();
+    Actions.controller();
   };
 }
 

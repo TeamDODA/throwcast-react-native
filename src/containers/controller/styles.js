@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     marginTop: 13,
     fontSize: 20,
   },
-  artist: {
+  description: {
     color: '#BBB',
     fontFamily: 'HelveticaNeue',
     fontSize: 14,

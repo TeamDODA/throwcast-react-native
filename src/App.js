@@ -1,4 +1,4 @@
-import { Scene, Router, Actions } from 'react-native-router-flux';
+import { Scene, Router, Actions, Modal } from 'react-native-router-flux';
 import { Provider, connect } from 'react-redux';
 import { StatusBar } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 import { SignIn, SignUp } from './components';
-import { Homepage, Player, Playlist } from './containers';
+import { Controller, Homepage, Player, Playlist } from './containers';
 import { actions as authActions } from './modules/auth';
 
 const RouterWithRedux = connect()(Router);
@@ -20,18 +20,23 @@ class App extends Component {
       if (token) {
         reduxStore.dispatch(authActions.authSuccess(token));
         Actions.homepage();
+        Actions.player();
       }
     });
   }
+
   render() {
     return (
       <Provider store={reduxStore}>
         <RouterWithRedux>
-          <Scene key="root">
-            <Scene key="signIn" component={SignIn} type="reset" hideNavBar />
-            <Scene key="signUp" component={SignUp} hideNavBar direction="vertical" />
-            <Scene key="homepage" component={Homepage} hideNavBar />
-            <Scene key="playlist" component={Playlist} hideNavBar />
+          <Scene key="modal" component={Modal}>
+            <Scene key="root">
+              <Scene key="signIn" component={SignIn} type="reset" hideNavBar />
+              <Scene key="signUp" component={SignUp} hideNavBar direction="vertical" />
+              <Scene key="homepage" component={Homepage} hideNavBar />
+              <Scene key="playlist" component={Playlist} hideNavBar />
+              <Scene key="controller" component={Controller} />
+            </Scene>
             <Scene key="player" component={Player} />
           </Scene>
         </RouterWithRedux>
