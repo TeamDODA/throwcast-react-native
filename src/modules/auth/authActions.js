@@ -90,19 +90,3 @@ export function toSignIn() {
 export function toSignUp() {
   return navigateTo('signUp');
 }
-
-export function toSignIn() {
-  return dispatch => store.delete('@Auth:token')
-    .then(() => {
-      dispatch(authInit());
-      Actions.signIn();
-    });
-}
-
-export function toSignUp() {
-  return dispatch => store.delete('@Auth:token')
-    .then(() => {
-      dispatch(authInit());
-      Actions.signUp();
-    });
-}
