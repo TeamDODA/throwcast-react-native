@@ -21,7 +21,7 @@ export function selectPodcast(playlist, index, changePodcast) {
       dispatch(select(playlist, index));
     }
 
-    Actions.controller();
+    Actions.playerRemote();
   };
 }
 

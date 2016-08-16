@@ -17,16 +17,16 @@ import s from './styles';
 
 class PlayerRemote extends Component {
   slideChange(value) {
-    this.props.actions.setCurrentTime(Math.round(value * this.props.player.duration));
+    this.props.actions.setCurrentTime(Math.round(value * this.props.playerRemote.duration));
   }
 
   slideComplete() {
-    this.props.player.audio.seek(this.props.player.currentTime);
+    this.props.playerRemote.audio.seek(this.props.playerRemote.currentTime);
     this.props.actions.togglePlay();
   }
 
   render() {
-    const { player, actions } = this.props;
+    const { player, playerRemote, actions } = this.props;
     const { togglePlay, nextPodcast, previousPodcast } = actions;
     const index = player.currentIndex;
     const podcast = player.podcastList[index];
@@ -76,14 +76,14 @@ class PlayerRemote extends Component {
             style={s.slider}
             trackStyle={s.sliderTrack}
             thumbStyle={s.sliderThumb}
-            value={player.currentTime / player.duration}
+            value={playerRemote.currentTime / playerRemote.duration}
           />
           <View style={s.timeInfo}>
             <Text style={s.timeLeft}>
-              {formattedTime(player.currentTime)}
+              {formattedTime(playerRemote.currentTime)}
             </Text>
             <Text style={s.timeRight}>
-              {formattedTime(player.duration)}
+              {formattedTime(playerRemote.duration)}
             </Text>
           </View>
         </View>
@@ -99,6 +99,7 @@ class PlayerRemote extends Component {
 
 const mapStateToProps = (state) => ({
   player: state.player,
+  playerRemote: state.playerRemote,
 });
 
 const mapDispatchToProps = (dispatch) => ({
