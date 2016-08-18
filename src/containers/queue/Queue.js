@@ -14,6 +14,7 @@ import { Actions } from 'react-native-router-flux';
 import { actions as queueActions } from './';
 import { selectPodcast } from '../player/playerActions';
 import s from './queueStyles';
+import PlayerSmallRemote from '../../components/playerSmallRemote';
 import QueueEntry from './QueueEntry';
 
 const window = Dimensions.get('window');
@@ -86,6 +87,9 @@ class Queue extends Component {
         </ParallaxScrollView>
         <View style={s.backButton}>
           <Icon onPress={Actions.pop} name="ios-arrow-back" size={30} color="#FFF" />
+        </View>
+        <View style={s.footer}>
+          <PlayerSmallRemote />
         </View>
       </View>
     );

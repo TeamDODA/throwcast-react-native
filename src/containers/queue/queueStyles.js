@@ -57,6 +57,12 @@ const queueStyles = StyleSheet.create({
     color: '#FFF',
     fontFamily: 'Helvetica Neue',
   },
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
 });
 
 export default queueStyles;
