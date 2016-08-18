@@ -22,8 +22,8 @@ const QueueEntry = ({ index, queue, podcast, player, selectPodcast }) => {
       onPress={() => selectPodcast(queue._id, queue.podcasts, index, changePodcast)}
     >
       <View style={s.box}>
-        <Text style={titleStyle} >{podcast.title}</Text>
-        <Text style={s.description}>{podcast.description}</Text>
+        <Text ellipsizeMode numberOfLines={2} style={titleStyle}>{podcast.title}</Text>
+        <Text ellipsizeMode numberOfLines={2} style={s.description}>{podcast.description}</Text>
       </View>
     </TouchableHighlight>
   );

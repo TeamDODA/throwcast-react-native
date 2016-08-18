@@ -61,12 +61,14 @@ class PlayerRemote extends Component {
           <Icon onPress={Actions.pop} name="ios-arrow-back" size={30} color="#FFF" />
         </View>
         <Image style={s.image} source={{ uri: podcast.imageUrl }} />
-        <Text style={s.title}>
-          {podcast.title}
-        </Text>
-        <Text style={s.description}>
-          {podcast.description}
-        </Text>
+        <View style={s.info}>
+          <Text ellipsizeMode numberOfLines={2} style={s.title}>
+            {podcast.title}
+          </Text>
+          <Text ellipsizeMode numberOfLines={2} style={s.description}>
+            {podcast.description}
+          </Text>
+        </View>
         <View style={s.sliderContainer}>
           <Slider
             onSlidingStart={actions.slide}

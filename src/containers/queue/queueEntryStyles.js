@@ -9,7 +9,7 @@ const queueEntryStyles = StyleSheet.create({
     backgroundColor: '#121212',
     borderColor: '#303030',
     borderBottomWidth: 0.4,
-    height: 60,
+    height: 66,
   },
   activeTitle: {
     color: 'green',

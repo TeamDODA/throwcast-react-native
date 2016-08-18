@@ -27,18 +27,22 @@ const styles = StyleSheet.create({
     width: window.width - 40,
     height: 280,
   },
+  info: {
+    height: 100,
+    marginLeft: 20,
+    marginRight: 20,
+  },
   title: {
     color: '#FFF',
     fontFamily: 'HelveticaNeue',
     marginBottom: 10,
     marginTop: 13,
-    fontSize: 20,
+    fontSize: 14,
   },
   description: {
     color: '#BBB',
     fontFamily: 'HelveticaNeue',
-    fontSize: 14,
-    marginBottom: 16,
+    fontSize: 10,
   },
   slider: {
     height: 20,
@@ -58,7 +62,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
   },
   timeInfo: {
-    marginTop: 20,
     flexDirection: 'row',
   },
   timeLeft: {

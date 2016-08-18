@@ -68,10 +68,10 @@ class PlayerSmallRemote extends Component {
         </View>
         <View style={s.controlContainer}>
           <View style={s.info}>
-            <Text style={s.title}>
+            <Text ellipsizeMode numberOfLines={1} style={s.title}>
               {podcast.title}
             </Text>
-            <Text style={s.description}>
+            <Text ellipsizeMode numberOfLines={1} style={s.description}>
               {podcast.description}
             </Text>
           </View>
