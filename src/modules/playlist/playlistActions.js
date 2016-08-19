@@ -110,13 +110,15 @@ export function playlistsRemoveFail(message) {
 }
 
 export function getPlaylists() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { auth } = getState();
     dispatch(playlistsLoadingInit());
     return fetch('http://localhost:8888/api/playlists/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        authorization: `Bearer ${auth.token}`,
       },
     })
     .then((response) => response.json())
@@ -124,7 +126,7 @@ export function getPlaylists() {
       if (response.message) {
         dispatch(playlistsLoadingFail(response.message));
       } else {
-        dispatch(playlistsLoadingSucc(response.data));
+        dispatch(playlistsLoadingSucc(response));
       }
     })
     .catch((e) => {
@@ -134,13 +136,15 @@ export function getPlaylists() {
 }
 
 export function createPlaylist(playlist) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { auth } = getState();
     dispatch(playlistsCreateInit());
     return fetch('http://localhost:8888/api/playlists', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        authorization: `Bearer ${auth.token}`,
       },
       body: playlist,
     })
@@ -160,13 +164,14 @@ export function createPlaylist(playlist) {
 }
 
 export function deletePlaylist(playlistId) {
-  return (dispatch) => {
-    dispatch(playlistsDeleteInit());
+  return (dispatch, getState) => {
+    const { auth } = getState();
     return fetch(`http://localhost:8888/api/playlists/${playlistId}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        authorization: `Bearer ${auth.token}`,
       },
     })
     .then((response) => response.json())
@@ -184,13 +189,15 @@ export function deletePlaylist(playlistId) {
 }
 
 export function addToPlaylist(playlistId, podcast) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { auth } = getState();
     dispatch(playlistsAddInit());
     return fetch(`http://localhost:8888/api/playlists/${playlistId}/podcasts/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        authorization: `Bearer ${auth.token}`,
       },
       body: podcast._id,
     })
@@ -209,13 +216,15 @@ export function addToPlaylist(playlistId, podcast) {
 }
 
 export function deleteFromPlaylist(playlistId, podcastId) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { auth } = getState();
     dispatch(playlistsRemoveInit());
     return fetch(`http://localhost:8888/api/playlists/${playlistId}/podcasts/${podcastId}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        authorization: `Bearer ${auth.token}`,
       },
     })
     .then((response) => response.json())

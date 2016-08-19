@@ -6,6 +6,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  innerContainer: {
+    position: 'absolute',
+    height: window.height - 40,
+    bottom: 0,
+  },
   header: {
     position: 'absolute',
     backgroundColor: 'rgba(0,0,0,.8)',

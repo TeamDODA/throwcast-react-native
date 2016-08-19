@@ -1,25 +1,33 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import React from 'react';
 import {
   View,
+  ScrollView,
   Text,
 } from 'react-native';
 
 import { actions as playlistActions } from '../../modules/playlist';
+import Entry from './Entry';
 import s from './styles';
 
-class AddToPlaylist extends Component {
-  render() {
-    return (
-      <View style={s.container}>
-        <View style={s.header}>
-          <Text style={s.headerTitle}>ADD TO PLAYLIST</Text>
-        </View>
-      </View>
-    );
-  }
-}
+const AddToPlaylist = ({ playlist, actions }) => (
+  <View style={s.container}>
+    <ScrollView style={s.innerContainer}>
+      {playlist.list.map(entry =>
+        <Entry
+          key={entry._id}
+          {...entry}
+          podcast={playlist.podcast}
+          addToPlaylist={actions.addToPlaylist}
+        />
+      )}
+    </ScrollView>
+    <View style={s.header}>
+      <Text style={s.headerTitle}>ADD TO PLAYLIST</Text>
+    </View>
+  </View>
+);
 
 const mapStateToProps = (state) => ({
   playlist: state.playlist,
