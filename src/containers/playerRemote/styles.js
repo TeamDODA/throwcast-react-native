@@ -11,12 +11,8 @@ const styles = StyleSheet.create({
   backButton: {
     backgroundColor: 'transparent',
     position: 'absolute',
-    top: 5,
-    left: 0,
-    paddingTop: 5,
-    paddingBottom: 5,
+    top: 10,
     paddingLeft: 20,
-    paddingRight: 20,
   },
   sliderContainer: {
     width: window.width - 40,
