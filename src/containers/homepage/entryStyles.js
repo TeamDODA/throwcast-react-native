@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   box: {
-    height: 145,
+    height: 155,
     width: 120,
     marginLeft: 5,
     backgroundColor: '#151515',
@@ -15,14 +15,14 @@ const styles = StyleSheet.create({
     },
   },
   title: {
-    marginTop: 8,
-    fontSize: 9,
+    marginTop: 2,
+    fontSize: 10,
     color: '#FFF',
     fontFamily: 'Helvetica Neue',
   },
   description: {
     marginTop: 1,
-    fontSize: 9,
+    fontSize: 10,
     color: '#909090',
     fontFamily: 'Helvetica Neue',
   },

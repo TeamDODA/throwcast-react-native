@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from 'react-native-slider';
 import { Actions } from 'react-native-router-flux';
 
-import { actions as playerActions } from '../player';
+import { actions as playerActions } from '../../modules/player';
 import { formattedTime } from './utils';
 import s from './styles';
 

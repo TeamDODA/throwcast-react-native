@@ -11,8 +11,9 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 
-import { actions as queueActions } from './';
-import { selectPodcast } from '../player/playerActions';
+import { actions as bMActions } from '../baseModal';
+import { actions as qActions } from './';
+import { actions as pActions } from '../../modules/player';
 import s from './queueStyles';
 import PlayerSmallRemote from '../../components/playerSmallRemote';
 import QueueEntry from './QueueEntry';
@@ -81,6 +82,7 @@ class Queue extends Component {
                 podcast={podcast}
                 player={player}
                 selectPodcast={actions.selectPodcast}
+                selectPodcastToAdd={actions.selectPodcastToAdd}
               />
             )}
           </View>
@@ -102,7 +104,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(queueActions, { selectPodcast }), dispatch),
+  actions: bindActionCreators(Object.assign(bMActions, qActions, pActions), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Queue);

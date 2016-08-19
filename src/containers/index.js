@@ -1,9 +1,9 @@
+import baseModal from './baseModal';
 import homepage from './homepage';
-import player from './player';
 import playerRemote from './playerRemote';
 import queue from './queue';
 
+export const BaseModal = baseModal;
 export const Homepage = homepage;
-export const Player = player;
 export const PlayerRemote = playerRemote;
 export const Queue = queue;

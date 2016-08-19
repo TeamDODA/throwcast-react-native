@@ -1,5 +1,12 @@
 import { types } from './';
 
+export function select(podcast) {
+  return {
+    type: types.SELECT_TO_ADD,
+    podcast,
+  };
+}
+
 export function playlistsLoadingInit() {
   return {
     type: types.PLAYLISTS_LOADING_INIT,

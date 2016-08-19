@@ -1,9 +1,12 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import {
+  View,
+} from 'react-native';
 import Video from 'react-native-video';
 
-import { actions as playerActions } from './';
+import { actions as playerActions } from '../../modules/player';
 
 class Player extends Component {
   componentDidMount() {
@@ -16,18 +19,20 @@ class Player extends Component {
     const podcast = player.podcastList[index];
 
     return (
-      <Video
-        source={{ uri: podcast.link }}
-        ref={c => (this.audio = c)}
-        volume={1.0}
-        muted={false}
-        paused={!player.playing}
-        resizeMode="cover"
-        onLoad={actions.onLoad}
-        onProgress={actions.onProgress}
-        onEnd={() => actions.onEnd(index, player.podcastList.length)}
-        repeat
-      />
+      <View>
+        <Video
+          source={{ uri: podcast.link }}
+          ref={c => (this.audio = c)}
+          volume={1.0}
+          muted={false}
+          paused={!player.playing}
+          resizeMode="cover"
+          onLoad={actions.onLoad}
+          onProgress={actions.onProgress}
+          onEnd={() => actions.onEnd(index, player.podcastList.length)}
+          repeat
+        />
+      </View>
     );
   }
 }

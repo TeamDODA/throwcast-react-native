@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 import { SignIn, SignUp } from './components';
-import { Homepage, Player, PlayerRemote, Queue } from './containers';
+import { BaseModal, Homepage, PlayerRemote, Queue } from './containers';
 import { actions as authActions } from './modules/auth';
 
 const RouterWithRedux = connect()(Router);
@@ -20,7 +20,7 @@ class App extends Component {
       if (token) {
         reduxStore.dispatch(authActions.authSuccess(token));
         Actions.homepage();
-        Actions.player();
+        Actions.baseModal();
       }
     });
   }
@@ -31,13 +31,13 @@ class App extends Component {
         <RouterWithRedux>
           <Scene key="modal" component={Modal}>
             <Scene key="root">
-              <Scene key="signIn" component={SignIn} type="reset" hideNavBar />
+              <Scene key="signIn" component={SignIn} hideNavBar />
               <Scene key="signUp" component={SignUp} hideNavBar direction="vertical" />
               <Scene key="homepage" component={Homepage} hideNavBar />
               <Scene key="queue" component={Queue} hideNavBar />
               <Scene key="playerRemote" component={PlayerRemote} />
             </Scene>
-            <Scene key="player" component={Player} />
+            <Scene key="baseModal" component={BaseModal} />
           </Scene>
         </RouterWithRedux>
       </Provider>

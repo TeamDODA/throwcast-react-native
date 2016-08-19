@@ -8,7 +8,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from 'react-native-slider';
 
-import { actions as playerActions } from '../../containers/player';
+import { actions as playerActions } from '../../modules/player';
 import s from './styles';
 
 class PlayerSmallRemote extends Component {

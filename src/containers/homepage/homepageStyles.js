@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   outerContainer: {
     backgroundColor: '#121212',
     flex: 1,
+    height: window.height,
   },
   innerContainer: {
     marginTop: 25,
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     marginTop: 10,
-    height: 180,
+    height: 162,
   },
   footer: {
     position: 'absolute',

@@ -6,10 +6,14 @@ const queueEntryStyles = StyleSheet.create({
     paddingRight: 12,
   },
   box: {
+    flexDirection: 'row',
     backgroundColor: '#121212',
     borderColor: '#303030',
     borderBottomWidth: 0.4,
     height: 66,
+  },
+  info: {
+    width: 280,
   },
   activeTitle: {
     color: 'green',
@@ -30,6 +34,11 @@ const queueEntryStyles = StyleSheet.create({
     fontFamily: 'HelveticaNeue-Medium',
     fontSize: 10,
     paddingLeft: 10,
+  },
+  addButton: {
+    backgroundColor: 'transparent',
+    marginTop: 16,
+    marginLeft: 36,
   },
 });
 

@@ -7,11 +7,11 @@ import {
   ScrollView,
 } from 'react-native';
 
-import * as podcastActions from '../../modules/podcast/podcastActions';
-import * as stationActions from '../../modules/station/stationActions';
-import * as playlistActions from '../../modules/playlist/playlistActions';
+import { actions as podcastActions } from '../../modules/podcast';
+import { actions as playlistActions } from '../../modules/playlist';
+import { actions as stationActions } from '../../modules/station';
 import { getQueue } from '../queue/queueActions';
-import { selectPodcast } from '../player/playerActions';
+import { selectPodcast } from '../../modules/player/playerActions';
 import PodcastEntry from './PodcastEntry';
 import ListEntry from './ListEntry';
 import PlayerSmallRemote from '../../components/playerSmallRemote';
@@ -36,7 +36,7 @@ class Homepage extends Component {
             <View style={s.scrollContainer}>
               <ScrollView automaticallyAdjustContentInsets={false} horizontal>
                 {stations.list.map((entry) =>
-                  <ListEntry key={entry._id} {...actions} entry={entry} type="stations"/>
+                  <ListEntry key={entry._id} {...actions} entry={entry} type="stations" />
                 )}
               </ScrollView>
             </View>

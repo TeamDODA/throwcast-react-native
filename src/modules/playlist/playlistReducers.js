@@ -3,12 +3,17 @@ import { types } from './';
 const initialState = {
   fetching: null,
   message: null,
+  podcast: null,
   list: [],
 };
 
 export default function (state = initialState, action) {
   const newList = state.list.slice(0);
   switch (action.type) {
+    case types.SELECT_TO_ADD:
+      return Object.assign({}, state, {
+        podcast: action.podcast,
+      });
     case types.PLAYLISTS_LOADING_INIT:
       return Object.assign({}, state, {
         fetching: true,
