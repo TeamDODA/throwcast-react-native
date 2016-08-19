@@ -29,11 +29,19 @@ export function queueDetail({ imageUrl, title, _id }) {
   };
 }
 
-export function getQueue(station) {
+export function getQueue(list, type) {
   return (dispatch) => {
+    let url;
     dispatch(queueLoadingInit());
-    dispatch(queueDetail(station));
-    return fetch(`http://localhost:8888/api/stations/${station._id}/podcasts/`, {
+    dispatch(queueDetail(list));
+
+    if (type === 'stations') {
+      url = `http://localhost:8888/api/stations/${list._id}/podcasts/`;
+    } else if (type === 'playlist') {
+      url = `http://localhost:8888/api/playlist/${list._id}/podcasts/`;
+    }
+
+    return fetch(url, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

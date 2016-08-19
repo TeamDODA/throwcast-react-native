@@ -23,7 +23,7 @@ export function stationsLoadingFail(message) {
 export function getStations() {
   return (dispatch) => {
     dispatch(stationsLoadingInit());
-    return fetch('http://localhost:8888/api/stations', {
+    return fetch('http://localhost:8888/api/stations/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',

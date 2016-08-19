@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   innerContainer: {
-    marginTop: 50,
+    marginTop: 25,
     flex: 1,
   },
   header: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   listTitle: {
-    marginTop: 10,
+    marginTop: 5,
     marginLeft: 5,
     fontFamily: 'Helvetica Neue',
     color: '#808080',
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     marginTop: 10,
-    height: 230,
+    height: 180,
   },
   footer: {
     position: 'absolute',

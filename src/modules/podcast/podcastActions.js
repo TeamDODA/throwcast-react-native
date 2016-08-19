@@ -23,7 +23,7 @@ export function podcastsLoadingFail(message) {
 export function getPodcasts() {
   return (dispatch) => {
     dispatch(podcastLoadingInit());
-    return fetch('http://localhost:8888/api/podcasts', {
+    return fetch('http://localhost:8888/api/podcasts/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',

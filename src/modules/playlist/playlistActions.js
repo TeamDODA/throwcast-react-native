@@ -105,7 +105,7 @@ export function playlistsRemoveFail(message) {
 export function getPlaylists() {
   return (dispatch) => {
     dispatch(playlistsLoadingInit());
-    return fetch('http://localhost:8888/api/playlists', {
+    return fetch('http://localhost:8888/api/playlists/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
