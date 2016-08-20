@@ -9,6 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from 'react-native-slider';
 import { Actions } from 'react-native-router-flux';
+import * as Animatable from 'react-native-animatable';
 
 import { actions as playerActions } from '../../modules/player';
 import { formattedTime } from './utils';
@@ -25,11 +26,29 @@ class PlayerRemote extends Component {
     this.props.actions.togglePlay();
   }
 
+  renderInfo() {
+    const { player, playerRemote } = this.props;
+    const index = player.currentIndex;
+    const podcast = player.podcastList[index];
+    return (
+      <Animatable.View style={s.infoContainer} animation={playerRemote.animation} duration={100}>
+        <Image style={s.image} source={{ uri: podcast.imageUrl }} />
+        <View style={s.info}>
+          <Text ellipsizeMode numberOfLines={2} style={s.title}>
+            {podcast.title}
+          </Text>
+          <Text ellipsizeMode numberOfLines={2} style={s.description}>
+            {podcast.description}
+          </Text>
+        </View>
+      </Animatable.View>
+    );
+  }
+
   render() {
     const { player, playerRemote, actions } = this.props;
     const { togglePlay, nextPodcast, previousPodcast } = actions;
     const index = player.currentIndex;
-    const podcast = player.podcastList[index];
     const prevButton = {
       onPress: index > 0 ? previousPodcast : null,
       style: s.rewind,
@@ -60,14 +79,8 @@ class PlayerRemote extends Component {
         <View style={s.backButton}>
           <Icon onPress={Actions.pop} name="ios-arrow-back" size={30} color="#FFF" />
         </View>
-        <Image style={s.image} source={{ uri: podcast.imageUrl }} />
-        <View style={s.info}>
-          <Text ellipsizeMode numberOfLines={2} style={s.title}>
-            {podcast.title}
-          </Text>
-          <Text ellipsizeMode numberOfLines={2} style={s.description}>
-            {podcast.description}
-          </Text>
+        <View style={s.innerContainer}>
+          {this.renderInfo()}
         </View>
         <View style={s.sliderContainer}>
           <Slider

@@ -2,6 +2,7 @@ const initialState = {
   duration: 0,
   currentTime: 0,
   audio: null,
+  animation: 'slideInRight',
 };
 
 export default function (state = initialState, action) {
@@ -27,11 +28,13 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         currentTime: 0,
         duration: 0,
+        animation: action.animation,
       });
     case 'PREVIOUS_PODCAST':
       return Object.assign({}, state, {
         currentTime: 0,
         duration: 0,
+        animation: action.animation,
       });
     default:
       return state;

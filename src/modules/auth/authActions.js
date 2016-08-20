@@ -52,6 +52,7 @@ const handleAuthSuccess = function handleAuthSuccess(dispatch) {
     dispatch(authSuccess(response.token));
     dispatch(authFormInit());
     Actions.homepage();
+    Actions.baseModal();
   };
 };
 

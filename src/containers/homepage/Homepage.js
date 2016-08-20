@@ -57,7 +57,7 @@ class Homepage extends Component {
             <View style={s.scrollContainer}>
               <ScrollView automaticallyAdjustContentInsets={false} horizontal>
                 {playlists.list.map((entry) =>
-                  <ListEntry key={entry._id} {...actions} entry={entry} type="playlist" />
+                  <ListEntry key={entry._id} {...actions} entry={entry} type="playlists" />
                 )}
               </ScrollView>
             </View>

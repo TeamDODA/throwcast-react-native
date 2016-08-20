@@ -37,12 +37,13 @@ class AddToPlaylist extends Component {
           style={s.buttons}
           name="md-add-circle"
           size={30}
-          onPress={() =>
+          onPress={() => {
+            this.setState({ toggleCreate: false });
             this.props.actions.createPlaylist({
               title: this.state.text,
               podcasts: [this.props.playlist.podcast._id],
-            })
-          }
+            });
+          }}
         />
         <Icon
           style={s.buttons}

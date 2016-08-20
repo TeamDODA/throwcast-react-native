@@ -13,7 +13,13 @@ const ListEntry = ({ entry, getQueue, type }) => {
       <View style={s.box}>
         <Image source={{ uri: entry.imageUrl, height: 120 }} />
         <Text ellipsizeMode numberOfLines={1} style={s.title}>{entry.title}</Text>
-        <Text ellipsizeMode numberOfLines={1} style={s.description}>{entry.description}</Text>
+        <Text
+          ellipsizeMode
+          numberOfLines={1}
+          style={s.description}
+        >
+          {type === 'playlists' ? `${entry.podcasts.length} podcasts` : entry.description}
+        </Text>
       </View>
     </TouchableHighlight>
   );

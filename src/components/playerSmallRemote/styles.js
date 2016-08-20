@@ -43,8 +43,13 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     shadowOpacity: 1,
   },
+  infoContainer: {
+    flexDirection: 'row',
+  },
   controlContainer: {
     flexDirection: 'row',
+    backgroundColor: '#202020',
+    width: 150,
   },
   play: {
     marginLeft: 15,

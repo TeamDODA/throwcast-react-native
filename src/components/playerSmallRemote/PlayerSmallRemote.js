@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from 'react-native-slider';
+import * as Animatable from 'react-native-animatable';
 
 import { actions as playerActions } from '../../modules/player';
 import s from './styles';
@@ -66,18 +67,20 @@ class PlayerSmallRemote extends Component {
             value={playerRemote.currentTime / playerRemote.duration}
           />
         </View>
-        <View style={s.controlContainer}>
-          <View style={s.info}>
+        <View style={s.infoContainer}>
+          <Animatable.View animation={playerRemote.animation} duration={150} style={s.info}>
             <Text ellipsizeMode numberOfLines={1} style={s.title}>
               {podcast.title}
             </Text>
             <Text ellipsizeMode numberOfLines={1} style={s.description}>
               {podcast.description}
             </Text>
+          </Animatable.View>
+          <View style={s.controlContainer}>
+            <Icon {...prevButton} />
+            <Icon {...toggleButton} />
+            <Icon {...nextButton} />
           </View>
-          <Icon {...prevButton} />
-          <Icon {...toggleButton} />
-          <Icon {...nextButton} />
         </View>
       </View>
     );

@@ -39,15 +39,39 @@ export function setDuration(duration) {
   };
 }
 
-export function nextPodcast() {
+export function clearAnimation() {
+  return {
+    type: 'CLEAR_ANIMATION',
+  };
+}
+
+export function next(animation) {
   return {
     type: 'NEXT_PODCAST',
+    animation,
+  };
+}
+
+export function previous(animation) {
+  return {
+    type: 'PREVIOUS_PODCAST',
+    animation,
+  };
+}
+
+export function nextPodcast() {
+  return (dispatch, getState) => {
+    const { player } = getState();
+    const animation = player.currentIndex % 2 ? 'slideInRight' : 'bounceInRight';
+    dispatch(next(animation));
   };
 }
 
 export function previousPodcast() {
-  return {
-    type: 'PREVIOUS_PODCAST',
+  return (dispatch, getState) => {
+    const { player } = getState();
+    const animation = player.currentIndex % 2 ? 'slideInLeft' : 'bounceInLeft';
+    dispatch(previous(animation));
   };
 }
 

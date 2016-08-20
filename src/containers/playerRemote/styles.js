@@ -15,12 +15,15 @@ const styles = StyleSheet.create({
     top: 10,
     paddingLeft: 20,
   },
-  sliderContainer: {
-    width: window.width - 40,
+  innerContainer: {
+    marginTop: 80,
+    width: window.width,
+  },
+  infoContainer: {
+    alignItems: 'center',
   },
   image: {
-    marginTop: 80,
-    marginBottom: 20,
+    marginBottom: 16,
     width: window.width - 40,
     height: 280,
   },
@@ -40,6 +43,9 @@ const styles = StyleSheet.create({
     color: '#BBB',
     fontFamily: 'HelveticaNeue',
     fontSize: 10,
+  },
+  sliderContainer: {
+    width: window.width - 40,
   },
   slider: {
     height: 20,
