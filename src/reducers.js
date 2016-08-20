@@ -7,8 +7,9 @@ import { reducers as playerRemote } from './containers/playerRemote';
 import { reducers as playlist } from './modules/playlist';
 import { reducers as podcast } from './modules/podcast';
 import { reducers as queue } from './containers/queue';
-import routes from './routes';
 import { reducers as station } from './modules/station';
+import { reducers as subscription } from './modules/subscription';
+import routes from './routes';
 
 export default combineReducers({
   auth,
@@ -21,4 +22,5 @@ export default combineReducers({
   queue,
   routes,
   station,
+  subscription,
 });
