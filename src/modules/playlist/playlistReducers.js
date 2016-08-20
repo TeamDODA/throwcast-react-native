@@ -70,15 +70,15 @@ export default function (state = initialState, action) {
         fetching: null,
         message: action.message,
       });
-    case types.PLAYLISTS_ADD_INIT:
+    case types.PLAYLISTS_UPDATE_INIT:
       return Object.assign({}, state, {
         fetching: true,
         message: null,
       });
-    case types.PLAYLISTS_ADD_SUCC:
-      newList.forEach(list => {
+    case types.PLAYLISTS_UPDATE_SUCC:
+      newList.forEach((list, index) => {
         if (list._id === action.playlistId) {
-          list.podcasts.push(action.podcast);
+          newList[index] = action.playlist;
         }
       });
       return Object.assign({}, state, {
@@ -86,32 +86,7 @@ export default function (state = initialState, action) {
         message: null,
         list: newList,
       });
-    case types.PLAYLISTS_ADD_FAIL:
-      return Object.assign({}, state, {
-        fetching: null,
-        message: action.message,
-      });
-    case types.PLAYLISTS_REMOVE_INIT:
-      return Object.assign({}, state, {
-        fetching: true,
-        message: null,
-      });
-    case types.PLAYLISTS_REMOVE_SUCC:
-      newList.forEach((list) => {
-        if (list._id === action.playlistId) {
-          list.podcasts.forEach((podcast, index) => {
-            if (podcast._id === action.podcastId) {
-              list.podcasts.splice(index, 1);
-            }
-          });
-        }
-      });
-      return Object.assign({}, state, {
-        fetching: null,
-        message: null,
-        list: newList,
-      });
-    case types.PLAYLISTS_REMOVE_FAIL:
+    case types.PLAYLISTS_UPDATE_FAIL:
       return Object.assign({}, state, {
         fetching: null,
         message: action.message,

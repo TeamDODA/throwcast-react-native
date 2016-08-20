@@ -10,10 +10,10 @@ const entryStyles = StyleSheet.create({
     backgroundColor: '#000',
     borderColor: '#303030',
     borderBottomWidth: 0.4,
-    height: 30,
+    height: 46,
   },
   info: {
-    width: 280,
+    width: 400,
   },
   title: {
     color: '#FFF',

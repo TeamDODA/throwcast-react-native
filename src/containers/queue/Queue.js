@@ -76,7 +76,7 @@ class Queue extends Component {
           <View style={s.background}>
             {podcastList.map((podcast, index) =>
               <QueueEntry
-                key={podcast._id}
+                key={index}
                 index={index}
                 queue={queue}
                 podcast={podcast}

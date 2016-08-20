@@ -35,7 +35,7 @@ export function getStations() {
       if (response.message) {
         dispatch(stationsLoadingFail(response.message));
       } else {
-        dispatch(stationsLoadingSucc(response.data));
+        dispatch(stationsLoadingSucc(response));
       }
     })
     .catch((e) => {

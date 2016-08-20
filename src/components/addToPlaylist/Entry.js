@@ -4,20 +4,30 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
 import s from './entryStyles';
 
-const Entry = ({ _id, title, podcast, list, addToPlaylist }) => (
+const Entry = ({ entry, podcast, updatePlaylist }) => (
   <TouchableHighlight
     style={s.container}
-    onPress={() => addToPlaylist(_id, podcast)}
+    onPress={() => {
+      entry.podcasts.push(podcast);
+      updatePlaylist(entry);
+    }}
   >
-    <View style={s.box}>
+    <Animatable.View animation="slideInLeft" duration={300} style={s.box}>
       <View style={s.info}>
-        <Text ellipsizeMode numberOfLines={2} style={s.title}>{title}</Text>
-        <Text ellipsizeMode numberOfLines={2} style={s.description}>{list.length} Podcasts</Text>
+        <Text ellipsizeMode numberOfLines={2} style={s.title}>{entry.title}</Text>
+        <Text
+          ellipsizeMode
+          numberOfLines={2}
+          style={s.description}
+        >
+          {entry.podcasts.length} Podcasts
+        </Text>
       </View>
-    </View>
+    </Animatable.View>
   </TouchableHighlight>
 );
 

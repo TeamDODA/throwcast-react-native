@@ -67,44 +67,22 @@ export function playlistsDeleteFail(message) {
   };
 }
 
-export function playlistsAddInit() {
+export function playlistsUpdateInit() {
   return {
-    type: types.PLAYLISTS_ADD_INIT,
+    type: types.PLAYLISTS_UPDATE_INIT,
   };
 }
 
-export function playlistsAddSucc(playlistId, podcast) {
+export function playlistsUpdateSucc(playlist) {
   return {
-    type: types.PLAYLISTS_ADD_SUCC,
-    playlistId,
-    podcast,
+    type: types.PLAYLISTS_UPDATE_SUCC,
+    playlist,
   };
 }
 
-export function playlistsAddFail(message) {
+export function playlistsUpdateFail(message) {
   return {
-    type: types.PLAYLISTS_ADD_FAIL,
-    message,
-  };
-}
-
-export function playlistsRemoveInit() {
-  return {
-    type: types.PLAYLISTS_REMOVE_INIT,
-  };
-}
-
-export function playlistsRemoveSucc(playlistId, podcastId) {
-  return {
-    type: types.PLAYLISTS_REMOVE_SUCC,
-    playlistId,
-    podcastId,
-  };
-}
-
-export function playlistsRemoveFail(message) {
-  return {
-    type: types.PLAYLISTS_REMOVE_FAIL,
+    type: types.PLAYLISTS_UPDATE_FAIL,
     message,
   };
 }
@@ -139,22 +117,22 @@ export function createPlaylist(playlist) {
   return (dispatch, getState) => {
     const { auth } = getState();
     dispatch(playlistsCreateInit());
-    return fetch('http://localhost:8888/api/playlists', {
+    return fetch('http://localhost:8888/api/playlists/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         authorization: `Bearer ${auth.token}`,
       },
-      body: playlist,
+      body: JSON.stringify(playlist),
     })
     .then((response) => response.json())
     .then((response) => {
-      playlist._id = response.data._id; // eslint-disable-line no-param-reassign
+      playlist._id = response._id; // eslint-disable-line no-param-reassign
       if (response.message) {
         dispatch(playlistsCreateFail(response.message));
       } else {
-        dispatch(playlistsCreateSucc(playlist));
+        dispatch(playlistsCreateSucc(response));
       }
     })
     .catch((e) => {
@@ -188,55 +166,30 @@ export function deletePlaylist(playlistId) {
   };
 }
 
-export function addToPlaylist(playlistId, podcast) {
+export function updatePlaylist(playlist) {
+  console.log(playlist);
   return (dispatch, getState) => {
     const { auth } = getState();
-    dispatch(playlistsAddInit());
-    return fetch(`http://localhost:8888/api/playlists/${playlistId}/podcasts/`, {
-      method: 'POST',
+    dispatch(playlistsUpdateInit());
+    return fetch(`http://localhost:8888/api/playlists/${playlist._id}`, {
+      method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         authorization: `Bearer ${auth.token}`,
       },
-      body: podcast._id,
+      body: JSON.stringify(playlist),
     })
     .then((response) => response.json())
     .then((response) => {
       if (response.message) {
-        dispatch(playlistsAddFail(response.message));
+        dispatch(playlistsUpdateFail(response.message));
       } else {
-        dispatch(playlistsAddSucc(playlistId, podcast));
+        dispatch(playlistsUpdateSucc(playlist));
       }
     })
     .catch((e) => {
-      dispatch(playlistsAddFail(e));
-    });
-  };
-}
-
-export function deleteFromPlaylist(playlistId, podcastId) {
-  return (dispatch, getState) => {
-    const { auth } = getState();
-    dispatch(playlistsRemoveInit());
-    return fetch(`http://localhost:8888/api/playlists/${playlistId}/podcasts/${podcastId}`, {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${auth.token}`,
-      },
-    })
-    .then((response) => response.json())
-    .then((response) => {
-      if (response.message) {
-        dispatch(playlistsRemoveFail(response.message));
-      } else {
-        dispatch(playlistsRemoveSucc(playlistId, podcastId));
-      }
-    })
-    .catch((e) => {
-      dispatch(playlistsRemoveFail(e));
+      dispatch(playlistsUpdateFail(e));
     });
   };
 }

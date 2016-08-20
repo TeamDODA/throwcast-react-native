@@ -8,12 +8,12 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     position: 'absolute',
-    height: window.height - 40,
+    height: window.height - 80,
     bottom: 0,
   },
   header: {
     position: 'absolute',
-    backgroundColor: 'rgba(0,0,0,.8)',
+    backgroundColor: 'rgba(0,0,0,.9)',
     width: window.width,
     alignItems: 'center',
     top: 0,
@@ -23,6 +23,37 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica Neue',
     color: '#FFF',
     fontSize: 12,
+  },
+  createContainer: {
+    position: 'absolute',
+    top: 34,
+    width: window.width,
+  },
+  create: {
+    paddingLeft: 12,
+    paddingRight: 12,
+  },
+  inputBox: {
+    borderBottomColor: '#202020',
+    borderBottomWidth: 2,
+    flexDirection: 'row',
+    marginLeft: 12,
+    marginRight: 12,
+  },
+  input: {
+    marginTop: 10,
+    height: 30,
+    width: 280,
+    color: '#FFF',
+  },
+  addButton: {
+    marginTop: 10,
+    color: 'purple',
+  },
+  buttons: {
+    marginTop: 10,
+    marginLeft: 10,
+    color: '#FFF',
   },
 });
 

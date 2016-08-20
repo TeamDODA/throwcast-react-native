@@ -34,31 +34,30 @@ export function getQueue(list, type) {
     let url;
     dispatch(queueLoadingInit());
     dispatch(queueDetail(list));
-
     if (type === 'stations') {
       url = `http://localhost:8888/api/stations/${list._id}/podcasts/`;
-    } else if (type === 'playlist') {
-      url = `http://localhost:8888/api/playlist/${list._id}/podcasts/`;
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.message) {
+          dispatch(queueLoadingFail(response.message));
+        } else {
+          dispatch(queueLoadingSucc(response));
+          Actions.queue();
+        }
+      })
+      .catch((e) => {
+        dispatch(queueLoadingFail(e));
+      });
     }
 
-    return fetch(url, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-    .then((response) => response.json())
-    .then((response) => {
-      if (response.message) {
-        dispatch(queueLoadingFail(response.message));
-      } else {
-        dispatch(queueLoadingSucc(response.data));
-        Actions.queue();
-      }
-    })
-    .catch((e) => {
-      dispatch(queueLoadingFail(e));
-    });
+    dispatch(queueLoadingSucc(list.podcasts));
+    return Actions.queue();
   };
 }
