@@ -166,8 +166,11 @@ export function deletePlaylist(playlistId) {
   };
 }
 
-export function updatePlaylist(playlist) {
-  console.log(playlist);
+export function updatePlaylist(playlist, podcast) {
+  let newPodcasts = playlist.podcasts.slice();
+  newPodcasts.push(podcast);
+  newPodcasts = newPodcasts.map(e => e._id);
+  playlist = Object.assign({}, playlist, { podcasts: newPodcasts });
   return (dispatch, getState) => {
     const { auth } = getState();
     dispatch(playlistsUpdateInit());
@@ -185,7 +188,7 @@ export function updatePlaylist(playlist) {
       if (response.message) {
         dispatch(playlistsUpdateFail(response.message));
       } else {
-        dispatch(playlistsUpdateSucc(playlist));
+        dispatch(playlistsUpdateSucc(response));
       }
     })
     .catch((e) => {

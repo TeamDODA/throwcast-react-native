@@ -12,8 +12,7 @@ const Entry = ({ entry, podcast, updatePlaylist }) => (
   <TouchableHighlight
     style={s.container}
     onPress={() => {
-      entry.podcasts.push(podcast);
-      updatePlaylist(entry);
+      updatePlaylist(entry, podcast);
     }}
   >
     <Animatable.View animation="slideInLeft" duration={300} style={s.box}>

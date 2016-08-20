@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  const newList = state.list.slice(0);
+  const newList = state.list.slice();
   switch (action.type) {
     case types.SELECT_TO_ADD:
       return Object.assign({}, state, {
@@ -76,9 +76,9 @@ export default function (state = initialState, action) {
         message: null,
       });
     case types.PLAYLISTS_UPDATE_SUCC:
-      newList.forEach((list, index) => {
-        if (list._id === action.playlistId) {
-          newList[index] = action.playlist;
+      newList.forEach((p, i) => {
+        if (p._id === action.playlist._id) {
+          newList[i] = action.playlist;
         }
       });
       return Object.assign({}, state, {
