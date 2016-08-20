@@ -1,15 +1,15 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
   View,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 
-import { actions as baseModalActions } from './';
-import Player from '../../components/player';
 import AddToPlaylist from '../../components/addToPlaylist';
+import Player from '../../components/player';
+import { actions as baseModalActions } from './';
 import s from './styles';
 
 class BaseModal extends Component {

@@ -1,19 +1,19 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
+  ScrollView,
   Text,
   View,
-  ScrollView,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
+import PodcastEntry from './PodcastEntry';
+import ListEntry from './ListEntry';
 import { actions as podcastActions } from '../../modules/podcast';
 import { actions as playlistActions } from '../../modules/playlist';
 import { actions as stationActions } from '../../modules/station';
 import { getQueue } from '../queue/queueActions';
 import { selectPodcast } from '../../modules/player/playerActions';
-import PodcastEntry from './PodcastEntry';
-import ListEntry from './ListEntry';
 import PlayerSmallRemote from '../../components/playerSmallRemote';
 import s from './homepageStyles';
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   Text,
-  View,
   TouchableHighlight,
+  View,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 

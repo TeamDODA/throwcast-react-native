@@ -1,10 +1,11 @@
 import React from 'react';
 import {
-  Text,
   Image,
-  View,
+  Text,
   TouchableHighlight,
+  View,
 } from 'react-native';
+
 import s from './entryStyles';
 
 const PodcastEntry = ({ entry, selectPodcast, player }) => {

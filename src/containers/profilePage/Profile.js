@@ -1,17 +1,17 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
+  ScrollView,
   Text,
   View,
-  ScrollView,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
+import ListEntry from '../homepage/ListEntry';
+import PlayerSmallRemote from '../../components/playerSmallRemote';
 import { actions as playlistActions } from '../../modules/playlist';
 import { actions as subscriptionActions } from '../../modules/subscription';
 import { getQueue } from '../queue/queueActions';
-import ListEntry from '../homepage/ListEntry';
-import PlayerSmallRemote from '../../components/playerSmallRemote';
 import s from './profileStyles';
 
 class Profile extends Component {

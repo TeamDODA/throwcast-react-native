@@ -1,17 +1,17 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
-  View,
   ScrollView,
   Text,
   TextInput,
+  View,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 
-import { actions as playlistActions } from '../../modules/playlist';
 import Entry from './Entry';
+import { actions as playlistActions } from '../../modules/playlist';
 import s from './styles';
 
 class AddToPlaylist extends Component {

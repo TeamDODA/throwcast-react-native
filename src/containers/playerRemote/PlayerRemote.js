@@ -1,20 +1,19 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
-  Text,
   Image,
+  Text,
   View,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from 'react-native-slider';
 import { Actions } from 'react-native-router-flux';
 import * as Animatable from 'react-native-animatable';
 
-import { actions as playerActions } from '../../modules/player';
 import { formattedTime } from './utils';
+import { actions as playerActions } from '../../modules/player';
 import s from './styles';
-
 
 class PlayerRemote extends Component {
   slideChange(value) {

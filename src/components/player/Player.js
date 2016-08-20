@@ -1,9 +1,9 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
   View,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Video from 'react-native-video';
 
 import { actions as playerActions } from '../../modules/player';

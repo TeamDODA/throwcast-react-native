@@ -1,11 +1,12 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import {
   Text,
-  View,
   TouchableHighlight,
+  View,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import AuthForm, { actions as authFormActions } from '../auth-form';
 import { actions as authActions } from '../../modules/auth';
 import s from './styles';

@@ -1,22 +1,22 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
+  Dimensions,
   Image,
   Text,
   View,
-  Dimensions,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 
+import PlayerSmallRemote from '../../components/playerSmallRemote';
+import QueueEntry from './QueueEntry';
 import { actions as bMActions } from '../baseModal';
 import { actions as qActions } from './';
 import { actions as pActions } from '../../modules/player';
 import s from './queueStyles';
-import PlayerSmallRemote from '../../components/playerSmallRemote';
-import QueueEntry from './QueueEntry';
 
 const window = Dimensions.get('window');
 const PARALLAX_HEADER_HEIGHT = 280;
