@@ -20,8 +20,6 @@ const QueueEntry = ({ index, queue, podcast, player, selectPodcast, selectPodcas
 
   if (player.queueId === queue._id && player.currentIndex === index) {
     titleStyle = s.activeTitle;
-  } else if (player.podcastList[player.currentIndex]._id === podcast._id) {
-    titleStyle = s.activeTitle;
   } else {
     titleStyle = s.inactiveTitle;
     changePodcast = true;

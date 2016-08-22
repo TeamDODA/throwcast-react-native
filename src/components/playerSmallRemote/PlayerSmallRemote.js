@@ -57,6 +57,7 @@ class PlayerSmallRemote extends Component {
       <View style={s.container}>
         <View style={s.sliderContainer}>
           <Slider
+            disabled={!hasPodcast}
             onSlidingStart={actions.slide}
             onValueChange={(value) => this.slideChange(value)}
             onSlidingComplete={() => this.slideComplete()}

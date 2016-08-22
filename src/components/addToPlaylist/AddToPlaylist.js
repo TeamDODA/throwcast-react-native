@@ -24,6 +24,11 @@ class AddToPlaylist extends Component {
   }
 
   renderInput() {
+    const initial = {
+      toggleCreate: false,
+      text: '',
+    };
+
     return (
       <Animatable.View animation="fadeInLeft" style={s.inputBox}>
         <TextInput
@@ -38,7 +43,7 @@ class AddToPlaylist extends Component {
           name="md-add-circle"
           size={30}
           onPress={() => {
-            this.setState({ toggleCreate: false });
+            this.setState(initial);
             this.props.actions.createPlaylist({
               title: this.state.text,
               podcasts: [this.props.playlist.podcast._id],
@@ -49,7 +54,7 @@ class AddToPlaylist extends Component {
           style={s.buttons}
           name="ios-remove-circle"
           size={30}
-          onPress={() => this.setState({ toggleCreate: false })}
+          onPress={() => this.setState(initial)}
         />
       </Animatable.View>
     );
@@ -74,9 +79,9 @@ class AddToPlaylist extends Component {
     return (
       <View style={s.container}>
         <ScrollView style={s.innerContainer}>
-          {playlist.list.map(entry =>
+          {playlist.list.map((entry, index) =>
             <Entry
-              key={entry._id}
+              key={index}
               entry={entry}
               podcast={playlist.podcast}
               updatePlaylist={actions.updatePlaylist}

@@ -20,8 +20,9 @@ class App extends Component {
       if (token) {
         reduxStore.dispatch(authActions.authSuccess(token));
         Actions.homepage();
-        Actions.baseModal();
       }
+
+      Actions.baseModal();
     });
   }
 
