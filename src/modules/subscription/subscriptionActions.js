@@ -68,7 +68,6 @@ export function getSubscriptions() {
 }
 
 export function updateSubscriptions(subscriptions) {
-  console.log(JSON.stringify(subscriptions));
   return (dispatch, getState) => {
     dispatch(subscriptionsUpdateInit());
     const { auth } = getState();

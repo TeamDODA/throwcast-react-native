@@ -33,7 +33,7 @@ class Queue extends Component {
   toggleSubscription() {
     const { subscriptions, queue, actions } = this.props;
     const subscriptionIds = subscriptions.list.map(subscription => subscription._id);
-    if (_.findIndex(subscriptionIds, queue._id) > -1) {
+    if (subscriptionIds.indexOf(queue._id) > -1) {
       actions.updateSubscriptions(_.without(subscriptionIds, queue._id));
     } else {
       actions.updateSubscriptions(subscriptionIds.concat(queue._id));
