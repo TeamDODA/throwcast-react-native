@@ -86,8 +86,9 @@ class Queue extends Component {
 
   renderBackground() {
     const { queue } = this.props;
+    const backupImage = 'http://cdn.skim.gs/images/Cat-looking-out-window_sy4cxp/25-random-cat-behaviors-finally-explained';
     const imageSource = {
-      uri: queue.image,
+      uri: queue.image || backupImage,
       width: window.width,
       height: PARALLAX_HEADER_HEIGHT,
     };
