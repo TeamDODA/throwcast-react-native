@@ -78,14 +78,14 @@ export function updateSubscriptions(subscriptions) {
         'Content-Type': 'application/json',
         authorization: `Bearer ${auth.token}`,
       },
-      body: subscriptions,
+      body: JSON.stringify(subscriptions),
     })
     .then((response) => response.json())
     .then((response) => {
       if (response.message) {
         dispatch(subscriptionsUpdateFail(response.message));
       } else {
-        dispatch(subscriptionsUpdateSucc(response));
+        dispatch(subscriptionsUpdateSucc(response.subscriptions));
       }
     })
     .catch((e) => {

@@ -22,7 +22,13 @@ class Profile extends Component {
   }
 
   render() {
-    const { actions, playlists } = this.props;
+    const { actions, playlists, subscriptions } = this.props;
+    const userPlaylists = [];
+    playlists.list.forEach(entry => {
+      if (entry.owner === subscriptions.id) {
+        userPlaylists.push(entry);
+      }
+    });
     return (
       <View style={s.outerContainer}>
         <ScrollView>
@@ -30,15 +36,15 @@ class Profile extends Component {
             <Text style={s.listTitle}>Subscriptions</Text>
             <View style={s.scrollContainer}>
               <ScrollView automaticallyAdjustContentInsets={false} horizontal>
-                {playlists.list.map((entry) =>
-                  <ListEntry key={entry._id} {...actions} entry={entry} type="subscriptions" />
+                {subscriptions.list.map((entry) =>
+                  <ListEntry key={entry._id} {...actions} entry={entry} type="stations" />
                 )}
               </ScrollView>
             </View>
             <Text style={s.listTitle}>My playlists</Text>
             <View style={s.scrollContainer}>
               <ScrollView automaticallyAdjustContentInsets={false} horizontal>
-                {playlists.list.map((entry) =>
+                {userPlaylists.map((entry) =>
                   <ListEntry key={entry._id} {...actions} entry={entry} type="playlist" />
                 )}
               </ScrollView>
@@ -59,6 +65,7 @@ class Profile extends Component {
 const mapStateToProps = (state) => ({
   stations: state.station,
   playlists: state.playlist,
+  subscriptions: state.subscription,
 });
 
 const mapDispatchToProps = (dispatch) => ({

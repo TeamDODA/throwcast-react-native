@@ -5,6 +5,16 @@ const PARALLAX_HEADER_HEIGHT = 280;
 const STICKY_HEADER_HEIGHT = 50;
 
 const queueStyles = StyleSheet.create({
+  addSubs: {
+    marginTop: 10,
+    position: 'absolute',
+    right: 26,
+  },
+  addSubs2: {
+    marginTop: 170,
+    position: 'absolute',
+    right: 26,
+  },
   background: {
     backgroundColor: '#121212',
     flex: 1,
@@ -28,6 +38,7 @@ const queueStyles = StyleSheet.create({
     right: 0,
   },
   stickySection: {
+    flexDirection: 'row',
     height: STICKY_HEADER_HEIGHT,
     backgroundColor: '#000',
     flex: 1,
@@ -35,6 +46,7 @@ const queueStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   stickySectionTitle: {
+    flexDirection: 'row',
     color: '#FFF',
     fontSize: 18,
   },

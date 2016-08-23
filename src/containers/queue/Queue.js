@@ -3,6 +3,7 @@ import {
   Dimensions,
   Image,
   Text,
+  TouchableHighlight,
   View,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -16,29 +17,69 @@ import QueueEntry from './QueueEntry';
 import { actions as bMActions } from '../baseModal';
 import { actions as qActions } from './';
 import { actions as pActions } from '../../modules/player';
+import { actions as sActions } from '../../modules/subscription';
 import s from './queueStyles';
 
 const window = Dimensions.get('window');
 const PARALLAX_HEADER_HEIGHT = 280;
 const STICKY_HEADER_HEIGHT = 50;
+const addSubs = {
+  name: 'md-checkbox',
+  size: 30,
+};
 
 class Queue extends Component {
+  addSubscription() {
+    const { subscriptions, queue, actions } = this.props;
+    let updated = false;
+    subscriptions.list.forEach((station, index) => {
+      if (station._id === queue._id) {
+        subscriptions.list.splice(index, 1);
+        updated = true;
+      }
+    });
+    if (!updated) {
+      subscriptions.list.push(queue._id);
+    }
+    actions.updateSubscriptions(subscriptions.list);
+  }
+
   renderStickyHeader() {
-    const { queue } = this.props;
+    const { queue, subscriptions } = this.props;
+    let pickColor = '#FFF';
+    subscriptions.list.forEach(station => {
+      if (station._id === queue._id) {
+        pickColor = 'purple';
+      }
+    });
     return (
-      <View style={s.stickySection}>
-        <Text style={s.stickySectionTitle}>{queue.title}</Text>
-      </View>
+      <TouchableHighlight onPress={() => this.addSubscription()}>
+        <View style={s.stickySection}>
+          <Text style={s.stickySectionTitle}>{queue.title}</Text>
+          <View style={s.addSubs}>
+            <Icon {...addSubs} color={pickColor} onPress={() => this.addSubscription()} />
+          </View>
+        </View>
+      </TouchableHighlight>
     );
   }
 
   renderForeground() {
-    const { queue } = this.props;
+    const { queue, subscriptions } = this.props;
+    let pickColor = '#FFF';
+    subscriptions.list.forEach(station => {
+      if (station._id === queue._id) {
+        pickColor = 'purple';
+      }
+    });
     return (
       <View key="parallax-header" style={s.parallaxHeader}>
         <Text style={s.queueTitle}>
           {queue.title}
         </Text>
+        <View style={s.addSubs2}>
+          <Icon {...addSubs} color={pickColor} onPress={() => this.addSubscription()} />
+        </View>
       </View>
     );
   }
@@ -101,10 +142,11 @@ class Queue extends Component {
 const mapStateToProps = (state) => ({
   player: state.player,
   queue: state.queue,
+  subscriptions: state.subscription,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(bMActions, qActions, pActions), dispatch),
+  actions: bindActionCreators(Object.assign(bMActions, qActions, pActions, sActions), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Queue);
