@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   Text,
   TouchableHighlight,
   View,
@@ -15,23 +16,25 @@ const SignIn = props => {
   const { actions, auth, authForm } = props;
   return (
     <View style={s.container}>
-      <View style={s.row}>
-        <Text style={s.title}>Throwcast</Text>
-      </View>
-      <View style={s.row}>
-        <AuthForm authForm={authForm} {...actions} />
-      </View>
-      <View style={s.row}>
-        <TouchableHighlight
-          style={s.button}
-          onPress={() => actions.signIn(authForm)}
-          disabled={auth.pending}
-          underlayColor="#99d9f4"
-        >
-          <Text style={s.buttonText}>Sign in</Text>
-        </TouchableHighlight>
-        <Text style={s.signUp} onPress={actions.toSignUp}>Sign Up</Text>
-        {auth.message && <Text style={s.notification}>{auth.message}</Text>}
+      <Image source={require('../../img/background.jpg')} style={s.backgroundImage} />
+      <View style={s.innerContainer}>
+        <View style={s.row}>
+          <Text style={s.title}>Throwcast</Text>
+        </View>
+        <View style={s.row}>
+          <AuthForm authForm={authForm} {...actions} />
+        </View>
+        <View style={s.row}>
+          <TouchableHighlight
+            style={s.button}
+            onPress={() => actions.signIn(authForm)}
+            disabled={auth.pending}
+          >
+            <Text style={s.buttonText}>Sign in</Text>
+          </TouchableHighlight>
+          <Text style={s.signUp} onPress={actions.toSignUp}>Sign Up</Text>
+          {auth.message && <Text style={s.notification}>{auth.message}</Text>}
+        </View>
       </View>
     </View>
   );

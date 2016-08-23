@@ -1,32 +1,51 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    marginTop: 120,
-    padding: 20,
+    flex: 1,
+  },
+  backgroundImage: {
+    resizeMode: 'cover',
+    height: 1200,
+  },
+  innerContainer: {
+    position: 'absolute',
+    width: window.width,
+    top: 100,
+  },
+  title: {
+    fontFamily: 'HelveticaNeue-Light',
+    fontSize: 72,
+    color: '#FFF',
+    backgroundColor: 'transparent',
+    alignSelf: 'center',
+    marginBottom: 30,
+    marginTop: 30,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 14,
     color: 'white',
     alignSelf: 'center',
   },
   button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
+    height: 50,
+    backgroundColor: 'rgba(178,76,76,0.8)',
     alignSelf: 'stretch',
     justifyContent: 'center',
+    marginTop: 10,
   },
   signIn: {
-    color: 'black',
+    backgroundColor: 'transparent',
+    marginTop: 10,
+    color: '#FFF',
     alignSelf: 'center',
-    fontSize: 24,
+    fontSize: 20,
   },
   notification: {
+    backgroundColor: 'transparent',
     fontFamily: 'HelveticaNeue-Light',
     fontSize: 15,
     alignSelf: 'center',

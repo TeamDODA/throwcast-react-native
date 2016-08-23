@@ -21,7 +21,7 @@ const ListEntry = ({ entry, getQueue, type }) => (
         style={s.description}
       >
         {type === 'playlists' ? `${entry.podcasts.length} podcasts` :
-        entry.description.short || entry.description.long }
+        entry.description ? entry.description.short || entry.description.long : ''}
       </Text>
     </View>
   </TouchableHighlight>
