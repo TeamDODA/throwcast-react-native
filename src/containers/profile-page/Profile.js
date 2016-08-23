@@ -7,9 +7,8 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Navbar from '../../components/navbar';
+import { Navbar, PlayerSmallRemote } from '../../components';
 import ListEntry from '../homepage/ListEntry';
-import PlayerSmallRemote from '../../components/playerSmallRemote';
 import { actions as playlistActions } from '../../modules/playlist';
 import { actions as subscriptionActions } from '../../modules/subscription';
 import { getQueue } from '../queue/queueActions';

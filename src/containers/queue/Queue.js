@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
 
-import PlayerSmallRemote from '../../components/playerSmallRemote';
+import { PlayerSmallRemote } from '../../components';
 import QueueEntry from './QueueEntry';
 import { actions as bMActions } from '../base-modal';
 import { actions as qActions } from './';

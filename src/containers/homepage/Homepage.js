@@ -7,7 +7,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Navbar from '../../components/navbar';
+import { Navbar } from '../../components';
 import PodcastEntry from './PodcastEntry';
 import ListEntry from './ListEntry';
 import { actions as podcastActions } from '../../modules/podcast';
@@ -15,7 +15,7 @@ import { actions as playlistActions } from '../../modules/playlist';
 import { actions as stationActions } from '../../modules/station';
 import { getQueue } from '../queue/queueActions';
 import { selectPodcast } from '../../modules/player/playerActions';
-import PlayerSmallRemote from '../../components/playerSmallRemote';
+import { PlayerSmallRemote } from '../../components';
 import s from './homepageStyles';
 
 

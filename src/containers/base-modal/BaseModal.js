@@ -7,8 +7,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 
-import AddToPlaylist from '../../components';
-import Player from '../../components/player';
+import { AddToPlaylist, Player } from '../../components';
 import { actions as baseModalActions } from './';
 import s from './styles';
 
