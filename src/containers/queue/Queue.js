@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
+import _ from 'lodash';
 
 import PlayerSmallRemote from '../../components/playerSmallRemote';
 import QueueEntry from './QueueEntry';
@@ -29,19 +30,14 @@ const addSubs = {
 };
 
 class Queue extends Component {
-  addSubscription() {
+  toggleSubscription() {
     const { subscriptions, queue, actions } = this.props;
-    let updated = false;
-    subscriptions.list.forEach((station, index) => {
-      if (station._id === queue._id) {
-        subscriptions.list.splice(index, 1);
-        updated = true;
-      }
-    });
-    if (!updated) {
-      subscriptions.list.push(queue._id);
+    const subscriptionIds = subscriptions.list.map(subscription => subscription._id);
+    if (_.findIndex(subscriptionIds, queue._id) > -1) {
+      actions.updateSubscriptions(_.without(subscriptionIds, queue._id));
+    } else {
+      actions.updateSubscriptions(subscriptionIds.concat(queue._id));
     }
-    actions.updateSubscriptions(subscriptions.list);
   }
 
   renderStickyHeader() {
@@ -53,11 +49,11 @@ class Queue extends Component {
       }
     });
     return (
-      <TouchableHighlight onPress={() => this.addSubscription()}>
+      <TouchableHighlight onPress={() => this.toggleSubscription()}>
         <View style={s.stickySection}>
           <Text style={s.stickySectionTitle}>{queue.title}</Text>
           <View style={s.addSubs}>
-            <Icon {...addSubs} color={pickColor} onPress={() => this.addSubscription()} />
+            <Icon {...addSubs} color={pickColor} onPress={() => this.toggleSubscription()} />
           </View>
         </View>
       </TouchableHighlight>
@@ -78,7 +74,7 @@ class Queue extends Component {
           {queue.title}
         </Text>
         <View style={s.addSubs2}>
-          <Icon {...addSubs} color={pickColor} onPress={() => this.addSubscription()} />
+          <Icon {...addSubs} color={pickColor} onPress={() => this.toggleSubscription()} />
         </View>
       </View>
     );

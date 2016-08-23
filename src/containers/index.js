@@ -1,6 +1,6 @@
 import baseModal from './baseModal';
 import homepage from './homepage';
-import profile from './profilepage';
+import profile from './profilePage';
 import playerRemote from './playerRemote';
 import queue from './queue';
 

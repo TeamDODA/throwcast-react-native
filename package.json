@@ -7,6 +7,7 @@
     "lint": "eslint ./src"
   },
   "dependencies": {
+    "lodash": "^4.15.0",
     "react": "15.2.1",
     "react-native": "0.30.0",
     "react-native-animatable": "^0.6.1",
