@@ -1,7 +1,7 @@
-import baseModal from './baseModal';
+import baseModal from './base-modal';
 import homepage from './homepage';
-import profile from './profilepage';
-import playerRemote from './playerRemote';
+import profile from './profile-page';
+import playerRemote from './player-remote';
 import queue from './queue';
 
 export const BaseModal = baseModal;

@@ -15,7 +15,7 @@ import _ from 'lodash';
 
 import PlayerSmallRemote from '../../components/playerSmallRemote';
 import QueueEntry from './QueueEntry';
-import { actions as bMActions } from '../baseModal';
+import { actions as bMActions } from '../base-modal';
 import { actions as qActions } from './';
 import { actions as pActions } from '../../modules/player';
 import { actions as sActions } from '../../modules/subscription';
