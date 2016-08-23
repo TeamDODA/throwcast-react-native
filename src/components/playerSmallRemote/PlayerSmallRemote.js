@@ -35,7 +35,7 @@ class PlayerSmallRemote extends Component {
       color: index > 0 ? '#fff' : '#333',
     };
 
-    const hasPodcast = podcast.link !== 'https://';
+    const hasPodcast = podcast.enclosure.url !== 'https://';
     const toggleButton = {
       onPress: hasPodcast ? togglePlay : null,
       style: s.play,

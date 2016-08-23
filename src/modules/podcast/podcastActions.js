@@ -35,7 +35,7 @@ export function getPodcasts() {
       if (response.message) {
         dispatch(podcastsLoadingFail(response.message));
       } else {
-        dispatch(podcastsLoadingSucc(response));
+        dispatch(podcastsLoadingSucc(response.slice(0, 100)));
       }
     })
     .catch((e) => {

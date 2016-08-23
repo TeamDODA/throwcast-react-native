@@ -21,7 +21,7 @@ class Player extends Component {
     return (
       <View>
         <Video
-          source={{ uri: podcast.link }}
+          source={{ uri: podcast.enclosure.url }}
           ref={c => (this.audio = c)}
           volume={1.0}
           muted={false}

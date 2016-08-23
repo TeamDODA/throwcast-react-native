@@ -20,11 +20,11 @@ export function queueLoadingFail(message) {
   };
 }
 
-export function queueDetail({ imageUrl, title, _id }) {
+export function queueDetail({ image, title, _id }) {
   return {
     type: 'QUEUE_DETAIL',
     title,
-    imageUrl,
+    image,
     _id,
   };
 }

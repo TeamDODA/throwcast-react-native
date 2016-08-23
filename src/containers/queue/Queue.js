@@ -87,7 +87,7 @@ class Queue extends Component {
   renderBackground() {
     const { queue } = this.props;
     const imageSource = {
-      uri: queue.imageUrl,
+      uri: queue.image,
       width: window.width,
       height: PARALLAX_HEADER_HEIGHT,
     };

@@ -3,7 +3,7 @@ const initialState = {
   message: null,
   _id: null,
   title: null,
-  imageUrl: null,
+  image: null,
   podcasts: [],
 };
 
@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         _id: action._id,
         title: action.title,
-        imageUrl: action.imageUrl,
+        image: action.image,
       });
     case 'QUEUE_LOADING_INIT':
       return Object.assign({}, state, {

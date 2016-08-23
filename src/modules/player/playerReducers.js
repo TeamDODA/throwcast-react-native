@@ -4,8 +4,8 @@ const initialState = {
   podcastList: [{
     title: null,
     description: null,
-    imageUrl: null,
-    link: 'https://',
+    image: null,
+    enclosure: { url: 'http://' },
   }],
   playing: false,
   muted: false,

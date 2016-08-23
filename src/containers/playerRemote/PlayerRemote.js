@@ -31,7 +31,7 @@ class PlayerRemote extends Component {
     const podcast = player.podcastList[index];
     return (
       <Animatable.View style={s.infoContainer} animation={playerRemote.animation} duration={100}>
-        <Image style={s.image} source={{ uri: podcast.imageUrl }} />
+        <Image style={s.image} source={{ uri: podcast.image }} />
         <View style={s.info}>
           <Text ellipsizeMode numberOfLines={2} style={s.title}>
             {podcast.title}
