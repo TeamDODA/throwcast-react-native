@@ -1,11 +1,8 @@
 import { Actions } from 'react-native-router-flux';
 
-export function select(queueId, podcasts, currentIndex) {
+export function initializePlayer() {
   return {
-    type: 'SELECT_PODCAST',
-    queueId,
-    podcasts,
-    currentIndex,
+    type: 'INIT_PLAYER',
   };
 }
 
@@ -16,9 +13,19 @@ export function setAudio(audio) {
   };
 }
 
+export function select(queueId, podcasts, currentIndex) {
+  return {
+    type: 'SELECT_PODCAST',
+    queueId,
+    podcasts,
+    currentIndex,
+  };
+}
+
 export function selectPodcast(queueId, podcasts, index, changePodcast) {
   return (dispatch) => {
     if (changePodcast) {
+      dispatch(initializePlayer());
       dispatch(select(queueId, podcasts, index));
     }
 

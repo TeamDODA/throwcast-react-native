@@ -9,25 +9,18 @@ const styles = StyleSheet.create({
     height: window.height,
   },
   innerContainer: {
-    marginTop: 25,
+    marginTop: 40,
     flex: 1,
   },
   header: {
     position: 'absolute',
-    backgroundColor: 'rgba(0,0,0,.8)',
+    backgroundColor: 'rgba(0,0,0,.9)',
     width: window.width,
-    height: 20,
+    height: 40,
     alignItems: 'center',
     top: 0,
-    bottom: 0,
     left: 0,
     right: 0,
-  },
-  headerTitle: {
-    marginTop: 2,
-    fontFamily: 'Helvetica Neue',
-    color: '#FFF',
-    fontSize: 10,
   },
   listTitle: {
     marginTop: 5,

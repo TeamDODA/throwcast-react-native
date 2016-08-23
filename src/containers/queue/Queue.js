@@ -114,7 +114,7 @@ class Queue extends Component {
           renderForeground={() => this.renderForeground()}
           renderBackground={() => this.renderBackground()}
         >
-          <View style={s.background}>
+          <View>
             {podcastList.map((podcast, index) =>
               <QueueEntry
                 key={index}

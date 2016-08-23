@@ -7,6 +7,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import Navbar from '../../components/navbar';
 import ListEntry from '../homepage/ListEntry';
 import PlayerSmallRemote from '../../components/playerSmallRemote';
 import { actions as playlistActions } from '../../modules/playlist';
@@ -52,7 +53,7 @@ class Profile extends Component {
           </View>
         </ScrollView>
         <View style={s.header}>
-          <Text style={s.headerTitle}>MY PROFILE</Text>
+          <Navbar />
         </View>
         <View style={s.footer}>
           <PlayerSmallRemote />

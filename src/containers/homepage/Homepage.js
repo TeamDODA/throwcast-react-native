@@ -7,6 +7,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import Navbar from '../../components/navbar';
 import PodcastEntry from './PodcastEntry';
 import ListEntry from './ListEntry';
 import { actions as podcastActions } from '../../modules/podcast';
@@ -64,7 +65,7 @@ class Homepage extends Component {
           </View>
         </ScrollView>
         <View style={s.header}>
-          <Text style={s.headerTitle}>HOME</Text>
+          <Navbar />
         </View>
         <View style={s.footer}>
           <PlayerSmallRemote />

@@ -9,14 +9,14 @@ const styles = StyleSheet.create({
     height: window.height,
   },
   innerContainer: {
-    marginTop: 25,
+    marginTop: 40,
     flex: 1,
   },
   header: {
     position: 'absolute',
     backgroundColor: 'rgba(0,0,0,.8)',
     width: window.width,
-    height: 20,
+    height: 40,
     alignItems: 'center',
     top: 0,
     bottom: 0,

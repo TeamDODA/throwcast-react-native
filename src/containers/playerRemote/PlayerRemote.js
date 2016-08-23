@@ -86,7 +86,7 @@ class PlayerRemote extends Component {
             onSlidingStart={actions.slide}
             onValueChange={(value) => this.slideChange(value)}
             onSlidingComplete={() => this.slideComplete()}
-            minimumTrackTintColor="#851c44"
+            minimumTrackTintColor="purple"
             style={s.slider}
             trackStyle={s.sliderTrack}
             thumbStyle={s.sliderThumb}

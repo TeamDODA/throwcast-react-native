@@ -14,7 +14,7 @@ const PodcastEntry = ({ entry, selectPodcast, player }) => {
     changePodcast = true;
   }
 
-  const defaultImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfS-6P9Opaz10gtWTGJH96CoCYnee86VATG2BOPBYFmtE3Q4X1';
+  const defaultImage = 'http://24.media.tumblr.com/tumblr_m3j315A5l31r6luwpo1_500.png';
 
   return (
     <TouchableHighlight onPress={() => selectPodcast(entry._id, [entry], 0, changePodcast)}>

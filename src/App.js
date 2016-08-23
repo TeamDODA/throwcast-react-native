@@ -1,10 +1,11 @@
-import { Scene, Router, Actions, Modal } from 'react-native-router-flux';
-import { Provider, connect } from 'react-redux';
+import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
-import store from 'react-native-simple-store';
-import React, { Component } from 'react';
+import { Provider, connect } from 'react-redux';
 import thunk from 'redux-thunk';
+import { Scene, Router, Actions, Modal } from 'react-native-router-flux';
+import store from 'react-native-simple-store';
+
 import reducers from './reducers';
 import { SignIn, SignUp } from './components';
 import { BaseModal, Homepage, PlayerRemote, Queue, Profile } from './containers';
@@ -19,7 +20,7 @@ class App extends Component {
     store.get('@Auth:token').then(token => {
       if (token) {
         reduxStore.dispatch(authActions.authSuccess(token));
-        Actions.homepage();
+        Actions.main();
       }
 
       Actions.baseModal();
@@ -30,14 +31,16 @@ class App extends Component {
     return (
       <Provider store={reduxStore}>
         <RouterWithRedux>
-          <Scene key="modal" component={Modal}>
-            <Scene key="root">
-              <Scene key="signIn" component={SignIn} hideNavBar />
-              <Scene key="signUp" component={SignUp} hideNavBar direction="vertical" />
-              <Scene key="homepage" component={Homepage} hideNavBar />
-              <Scene key="queue" component={Queue} hideNavBar />
+          <Scene key="modal" component={Modal} >
+            <Scene key="root" hideNavBar>
+              <Scene key="signIn" component={SignIn} type="reset" />
+              <Scene key="signUp" component={SignUp} direction="vertical" />
+              <Scene key="main" tabs>
+                <Scene key="homepage" component={Homepage} hideNavBar initial />
+                <Scene key="profilepage" component={Profile} hideNavBar />
+              </Scene>
+              <Scene key="queue" component={Queue} />
               <Scene key="playerRemote" component={PlayerRemote} />
-              <Scene key="profilePage" component={Profile} hideNavBar />
             </Scene>
             <Scene key="baseModal" component={BaseModal} />
           </Scene>

@@ -37,6 +37,8 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         playing: false,
       });
+    case 'INIT_PLAYER':
+      return Object.assign({}, initialState);
     default:
       return state;
   }

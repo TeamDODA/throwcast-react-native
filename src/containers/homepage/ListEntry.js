@@ -8,7 +8,7 @@ import {
 
 import s from './entryStyles';
 
-const defaultImage = 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQfWyR7S_wi89O33ITGiHuL2wMVfHfj4I-yAU-i1T0CDRFpo1sxXA';
+const defaultImage = 'http://24.media.tumblr.com/tumblr_m3j315A5l31r6luwpo1_500.png';
 
 const ListEntry = ({ entry, getQueue, type }) => (
   <TouchableHighlight onPress={() => getQueue(entry, type)}>
