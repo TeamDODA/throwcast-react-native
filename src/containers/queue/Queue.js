@@ -18,6 +18,7 @@ import QueueEntry from './QueueEntry';
 import { actions as bMActions } from '../base-modal';
 import { actions as qActions } from './';
 import { actions as pActions } from '../../modules/player';
+import { actions as plActions } from '../../modules/playlist';
 import { actions as sActions } from '../../modules/subscription';
 import s from './queueStyles';
 
@@ -123,6 +124,7 @@ class Queue extends Component {
                 player={player}
                 selectPodcast={actions.selectPodcast}
                 selectPodcastToAdd={actions.selectPodcastToAdd}
+                updatePlaylist={actions.updatePlaylist}
               />
             )}
           </View>
@@ -142,10 +144,12 @@ const mapStateToProps = (state) => ({
   player: state.player,
   queue: state.queue,
   subscriptions: state.subscription,
+  playlist: state.playlist,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(bMActions, qActions, pActions, sActions), dispatch),
+  actions: bindActionCreators(Object.assign(
+    bMActions, qActions, pActions, sActions, plActions), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Queue);

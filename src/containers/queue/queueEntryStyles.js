@@ -14,6 +14,7 @@ const queueEntryStyles = StyleSheet.create({
   },
   info: {
     width: 280,
+    height: 66,
   },
   activeTitle: {
     color: 'purple',

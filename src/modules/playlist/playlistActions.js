@@ -1,4 +1,5 @@
 import { types } from './';
+import { queueLoadingSucc } from '../../containers/queue/queueActions';
 
 export function select(podcast) {
   return {
@@ -166,14 +167,25 @@ export function deletePlaylist(playlistId) {
   };
 }
 
-export function updatePlaylist(playlist, podcast) {
+export function updatePlaylist(playlist, podcast, type) {
   let newPodcasts = playlist.podcasts.slice();
-  newPodcasts.push(podcast);
-  newPodcasts = newPodcasts.map(e => e._id);
+  if (type) {
+    newPodcasts.forEach((item, index) => {
+      if (item._id === podcast._id) {
+        newPodcasts.splice(index, 1);
+      }
+    });
+  } else {
+    newPodcasts.push(podcast);
+    newPodcasts = newPodcasts.map(e => e._id);
+  }
   playlist = Object.assign({}, playlist, { podcasts: newPodcasts });
   return (dispatch, getState) => {
     const { auth } = getState();
     dispatch(playlistsUpdateInit());
+    if (type) {
+      dispatch(queueLoadingSucc(playlist.podcasts, 'userPlaylists'));
+    }
     return fetch(`http://localhost:8888/api/playlists/${playlist._id}`, {
       method: 'PUT',
       headers: {

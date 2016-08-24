@@ -8,7 +8,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import s from './queueEntryStyles';
 
-const QueueEntry = ({ index, queue, podcast, player, selectPodcast, selectPodcastToAdd }) => {
+const QueueEntry = (
+  { index, queue, podcast, player, selectPodcast, selectPodcastToAdd, updatePlaylist }) => {
+  let updateButton;
   let titleStyle;
   let changePodcast = false;
   const onPress = () => selectPodcast(queue._id, queue.podcasts, index, changePodcast);
@@ -16,7 +18,13 @@ const QueueEntry = ({ index, queue, podcast, player, selectPodcast, selectPodcas
     style: s.addButton,
     name: 'md-add',
     size: 30,
-    color: '#fff',
+    color: 'purple',
+  };
+  const deleteButton = {
+    style: s.addButton,
+    name: 'md-remove',
+    size: 30,
+    color: 'purple',
   };
 
   if (player.queueId === queue._id && player.currentIndex === index) {
@@ -26,16 +34,24 @@ const QueueEntry = ({ index, queue, podcast, player, selectPodcast, selectPodcas
     changePodcast = true;
   }
 
+  if (queue.type === 'userPlaylists') {
+    updateButton = <Icon {...deleteButton} onPress={() => updatePlaylist(queue, podcast, true)} />;
+  } else {
+    updateButton = <Icon {...addButton} onPress={() => selectPodcastToAdd(podcast)} />;
+  }
+
   return (
-    <TouchableHighlight style={s.container} onPress={onPress}>
+    <View style={s.container}>
       <View style={s.box}>
-        <View style={s.info}>
-          <Text ellipsizeMode numberOfLines={2} style={titleStyle}>{podcast.title}</Text>
-          <Text ellipsizeMode numberOfLines={2} style={s.description}>{podcast.description}</Text>
-        </View>
-        <Icon {...addButton} onPress={() => selectPodcastToAdd(podcast)} />
+        <TouchableHighlight onPress={onPress}>
+          <View style={s.info}>
+            <Text ellipsizeMode numberOfLines={2} style={titleStyle}>{podcast.title}</Text>
+            <Text ellipsizeMode numberOfLines={2} style={s.description}>{podcast.description}</Text>
+          </View>
+        </TouchableHighlight>
+        {updateButton}
       </View>
-    </TouchableHighlight>
+    </View>
   );
 };
 

@@ -45,7 +45,7 @@ class Profile extends Component {
             <View style={s.scrollContainer}>
               <ScrollView automaticallyAdjustContentInsets={false} horizontal>
                 {userPlaylists.map((entry) =>
-                  <ListEntry key={entry._id} {...actions} entry={entry} type="playlists" />
+                  <ListEntry key={entry._id} {...actions} entry={entry} type="userPlaylists" />
                 )}
               </ScrollView>
             </View>

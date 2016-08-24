@@ -6,10 +6,11 @@ export function queueLoadingInit() {
   };
 }
 
-export function queueLoadingSucc(podcasts) {
+export function queueLoadingSucc(podcasts, dataType) {
   return {
     type: 'QUEUE_LOADING_SUCC',
     podcasts,
+    dataType,
   };
 }
 
@@ -50,7 +51,7 @@ export function getQueue(list, type) {
         if (response.message) {
           dispatch(queueLoadingFail(response.message));
         } else {
-          dispatch(queueLoadingSucc(response));
+          dispatch(queueLoadingSucc(response, type));
           Actions.queue();
         }
       })
@@ -59,7 +60,7 @@ export function getQueue(list, type) {
       });
     }
 
-    dispatch(queueLoadingSucc(list.podcasts));
+    dispatch(queueLoadingSucc(list.podcasts, type));
     return Actions.queue();
   };
 }

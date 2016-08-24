@@ -5,6 +5,7 @@ const initialState = {
   title: null,
   image: null,
   podcasts: [],
+  type: null,
 };
 
 export default function (state = initialState, action) {
@@ -25,6 +26,7 @@ export default function (state = initialState, action) {
         fetching: null,
         message: null,
         podcasts: action.podcasts,
+        type: action.dataType,
       });
     case 'QUEUE_LOADING_FAIL':
       return Object.assign({}, state, {
