@@ -21,6 +21,7 @@ import { actions as pActions } from '../../modules/player';
 import { actions as sActions } from '../../modules/subscription';
 import s from './queueStyles';
 
+const backupImage = 'http://cdn.skim.gs/images/Cat-looking-out-window_sy4cxp/25-random-cat-behaviors-finally-explained';
 const window = Dimensions.get('window');
 const PARALLAX_HEADER_HEIGHT = 280;
 const STICKY_HEADER_HEIGHT = 50;
@@ -42,6 +43,7 @@ class Queue extends Component {
 
   renderStickyHeader() {
     const { queue, subscriptions } = this.props;
+    const onPress = subscriptions.fetching ? null : () => this.toggleSubscription();
     let pickColor = '#FFF';
     subscriptions.list.forEach(station => {
       if (station._id === queue._id) {
@@ -49,11 +51,11 @@ class Queue extends Component {
       }
     });
     return (
-      <TouchableHighlight onPress={() => this.toggleSubscription()}>
+      <TouchableHighlight onPress={onPress}>
         <View style={s.stickySection}>
           <Text style={s.stickySectionTitle}>{queue.title}</Text>
           <View style={s.addSubs}>
-            <Icon {...addSubs} color={pickColor} onPress={() => this.toggleSubscription()} />
+            <Icon {...addSubs} color={pickColor} onPress={onPress} />
           </View>
         </View>
       </TouchableHighlight>
@@ -62,6 +64,7 @@ class Queue extends Component {
 
   renderForeground() {
     const { queue, subscriptions } = this.props;
+    const onPress = subscriptions.fetching ? null : () => this.toggleSubscription();
     let pickColor = '#FFF';
     subscriptions.list.forEach(station => {
       if (station._id === queue._id) {
@@ -74,7 +77,7 @@ class Queue extends Component {
           {queue.title}
         </Text>
         <View style={s.addSubs2}>
-          <Icon {...addSubs} color={pickColor} onPress={() => this.toggleSubscription()} />
+          <Icon {...addSubs} color={pickColor} onPress={onPress} />
         </View>
       </View>
     );
@@ -82,7 +85,6 @@ class Queue extends Component {
 
   renderBackground() {
     const { queue } = this.props;
-    const backupImage = 'http://cdn.skim.gs/images/Cat-looking-out-window_sy4cxp/25-random-cat-behaviors-finally-explained';
     const imageSource = {
       uri: queue.image || backupImage,
       width: window.width,

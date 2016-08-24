@@ -3,8 +3,9 @@ import store from 'react-native-simple-store';
 
 import { types } from './';
 import { authFormInit } from '../../components/auth-form/authFormActions';
-import { initializePlayer } from '../player/playerActions';
 import { changeFocus } from '../navbar/navbarActions';
+import { initializePlayer } from '../player/playerActions';
+import { subscriptionsLoadingSucc, getSubscriptions } from '../subscription/subscriptionActions';
 
 export function authInit() {
   return { type: types.AUTH_INIT };
@@ -53,6 +54,7 @@ const handleAuthSuccess = function handleAuthSuccess(dispatch) {
     store.save('@Auth:token', response.token);
     dispatch(authSuccess(response.token));
     dispatch(authFormInit());
+    getSubscriptions();
     Actions.main();
   };
 };
@@ -110,6 +112,7 @@ export function authCheck(token) {
       dispatch(authFailure(response.message));
     } else {
       dispatch(authSuccess(token));
+      dispatch(subscriptionsLoadingSucc(response._id, response.subscriptions));
       Actions.main();
     }
   })

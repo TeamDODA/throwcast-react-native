@@ -11,6 +11,7 @@ import s from './queueEntryStyles';
 const QueueEntry = ({ index, queue, podcast, player, selectPodcast, selectPodcastToAdd }) => {
   let titleStyle;
   let changePodcast = false;
+  const onPress = () => selectPodcast(queue._id, queue.podcasts, index, changePodcast);
   const addButton = {
     style: s.addButton,
     name: 'md-add',
@@ -26,10 +27,7 @@ const QueueEntry = ({ index, queue, podcast, player, selectPodcast, selectPodcas
   }
 
   return (
-    <TouchableHighlight
-      style={s.container}
-      onPress={() => selectPodcast(queue._id, queue.podcasts, index, changePodcast)}
-    >
+    <TouchableHighlight style={s.container} onPress={onPress}>
       <View style={s.box}>
         <View style={s.info}>
           <Text ellipsizeMode numberOfLines={2} style={titleStyle}>{podcast.title}</Text>
