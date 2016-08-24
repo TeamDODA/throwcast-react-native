@@ -1,3 +1,5 @@
+// eslint-disable-line global-require
+
 import React, { Component } from 'react';
 import {
   Image,

@@ -60,7 +60,10 @@ class Navbar extends Component {
               </View>
             </Animatable.View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => actions.toTab('profilepage')} style={[profileBox, s.box]}>
+          <TouchableHighlight
+            onPress={() => actions.toTab('profilepage')}
+            style={[profileBox, s.box]}
+          >
             <Animatable.View animation={profile ? 'fadeIn' : ''} duration={150}>
               <View style={s.flexRow} >
                 <Text style={s.text}>PROFILE</Text>
