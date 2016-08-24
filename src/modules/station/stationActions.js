@@ -1,4 +1,5 @@
 import { types } from './';
+import { BASE_API_URL } from '../../constants';
 
 export function stationsLoadingInit() {
   return {
@@ -24,7 +25,7 @@ export function getStations() {
   return (dispatch, getState) => {
     const { auth } = getState();
     dispatch(stationsLoadingInit());
-    return fetch('http://localhost:8888/api/stations/', {
+    return fetch(`${BASE_API_URL}/api/stations/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

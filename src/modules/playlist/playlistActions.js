@@ -1,5 +1,6 @@
 import { types } from './';
 import { queueLoadingSucc } from '../../containers/queue/queueActions';
+import { BASE_API_URL } from '../../constants';
 
 export function select(podcast) {
   return {
@@ -92,7 +93,7 @@ export function getPlaylists() {
   return (dispatch, getState) => {
     const { auth } = getState();
     dispatch(playlistsLoadingInit());
-    return fetch('http://localhost:8888/api/playlists/', {
+    return fetch(`${BASE_API_URL}/api/playlists/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -118,7 +119,7 @@ export function createPlaylist(playlist) {
   return (dispatch, getState) => {
     const { auth } = getState();
     dispatch(playlistsCreateInit());
-    return fetch('http://localhost:8888/api/playlists/', {
+    return fetch(`${BASE_API_URL}/api/playlists/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -145,7 +146,7 @@ export function createPlaylist(playlist) {
 export function deletePlaylist(playlistId) {
   return (dispatch, getState) => {
     const { auth } = getState();
-    return fetch(`http://localhost:8888/api/playlists/${playlistId}`, {
+    return fetch(`${BASE_API_URL}/api/playlists/${playlistId}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
@@ -185,7 +186,7 @@ export function updatePlaylist(playlist, podcast, type) {
     if (type) {
       dispatch(queueLoadingSucc(playlist.podcasts, 'userPlaylists'));
     }
-    return fetch(`http://localhost:8888/api/playlists/${playlist._id}`, {
+    return fetch(`${BASE_API_URL}/api/playlists/${playlist._id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',

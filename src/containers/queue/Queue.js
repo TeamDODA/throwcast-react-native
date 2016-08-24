@@ -20,9 +20,9 @@ import { actions as qActions } from './';
 import { actions as pActions } from '../../modules/player';
 import { actions as plActions } from '../../modules/playlist';
 import { actions as sActions } from '../../modules/subscription';
+import { DEFAULT_COVER_IMAGE } from '../../constants';
 import s from './queueStyles';
 
-const backupImage = 'http://cdn.skim.gs/images/Cat-looking-out-window_sy4cxp/25-random-cat-behaviors-finally-explained';
 const window = Dimensions.get('window');
 const PARALLAX_HEADER_HEIGHT = 280;
 const STICKY_HEADER_HEIGHT = 50;
@@ -104,7 +104,7 @@ class Queue extends Component {
   renderBackground() {
     const { queue } = this.props;
     const imageSource = {
-      uri: queue.image || backupImage,
+      uri: queue.image || DEFAULT_COVER_IMAGE,
       width: window.width,
       height: PARALLAX_HEADER_HEIGHT,
     };

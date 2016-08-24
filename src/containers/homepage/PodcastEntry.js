@@ -5,6 +5,7 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+import { DEFAULT_IMAGE } from '../../constants';
 
 import s from './entryStyles';
 
@@ -14,12 +15,10 @@ const PodcastEntry = ({ entry, selectPodcast, player }) => {
     changePodcast = true;
   }
 
-  const defaultImage = 'http://24.media.tumblr.com/tumblr_m3j315A5l31r6luwpo1_500.png';
-
   return (
     <TouchableHighlight onPress={() => selectPodcast(entry._id, [entry], 0, changePodcast)}>
       <View style={s.box}>
-        <Image source={{ uri: entry.image || defaultImage, height: 120 }} />
+        <Image source={{ uri: entry.image || DEFAULT_IMAGE, height: 120 }} />
         <Text ellipsizeMode numberOfLines={1} style={s.title}>{entry.title}</Text>
         <Text ellipsizeMode numberOfLines={1} style={s.description}>{entry.description}</Text>
       </View>

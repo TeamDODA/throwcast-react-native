@@ -6,6 +6,7 @@ import { authFormInit } from '../../components/auth-form/authFormActions';
 import { changeFocus } from '../navbar/navbarActions';
 import { initializePlayer } from '../player/playerActions';
 import { subscriptionsLoadingSucc, getSubscriptions } from '../subscription/subscriptionActions';
+import { BASE_API_URL } from '../../constants';
 
 export function authInit() {
   return { type: types.AUTH_INIT };
@@ -62,7 +63,7 @@ const handleAuthSuccess = function handleAuthSuccess(dispatch) {
 const authPost = function authRequest(uri, credentials) {
   return dispatch => {
     dispatch(authPending());
-    return fetch(`http://localhost:8888${uri}`, authRequestOptions(credentials))
+    return fetch(`${BASE_API_URL}${uri}`, authRequestOptions(credentials))
       .then(response => response.json())
       .then(handleResponseMessage())
       .then(handleAuthSuccess(dispatch))
@@ -98,7 +99,7 @@ export function toSignUp() {
 }
 
 export function authCheck(token) {
-  return dispatch => fetch('http://localhost:8888/api/users/me', {
+  return dispatch => fetch(`${BASE_API_URL}/api/users/me`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',

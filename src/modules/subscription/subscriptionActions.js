@@ -1,4 +1,5 @@
 import { types } from './';
+import { BASE_API_URL } from '../../constants';
 
 export function subscriptionsLoadingInit() {
   return {
@@ -45,7 +46,7 @@ export function getSubscriptions() {
   return (dispatch, getState) => {
     dispatch(subscriptionsLoadingInit());
     const { auth } = getState();
-    return fetch('http://localhost:8888/api/users/me', {
+    return fetch(`${BASE_API_URL}/api/users/me`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -71,7 +72,7 @@ export function updateSubscriptions(subscriptions) {
   return (dispatch, getState) => {
     dispatch(subscriptionsUpdateInit());
     const { auth } = getState();
-    return fetch('http://localhost:8888/api/users/subscriptions/', {
+    return fetch(`${BASE_API_URL}/api/users/subscriptions/`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',

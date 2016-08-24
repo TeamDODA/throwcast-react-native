@@ -1,4 +1,5 @@
 import { Actions } from 'react-native-router-flux';
+import { BASE_API_URL } from '../../constants';
 
 export function queueLoadingInit() {
   return {
@@ -37,7 +38,7 @@ export function getQueue(list, type) {
     dispatch(queueLoadingInit());
     dispatch(queueDetail(list));
     if (type === 'stations') {
-      url = `http://localhost:8888/api/stations/${list._id}/podcasts/`;
+      url = `${BASE_API_URL}/api/stations/${list._id}/podcasts/`;
       return fetch(url, {
         method: 'GET',
         headers: {
