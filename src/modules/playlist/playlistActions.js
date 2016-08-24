@@ -153,10 +153,9 @@ export function deletePlaylist(playlistId) {
         authorization: `Bearer ${auth.token}`,
       },
     })
-    .then((response) => response.json())
     .then((response) => {
-      if (response.message) {
-        dispatch(playlistsDeleteFail(response.message));
+      if (response.status !== 204) {
+        dispatch(playlistsDeleteFail(response.status));
       } else {
         dispatch(playlistsDeleteSucc(playlistId));
       }

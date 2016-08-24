@@ -26,8 +26,12 @@ const backupImage = 'http://cdn.skim.gs/images/Cat-looking-out-window_sy4cxp/25-
 const window = Dimensions.get('window');
 const PARALLAX_HEADER_HEIGHT = 280;
 const STICKY_HEADER_HEIGHT = 50;
-const addSubs = {
+let addSubs = {
   name: 'md-checkbox',
+  size: 30,
+};
+const deleteButton = {
+  name: 'md-remove',
   size: 30,
 };
 
@@ -43,9 +47,14 @@ class Queue extends Component {
   }
 
   renderStickyHeader() {
-    const { queue, subscriptions } = this.props;
-    const onPress = subscriptions.fetching ? null : () => this.toggleSubscription();
+    const { queue, subscriptions, actions } = this.props;
+    let onPress = subscriptions.fetching ? null : () => this.toggleSubscription();
     let pickColor = '#FFF';
+    if (queue.type === 'userPlaylists') {
+      onPress = () => actions.deletePlaylist(queue._id);
+      addSubs = deleteButton;
+      pickColor = 'purple';
+    }
     subscriptions.list.forEach(station => {
       if (station._id === queue._id) {
         pickColor = 'purple';
@@ -64,9 +73,17 @@ class Queue extends Component {
   }
 
   renderForeground() {
-    const { queue, subscriptions } = this.props;
-    const onPress = subscriptions.fetching ? null : () => this.toggleSubscription();
+    const { queue, subscriptions, actions } = this.props;
+    let onPress = subscriptions.fetching ? null : () => this.toggleSubscription();
     let pickColor = '#FFF';
+    if (queue.type === 'userPlaylists') {
+      onPress = () => {
+        actions.deletePlaylist(queue._id);
+        Actions.pop();
+      };
+      addSubs = deleteButton;
+      pickColor = 'purple';
+    }
     subscriptions.list.forEach(station => {
       if (station._id === queue._id) {
         pickColor = 'purple';
