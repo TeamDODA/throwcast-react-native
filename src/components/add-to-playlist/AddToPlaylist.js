@@ -79,7 +79,7 @@ class AddToPlaylist extends Component {
     return (
       <View style={s.container}>
         <ScrollView style={s.innerContainer}>
-          {playlist.list.filter((e) => e.owner === subscription.id).forEach((entry, index) =>
+          {playlist.list.filter((e) => e.owner === subscription.id).map((entry, index) =>
             <Entry
               key={index}
               entry={entry}
