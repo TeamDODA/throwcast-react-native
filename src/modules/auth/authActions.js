@@ -116,7 +116,7 @@ export function authCheck(token) {
       Actions.main();
     }
   })
-  .catch((e) => {
-    dispatch(authFailure(e));
+  .catch(() => {
+    dispatch(authFailure('Session expired'));
   });
 }
