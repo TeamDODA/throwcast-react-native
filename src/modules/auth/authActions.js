@@ -94,3 +94,26 @@ export function toSignIn() {
 export function toSignUp() {
   return navigateTo('signUp');
 }
+
+export function authCheck(token) {
+  return dispatch => fetch('http://localhost:8888/api/users/me', {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => response.json())
+  .then((response) => {
+    if (response.message) {
+      dispatch(authFailure(response.message));
+    } else {
+      dispatch(authSuccess(token));
+      Actions.main();
+    }
+  })
+  .catch((e) => {
+    dispatch(authFailure(e));
+  });
+}

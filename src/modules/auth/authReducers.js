@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
     case types.AUTH_PENDING:
       return Object.assign({}, state, {
         pending: true,
-        message: 'Attempting to authenticate',
+        message: 'Loading',
       });
     case types.AUTH_SUCCESS:
       return Object.assign({}, state, {

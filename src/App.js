@@ -17,10 +17,12 @@ const reduxStore = createStore(reducers, applyMiddleware(thunk));
 class App extends Component {
   componentWillMount() {
     StatusBar.setHidden(true, 'none');
+    reduxStore.dispatch(authActions.authPending());
     store.get('@Auth:token').then(token => {
       if (token) {
-        reduxStore.dispatch(authActions.authSuccess(token));
-        Actions.main();
+        reduxStore.dispatch(authActions.authCheck(token));
+      } else {
+        reduxStore.dispatch(authActions.authFailure(null));
       }
 
       Actions.baseModal();
