@@ -30,8 +30,9 @@ export function queueDetail({ image, title, _id }) {
 }
 
 export function getQueue(list, type) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     let url;
+    const { auth } = getState();
     dispatch(queueLoadingInit());
     dispatch(queueDetail(list));
     if (type === 'stations') {
@@ -41,6 +42,7 @@ export function getQueue(list, type) {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          authorization: `Bearer ${auth.token}`,
         },
       })
       .then((response) => response.json())

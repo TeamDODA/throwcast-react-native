@@ -21,13 +21,15 @@ export function podcastsLoadingFail(message) {
 }
 
 export function getPodcasts() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { auth } = getState();
     dispatch(podcastLoadingInit());
     return fetch('http://localhost:8888/api/podcasts/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        authorization: `Bearer ${auth.token}`,
       },
     })
     .then((response) => response.json())

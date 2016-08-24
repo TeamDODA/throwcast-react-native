@@ -21,13 +21,15 @@ export function stationsLoadingFail(message) {
 }
 
 export function getStations() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { auth } = getState();
     dispatch(stationsLoadingInit());
     return fetch('http://localhost:8888/api/stations/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        authorization: `Bearer ${auth.token}`,
       },
     })
     .then((response) => response.json())
