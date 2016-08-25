@@ -179,21 +179,21 @@ export function updatePlaylist(playlist, podcast, type) {
     newPodcasts.push(podcast);
     newPodcasts = newPodcasts.map(e => e._id);
   }
-  playlist = Object.assign({}, playlist, { podcasts: newPodcasts });
+  const update = Object.assign({}, playlist, { podcasts: newPodcasts });
   return (dispatch, getState) => {
     const { auth } = getState();
     dispatch(playlistsUpdateInit());
     if (type) {
-      dispatch(queueLoadingSucc(playlist.podcasts, 'userPlaylists'));
+      dispatch(queueLoadingSucc(update.podcasts, 'userPlaylists'));
     }
-    return fetch(`${BASE_API_URL}/api/playlists/${playlist._id}`, {
+    return fetch(`${BASE_API_URL}/api/playlists/${update._id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         authorization: `Bearer ${auth.token}`,
       },
-      body: JSON.stringify(playlist),
+      body: JSON.stringify(update),
     })
     .then((response) => response.json())
     .then((response) => {

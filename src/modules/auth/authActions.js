@@ -5,7 +5,8 @@ import { types } from './';
 import { authFormInit } from '../../components/auth-form/authFormActions';
 import { changeFocus } from '../navbar/navbarActions';
 import { initializePlayer } from '../player/playerActions';
-import { subscriptionsLoadingSucc, getSubscriptions } from '../subscription/subscriptionActions';
+import { getFavorites } from '../favorite/favoriteActions';
+import { setUser, unsetUser, getUserPlaylists } from '../user/userActions';
 import { BASE_API_URL } from '../../constants';
 
 export function authInit() {
@@ -55,7 +56,8 @@ const handleAuthSuccess = function handleAuthSuccess(dispatch) {
     store.save('@Auth:token', response.token);
     dispatch(authSuccess(response.token));
     dispatch(authFormInit());
-    getSubscriptions();
+    dispatch(getFavorites());
+    dispatch(getUserPlaylists());
     Actions.main();
   };
 };
@@ -111,13 +113,17 @@ export function authCheck(token) {
   .then((response) => {
     if (response.message) {
       dispatch(authFailure(response.message));
+      dispatch(unsetUser());
     } else {
       dispatch(authSuccess(token));
-      dispatch(subscriptionsLoadingSucc(response._id, response.subscriptions));
+      dispatch(setUser(response));
+      dispatch(getFavorites());
+      dispatch(getUserPlaylists());
       Actions.main();
     }
   })
   .catch(() => {
     dispatch(authFailure('Session expired'));
+    dispatch(unsetUser());
   });
 }

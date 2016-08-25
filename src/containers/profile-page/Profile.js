@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   ScrollView,
   Text,
@@ -10,71 +10,57 @@ import { connect } from 'react-redux';
 import { Navbar, PlayerSmallRemote } from '../../components';
 import ListEntry from '../homepage/ListEntry';
 import { actions as playlistActions } from '../../modules/playlist';
-import { actions as subscriptionActions } from '../../modules/subscription';
+import { actions as favoriteActions } from '../../modules/favorite';
 import { getQueue } from '../queue/queueActions';
 import s from './profileStyles';
 
-class Profile extends Component {
-  componentWillMount() {
-    const { actions } = this.props;
-    actions.getPlaylists();
-    actions.getSubscriptions();
-  }
-
-  render() {
-    const { actions, playlists, subscriptions } = this.props;
-    const userPlaylists = [];
-    playlists.list.forEach(entry => {
-      if (entry.owner === subscriptions.id) {
-        userPlaylists.push(entry);
-      }
-    });
-    return (
-      <View style={s.outerContainer}>
-        <ScrollView>
-          <View style={s.innerContainer}>
-            <Text style={s.listTitle}>Subscriptions</Text>
-            <View style={s.scrollContainer}>
-              <ScrollView automaticallyAdjustContentInsets={false} horizontal>
-                {subscriptions.list.map((entry) =>
-                  <ListEntry key={entry._id} {...actions} entry={entry} type="stations" />
-                )}
-              </ScrollView>
-            </View>
-            <Text style={s.listTitle}>My playlists</Text>
-            <View style={s.scrollContainer}>
-              <ScrollView automaticallyAdjustContentInsets={false} horizontal>
-                {userPlaylists.map((entry) =>
-                  <ListEntry key={entry._id} {...actions} entry={entry} type="userPlaylists" />
-                )}
-              </ScrollView>
-            </View>
+const Profile = props => {
+  const { actions, favorite, user } = props;
+  return (
+    <View style={s.outerContainer}>
+      <ScrollView>
+        <View style={s.innerContainer}>
+          <Text style={s.listTitle}>Subscriptions</Text>
+          <View style={s.scrollContainer}>
+            <ScrollView automaticallyAdjustContentInsets={false} horizontal>
+              {favorite.stations.map((entry) =>
+                <ListEntry key={entry._id} {...actions} entry={entry} type="stations" />
+              )}
+            </ScrollView>
           </View>
-        </ScrollView>
-        <View style={s.header}>
-          <Navbar />
+          <Text style={s.listTitle}>My playlists</Text>
+          <View style={s.scrollContainer}>
+            <ScrollView automaticallyAdjustContentInsets={false} horizontal>
+              {user.playlists.map((entry) =>
+                <ListEntry key={entry._id} {...actions} entry={entry} type="userPlaylists" />
+              )}
+            </ScrollView>
+          </View>
         </View>
-        <View style={s.footer}>
-          <PlayerSmallRemote />
-        </View>
+      </ScrollView>
+      <View style={s.header}>
+        <Navbar />
       </View>
-    );
-  }
-}
+      <View style={s.footer}>
+        <PlayerSmallRemote />
+      </View>
+    </View>
+  );
+};
 
 const mapStateToProps = (state) => ({
   stations: state.station,
   playlists: state.playlist,
-  subscriptions: state.subscription,
+  favorite: state.favorite,
+  user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(
-    {},
-    { getQueue },
-    subscriptionActions,
-    playlistActions
-  ), dispatch),
+  actions: bindActionCreators({
+    getQueue,
+    ...favoriteActions,
+    ...playlistActions,
+  }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

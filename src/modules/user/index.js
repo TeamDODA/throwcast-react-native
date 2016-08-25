@@ -1,5 +1,5 @@
-import * as _actions from './subscriptionActions';
-import _reducers from './subscriptionReducers';
+import * as _actions from './userActions';
+import _reducers from './userReducers';
 import * as _types from './constants';
 
 export const actions = _actions;

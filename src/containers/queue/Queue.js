@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
-import _ from 'lodash';
 
 import { PlayerSmallRemote } from '../../components';
 import QueueEntry from './QueueEntry';
@@ -20,7 +19,6 @@ import { actions as qActions } from './';
 import { actions as pActions } from '../../modules/player';
 import { actions as fActions } from '../../modules/favorite';
 import { actions as plActions } from '../../modules/playlist';
-import { actions as sActions } from '../../modules/subscription';
 import { DEFAULT_COVER_IMAGE } from '../../constants';
 import s from './queueStyles';
 
@@ -37,34 +35,22 @@ const deleteButton = {
 };
 
 class Queue extends Component {
-  toggleSubscription() {
-    const { subscriptions, queue, actions } = this.props;
-    const subscriptionIds = subscriptions.list.map(subscription => subscription._id);
-    if (subscriptionIds.indexOf(queue._id) > -1) {
-      actions.updateSubscriptions(_.without(subscriptionIds, queue._id));
-    } else {
-      actions.updateSubscriptions(subscriptionIds.concat(queue._id));
-    }
-  }
-
   renderStickyHeader() {
-    const { queue, subscriptions, actions, favorites } = this.props;
+    const { queue, actions, favorite } = this.props;
     const favInfo = { localField: queue._id, from: queue.type };
-    let onPress = subscriptions.fetching ? null : () => actions.addFavorite(favInfo);
+    let onPress = favorite.fetching ? null : () => actions.addFavorite(favInfo);
     let pickColor = '#FFF';
     if (queue.type === 'userPlaylists') {
       onPress = () => actions.deletePlaylist(queue._id);
       addSubs = deleteButton;
       pickColor = 'purple';
     }
-    if (favorites.list.stations) {
-      favorites.list.stations.forEach(station => {
-        if (station[0]._id === queue._id) {
-          pickColor = 'purple';
-          onPress = () => actions.deleteFavorite(queue._id);
-        }
-      });
-    }
+    favorite[queue.type].forEach(fav => {
+      if (fav._id === queue._id) {
+        pickColor = 'purple';
+        // onPress = () => actions.deleteFavorite(queue._id);
+      }
+    });
     return (
       <TouchableHighlight onPress={onPress}>
         <View style={s.stickySection}>
@@ -78,9 +64,9 @@ class Queue extends Component {
   }
 
   renderForeground() {
-    const { queue, subscriptions, actions, favorites } = this.props;
+    const { queue, favorite, actions } = this.props;
     const favInfo = { localField: queue._id, from: queue.type };
-    let onPress = subscriptions.fetching ? null : () => actions.addFavorite(favInfo);
+    let onPress = favorite.fetching ? null : () => actions.addFavorite(favInfo);
     let pickColor = '#FFF';
     if (queue.type === 'userPlaylists') {
       onPress = () => {
@@ -90,14 +76,12 @@ class Queue extends Component {
       addSubs = deleteButton;
       pickColor = 'purple';
     }
-    if (favorites.list.stations) {
-      favorites.list.stations.forEach(station => {
-        if (station[0]._id === queue._id) {
-          pickColor = 'purple';
-          onPress = () => actions.deleteFavorite(queue._id);
-        }
-      });
-    }
+    favorite[queue.type].forEach(fav => {
+      if (fav._id === queue._id) {
+        pickColor = 'purple';
+        onPress = () => actions.deleteFavorite(queue._id);
+      }
+    });
     return (
       <View key="parallax-header" style={s.parallaxHeader}>
         <Text style={s.queueTitle}>
@@ -169,14 +153,14 @@ class Queue extends Component {
 const mapStateToProps = (state) => ({
   player: state.player,
   queue: state.queue,
-  subscriptions: state.subscription,
+  favorite: state.favorite,
   playlist: state.playlist,
   favorites: state.favorite,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(Object.assign(
-    bMActions, qActions, pActions, sActions, plActions, fActions), dispatch),
+    bMActions, qActions, pActions, plActions, fActions), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Queue);
