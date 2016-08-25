@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import {
   Image,
@@ -13,6 +14,7 @@ import * as Animatable from 'react-native-animatable';
 
 import { formattedTime } from './utils';
 import { actions as playerActions } from '../../modules/player';
+import { actions as favoriteActions } from '../../modules/favorite';
 import s from './styles';
 
 class PlayerRemote extends Component {
@@ -25,6 +27,29 @@ class PlayerRemote extends Component {
     this.props.actions.togglePlay();
   }
 
+  renderAddFavorite() {
+    const { actions, favorite, player } = this.props;
+    const podcastId = player.podcastList[player.currentIndex]._id;
+    const favInfo = { localField: podcastId, from: 'podcasts' };
+    const isFavorite = _.find(favorite.podcasts, { _id: podcastId });
+    const pickColor = isFavorite ? 'purple' : '#FFF';
+    let onPress;
+    if (favorite.pending) {
+      onPress = null;
+    } else {
+      onPress = isFavorite ?
+      onPress = () => actions.deleteFavorite(favInfo) :
+      onPress = () => actions.addFavorite(favInfo);
+    }
+    return (
+      <View style={s.addFavorite}>
+        <Text style={s.title} marginRight={10}>Add as Favorite</Text>
+        <View style={s.addIcon}>
+          <Icon name="md-checkbox" marginLeft={100} size={30} color={pickColor} onPress={onPress} />
+        </View>
+      </View>
+    );
+  }
   renderInfo() {
     const { player, playerRemote } = this.props;
     const index = player.currentIndex;
@@ -106,6 +131,7 @@ class PlayerRemote extends Component {
           <Icon {...toggleButton} />
           <Icon {...nextButton} />
         </View>
+        <View style={s.addButton}>{this.renderAddFavorite()}</View>
       </View>
     );
   }
@@ -114,10 +140,11 @@ class PlayerRemote extends Component {
 const mapStateToProps = (state) => ({
   player: state.player,
   playerRemote: state.playerRemote,
+  favorite: state.favorite,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(playerActions, dispatch),
+  actions: bindActionCreators({ ...playerActions, ...favoriteActions }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerRemote);

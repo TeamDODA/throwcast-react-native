@@ -1,3 +1,4 @@
+import { Actions } from 'react-native-router-flux';
 import { types } from './';
 import { queueLoadingSucc } from '../../containers/queue/queueActions';
 import { BASE_API_URL } from '../../constants';
@@ -159,6 +160,7 @@ export function deletePlaylist(playlistId) {
         dispatch(playlistsDeleteFail(response.status));
       } else {
         dispatch(playlistsDeleteSucc(playlistId));
+        Actions.pop();
       }
     })
     .catch((e) => {

@@ -9,26 +9,30 @@ import { connect } from 'react-redux';
 
 import { Navbar, PlayerSmallRemote } from '../../components';
 import ListEntry from '../homepage/ListEntry';
+import PodcastEntry from '../homepage/PodcastEntry';
 import { actions as playlistActions } from '../../modules/playlist';
 import { actions as favoriteActions } from '../../modules/favorite';
 import { getQueue } from '../queue/queueActions';
 import s from './profileStyles';
 
-const FavoriteList = ({ actions, favorite, title, type }) => (
+const FavoriteList = ({ actions, favorite, title, type, player }) => (
   <View>
     <Text style={s.listTitle}>Favorite {title}</Text>
     <View style={s.scrollContainer}>
       <ScrollView automaticallyAdjustContentInsets={false} horizontal>
-        {favorite[type].map((entry) =>
-          <ListEntry key={entry._id} {...actions} entry={entry} type="stations" />
-        )}
+        {favorite[type].map((entry) => {
+          if (type === 'podcasts') {
+            return <PodcastEntry key={entry._id} {...actions} entry={entry} player={player} />;
+          }
+          return <ListEntry key={entry._id} {...actions} entry={entry} type={type} />;
+        })}
       </ScrollView>
     </View>
   </View>
 );
 
-const Profile = ({ actions, favorite, user }) => {
-  const props = { actions, favorite };
+const Profile = ({ actions, favorite, user, player }) => {
+  const props = { actions, favorite, player };
   return (
     <View style={s.outerContainer}>
       <ScrollView>
@@ -59,7 +63,7 @@ const Profile = ({ actions, favorite, user }) => {
   );
 };
 
-const mapStateToProps = ({ favorite, user }) => ({ favorite, user });
+const mapStateToProps = ({ favorite, user, player }) => ({ favorite, user, player });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({

@@ -15,6 +15,19 @@ const styles = StyleSheet.create({
     top: 10,
     paddingLeft: 20,
   },
+  addButton: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    right: 20,
+    top: 8,
+  },
+  addIcon: {
+    marginLeft: 10,
+    top: 6,
+  },
+  addFavorite: {
+    flexDirection: 'row',
+  },
   innerContainer: {
     marginTop: 80,
     width: window.width,
@@ -37,6 +50,11 @@ const styles = StyleSheet.create({
     fontFamily: 'HelveticaNeue',
     marginBottom: 10,
     marginTop: 13,
+    fontSize: 14,
+  },
+  addText: {
+    color: '#FFF',
+    fontFamily: 'HelveticaNeue',
     fontSize: 14,
   },
   description: {
