@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
+import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
 
 import { PlayerSmallRemote } from '../../components';
@@ -47,21 +48,25 @@ class Queue extends Component {
     const button = isOwner ? deleteButton : favoriteButton;
 
     let onPress;
+    let icon;
     if (favorite.pending) {
       onPress = null;
+      icon = <Spinner type="Arc" size={26} color="#FFFFFF" />;
     } else if (isOwner && queue.type === 'playlists') {
       onPress = () => actions.deletePlaylist(queue._id);
+      icon = <Icon {...button} color={pickColor} onPress={onPress} />;
     } else {
       onPress = isFavorite ?
         onPress = () => actions.deleteFavorite(favInfo) :
         onPress = () => actions.addFavorite(favInfo);
+      icon = <Icon {...button} color={pickColor} onPress={onPress} />;
     }
     return (
       <TouchableHighlight onPress={onPress}>
         <View style={s.stickySection}>
           <Text style={s.stickySectionTitle}>{queue.title}</Text>
           <View style={s.addSubs}>
-            <Icon {...button} color={pickColor} onPress={onPress} />
+            {icon}
           </View>
         </View>
       </TouchableHighlight>
@@ -79,14 +84,18 @@ class Queue extends Component {
     const button = isOwner ? deleteButton : favoriteButton;
 
     let onPress;
+    let icon;
     if (favorite.pending) {
       onPress = null;
+      icon = <Spinner type="Arc" size={26} color="#FFFFFF" />;
     } else if (isOwner && queue.type === 'playlists') {
       onPress = () => actions.deletePlaylist(queue._id);
+      icon = <Icon {...button} color={pickColor} onPress={onPress} />;
     } else {
       onPress = isFavorite ?
         onPress = () => actions.deleteFavorite(favInfo) :
         onPress = () => actions.addFavorite(favInfo);
+      icon = <Icon {...button} color={pickColor} onPress={onPress} />;
     }
     return (
       <View key="parallax-header" style={s.parallaxHeader}>
@@ -94,7 +103,7 @@ class Queue extends Component {
           {queue.title}
         </Text>
         <View style={s.addSubs2}>
-          <Icon {...button} color={pickColor} onPress={onPress} />
+          {icon}
         </View>
       </View>
     );

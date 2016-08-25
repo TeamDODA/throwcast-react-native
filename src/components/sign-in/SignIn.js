@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Spinner from 'react-native-spinkit';
 
 import AuthForm, { actions as authFormActions } from '../auth-form';
 import { actions as authActions } from '../../modules/auth';
@@ -39,8 +40,8 @@ class SignIn extends Component {
 
   renderLoading() {
     return (
-      <View style={s.container}>
-        <Image source={require('../../img/loading.gif')} style={s.loading} />
+      <View style={s.loadContainer}>
+        <Spinner type="Wave" size={40} color="#FFFFFF" />
       </View>
     );
   }

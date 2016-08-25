@@ -5,6 +5,7 @@ const window = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
+    alignItems: 'center',
     flex: 1,
   },
   backgroundImage: {
@@ -51,9 +52,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 30,
   },
-  loading: {
-    width: 100,
-    height: 100,
+  loadContainer: {
+    marginTop: 40,
+    alignItems: 'center',
   },
 });
 

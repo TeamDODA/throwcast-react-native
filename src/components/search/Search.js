@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
+import Spinner from 'react-native-spinkit';
 
 import Entry from './Entry';
 import { actions as baseModalActions } from '../../containers/base-modal';
@@ -47,7 +48,9 @@ class Search extends Component {
     const { search } = this.props;
     const fetching = search.playlistFetching || search.stationFetching || search.podcastFetching;
     const onPress = fetching ? null : this.search.bind(this);
-
+    const icon = fetching ?
+      <Spinner type="Arc" size={22} color="#FFFFFF" style={s.load} /> :
+      <Icon name="ios-search-outline" size={30} onPress={onPress} style={s.buttons} />;
     return (
       <Animatable.View animation="fadeInLeft" duration={320} style={s.inputBox}>
         <TextInput
@@ -57,12 +60,7 @@ class Search extends Component {
           placeholder="Search..."
           placeholderTextColor="purple"
         />
-        <Icon
-          style={s.buttons}
-          name="ios-search-outline"
-          size={30}
-          onPress={onPress}
-        />
+        {icon}
       </Animatable.View>
     );
   }

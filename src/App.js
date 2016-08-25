@@ -37,7 +37,7 @@ class App extends Component {
             <Scene key="root" hideNavBar>
               <Scene key="signIn" component={SignIn} type="reset" />
               <Scene key="signUp" component={SignUp} direction="vertical" />
-              <Scene key="main" tabs>
+              <Scene key="main" tabs type="reset">
                 <Scene key="homepage" component={Homepage} hideNavBar initial />
                 <Scene key="profilepage" component={Profile} hideNavBar />
               </Scene>

@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
+import Spinner from 'react-native-spinkit';
 
 import { AddToPlaylist, Player, Search } from '../../components';
 import { actions as baseModalActions } from './';
@@ -50,6 +51,7 @@ class BaseModal extends Component {
 
     return (
       <Animatable.View {...AnimatableView} style={s.loadContainer}>
+        <Spinner type="Arc" size={40} color="#FFFFFF" />
         <Text style={s.loading}>Loading</Text>
       </Animatable.View>
     );

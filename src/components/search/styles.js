@@ -59,6 +59,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: '#FFF',
   },
+  load: {
+    marginTop: 12,
+    marginLeft: 22,
+  },
 });
 
 export default styles;
