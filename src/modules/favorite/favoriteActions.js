@@ -1,9 +1,15 @@
 import { types } from './';
 import { BASE_API_URL } from '../../constants';
 
-export function favoritesLoadingInit() {
+export function favoritesPendingTrue() {
   return {
-    type: types.FAVORITES_LOADING_INIT,
+    type: types.FAVORITES_PENDING_TRUE,
+  };
+}
+
+export function favoritesPendingFalse() {
+  return {
+    type: types.FAVORITES_PENDING_FALSE,
   };
 }
 
@@ -18,18 +24,6 @@ export function favoritesLoadingFail({ message }) {
   return {
     type: types.FAVORITES_LOADING_FAIL,
     message,
-  };
-}
-
-export function favoritesAddInit() {
-  return {
-    type: types.FAVORITES_ADD_INIT,
-  };
-}
-
-export function favoritesDeleteInit() {
-  return {
-    type: types.FAVORITES_DELETE_INIT,
   };
 }
 
@@ -103,7 +97,7 @@ const deleteSuccess = {
 
 export function getFavorites() {
   return (dispatch, getState) => {
-    dispatch(favoritesLoadingInit());
+    dispatch(favoritesPendingTrue());
     const { auth } = getState();
     return fetch(`${BASE_API_URL}/api/users/favorites`, {
       method: 'GET',
@@ -115,6 +109,7 @@ export function getFavorites() {
     })
     .then(response => response.json())
     .then(response => {
+      dispatch(favoritesPendingFalse());
       if (response.message) {
         dispatch(favoritesLoadingFail(response));
       } else {
@@ -129,7 +124,7 @@ export function getFavorites() {
 
 export function addFavorite({ from, localField }) {
   return (dispatch, getState) => {
-    dispatch(favoritesAddInit());
+    dispatch(favoritesPendingTrue());
     const { auth } = getState();
     return fetch(`${BASE_API_URL}/api/favorites/`, {
       method: 'POST',
@@ -140,8 +135,9 @@ export function addFavorite({ from, localField }) {
       },
       body: JSON.stringify({ from, localField }),
     })
-    .then((response) => response.json())
-    .then((response) => {
+    .then(response => response.json())
+    .then(response => {
+      dispatch(favoritesPendingFalse());
       if (response.message) {
         dispatch(favoritesAddFail(response));
       } else {
@@ -156,7 +152,7 @@ export function addFavorite({ from, localField }) {
 
 export function deleteFavorite({ from, localField }) {
   return (dispatch, getState) => {
-    dispatch(favoritesDeleteInit());
+    dispatch(favoritesPendingTrue());
     const { auth } = getState();
     // NOTE: This is the wrong ID. Figure out how to send the info needed to the server.
     return fetch(`${BASE_API_URL}/api/users/favorites/${localField}`, {
@@ -167,7 +163,8 @@ export function deleteFavorite({ from, localField }) {
         authorization: `Bearer ${auth.token}`,
       },
     })
-    .then((response) => {
+    .then(response => {
+      dispatch(favoritesPendingFalse());
       if (response.status !== 204) {
         dispatch(favoritesDeleteFail(response.status));
       } else {

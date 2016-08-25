@@ -43,15 +43,19 @@ class Queue extends Component {
     const isOwner = queue.owner === user._id;
     const isFavorite = _.find(favorite[queue.type], { _id: queue._id });
 
-    let onPress = favorite.fetching ? null : () => actions.addFavorite(favInfo);
-
     const pickColor = (isOwner || isFavorite) ? 'purple' : '#FFF';
     const button = isOwner ? deleteButton : favoriteButton;
 
-    if (queue.owner === user._id) {
+    let onPress;
+    if (favorite.pending) {
+      onPress = null;
+    } else if (isOwner && queue.type === 'playlists') {
       onPress = () => actions.deletePlaylist(queue._id);
+    } else {
+      onPress = isFavorite ?
+        onPress = () => actions.deleteFavorite(favInfo) :
+        onPress = () => actions.addFavorite(favInfo);
     }
-
     return (
       <TouchableHighlight onPress={onPress}>
         <View style={s.stickySection}>
@@ -71,18 +75,19 @@ class Queue extends Component {
     const isOwner = queue.owner === user._id;
     const isFavorite = _.find(favorite[queue.type], { _id: queue._id });
 
-    let onPress = favorite.fetching ? null : () => actions.addFavorite(favInfo);
-
     const pickColor = (isOwner || isFavorite) ? 'purple' : '#FFF';
     const button = isOwner ? deleteButton : favoriteButton;
 
-    if (queue.owner === user._id) {
-      onPress = () => {
-        actions.deletePlaylist(queue._id);
-        Actions.pop();
-      };
+    let onPress;
+    if (favorite.pending) {
+      onPress = null;
+    } else if (isOwner && queue.type === 'playlists') {
+      onPress = () => actions.deletePlaylist(queue._id);
+    } else {
+      onPress = isFavorite ?
+        onPress = () => actions.deleteFavorite(favInfo) :
+        onPress = () => actions.addFavorite(favInfo);
     }
-
     return (
       <View key="parallax-header" style={s.parallaxHeader}>
         <Text style={s.queueTitle}>
