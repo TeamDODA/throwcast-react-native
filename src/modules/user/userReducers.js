@@ -30,9 +30,20 @@ export default function (state = initialState, action) {
       };
     case types.PLAYLISTS_DELETE_SUCC:
       newList = state.playlists.slice();
-      newList.forEach((list, index) => {
-        if (list._id === action.playlistId) {
-          newList.splice(index, 1);
+      newList.forEach((p, i) => {
+        if (p._id === action.playlistId) {
+          newList.splice(i, 1);
+        }
+      });
+      return {
+        ...state,
+        playlists: newList,
+      };
+    case types.PLAYLISTS_UPDATE_SUCC:
+      newList = state.playlists.slice();
+      newList.forEach((p, i) => {
+        if (p._id === action.playlist._id) {
+          newList[i] = action.playlist;
         }
       });
       return {

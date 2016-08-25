@@ -48,7 +48,12 @@ const styles = StyleSheet.create({
   },
   addButton: {
     marginTop: 10,
+    marginLeft: 8,
     color: 'purple',
+  },
+  load: {
+    marginTop: 10,
+    marginLeft: 8,
   },
   buttons: {
     marginTop: 10,

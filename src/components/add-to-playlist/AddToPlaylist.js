@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
+import Spinner from 'react-native-spinkit';
 
 import Entry from './Entry';
 import { actions as playlistActions } from '../../modules/playlist';
@@ -60,16 +61,19 @@ class AddToPlaylist extends Component {
     );
   }
 
-  renderPlusButton() {
+  renderPlusButton({ fetching }) {
+    const icon = fetching ?
+      <Spinner type="Arc" size={20} color="#FFFFFF" style={s.load} /> :
+      <Icon
+        name="md-add"
+        size={30}
+        color="#fff"
+        onPress={() => this.setState({ toggleCreate: true })}
+        style={s.addButton}
+      />;
     return (
       <Animatable.View animation="bounceIn" style={s.create}>
-        <Icon
-          style={s.addButton}
-          name="md-add"
-          size={30}
-          color="#fff"
-          onPress={() => this.setState({ toggleCreate: true })}
-        />
+        {icon}
       </Animatable.View>
     );
   }
@@ -84,7 +88,7 @@ class AddToPlaylist extends Component {
               key={index}
               entry={entry}
               podcast={playlist.podcast}
-              updatePlaylist={actions.updatePlaylist}
+              updatePlaylist={playlist.fetching ? null : actions.updatePlaylist}
             />
           )}
         </ScrollView>
@@ -92,7 +96,7 @@ class AddToPlaylist extends Component {
           <Text style={s.headerTitle}>ADD TO PLAYLIST</Text>
         </View>
         <View style={s.createContainer}>
-          {this.state.toggleCreate ? this.renderInput() : this.renderPlusButton()}
+          {this.state.toggleCreate ? this.renderInput() : this.renderPlusButton(playlist)}
         </View>
       </View>
     );
