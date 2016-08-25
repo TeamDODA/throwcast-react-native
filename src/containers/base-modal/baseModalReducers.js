@@ -1,5 +1,6 @@
 const initialState = {
   playlistModal: false,
+  searchModal: false,
 };
 
 export default function (state = initialState, action) {
@@ -8,9 +9,14 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         playlistModal: true,
       });
-    case 'PLAYLIST_MODAL_HIDE':
+    case 'SEARCH_MODAL_SHOW':
+      return Object.assign({}, state, {
+        searchModal: true,
+      });
+    case 'MODAL_HIDE':
       return Object.assign({}, state, {
         playlistModal: false,
+        searchModal: false,
       });
     default:
       return state;

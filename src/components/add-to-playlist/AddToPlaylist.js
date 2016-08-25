@@ -14,6 +14,11 @@ import Entry from './Entry';
 import { actions as playlistActions } from '../../modules/playlist';
 import s from './styles';
 
+const initial = {
+  toggleCreate: false,
+  text: '',
+};
+
 class AddToPlaylist extends Component {
   constructor(props) {
     super(props);
@@ -24,11 +29,6 @@ class AddToPlaylist extends Component {
   }
 
   renderInput() {
-    const initial = {
-      toggleCreate: false,
-      text: '',
-    };
-
     return (
       <Animatable.View animation="fadeInLeft" style={s.inputBox}>
         <TextInput

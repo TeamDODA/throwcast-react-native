@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   box: {
     height: 40,
-    width: (window.width * (3 / 7)),
+    width: (window.width * (3 / 8)),
     alignItems: 'center',
   },
   activeBox: {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   smallBox: {
     height: 40,
-    width: (window.width * (1 / 7)),
+    width: (window.width * (1 / 8)),
     backgroundColor: 'rgba(75,0,130,0.4)',
     alignItems: 'center',
   },

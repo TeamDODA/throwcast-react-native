@@ -10,8 +10,9 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 
-import { actions as navbarActions } from '../../modules/navbar';
 import { actions as authActions } from '../../modules/auth';
+import { actions as baseModalActions } from '../../containers/base-modal';
+import { actions as navbarActions } from '../../modules/navbar';
 import s from './styles';
 
 class Navbar extends Component {
@@ -52,6 +53,11 @@ class Navbar extends Component {
     return (
       <View style={s.container}>
         <View style={s.flexRow}>
+          <TouchableHighlight style={s.smallBox} onPress={() => actions.showSearchModal()}>
+            <Animatable.View>
+              <Icon name="ios-search" size={26} color="#FFF" style={s.activeButton} />
+            </Animatable.View>
+          </TouchableHighlight>
           <TouchableHighlight onPress={() => actions.toTab('homepage')} style={[homeBox, s.box]}>
             <Animatable.View animation={home ? 'fadeIn' : ''} duration={150}>
               <View style={s.flexRow} >
@@ -87,7 +93,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(navbarActions, authActions), dispatch),
+  actions: bindActionCreators(Object.assign(authActions, baseModalActions, navbarActions),
+    dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

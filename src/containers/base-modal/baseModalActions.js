@@ -6,9 +6,16 @@ export function showPlaylistModal() {
   };
 }
 
-export function hidePlaylistModal() {
+
+export function showSearchModal() {
   return {
-    type: 'PLAYLIST_MODAL_HIDE',
+    type: 'SEARCH_MODAL_SHOW',
+  };
+}
+
+export function hideModal() {
+  return {
+    type: 'MODAL_HIDE',
   };
 }
 
