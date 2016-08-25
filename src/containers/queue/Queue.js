@@ -160,8 +160,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(
-    bMActions, qActions, pActions, plActions, fActions), dispatch),
+  actions: bindActionCreators({
+    ...bMActions,
+    ...qActions,
+    ...pActions,
+    ...plActions,
+    ...fActions,
+  }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Queue);

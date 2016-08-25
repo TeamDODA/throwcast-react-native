@@ -9,22 +9,24 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case types.STATIONS_LOADING_INIT:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         fetching: true,
         message: null,
-      });
+      };
     case types.STATIONS_LOADING_SUCC:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         fetching: null,
         message: null,
         list: action.stations,
-      });
+      };
     case types.STATIONS_LOADING_FAIL:
-      return Object.assign({}, state, {
+      return {
         fetching: null,
         message: null,
         list: [],
-      });
+      };
     default:
       return state;
   }

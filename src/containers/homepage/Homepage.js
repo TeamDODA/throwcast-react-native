@@ -85,15 +85,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(
-    {},
-    { getQueue },
-    { selectPodcast },
-    podcastActions,
-    stationActions,
-    favoriteActions,
-    playlistActions
-  ), dispatch),
+  actions: bindActionCreators({
+    getQueue,
+    selectPodcast,
+    ...podcastActions,
+    ...stationActions,
+    ...favoriteActions,
+    ...playlistActions,
+  }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

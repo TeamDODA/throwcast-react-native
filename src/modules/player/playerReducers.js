@@ -14,31 +14,36 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'SELECT_PODCAST':
-      return Object.assign({}, state, {
+      return {
+        ...state,
         queueId: action.queueId,
         currentIndex: action.currentIndex,
         podcastList: action.podcasts,
         playing: true,
         muted: false,
-      });
+      };
     case 'TOGGLE_PLAY':
-      return Object.assign({}, state, {
+      return {
+        ...state,
         playing: !state.playing,
-      });
+      };
     case 'NEXT_PODCAST':
-      return Object.assign({}, state, {
+      return {
+        ...state,
         currentIndex: state.currentIndex + 1,
-      });
+      };
     case 'PREVIOUS_PODCAST':
-      return Object.assign({}, state, {
+      return {
+        ...state,
         currentIndex: state.currentIndex - 1,
-      });
+      };
     case 'SLIDE':
-      return Object.assign({}, state, {
+      return {
+        ...state,
         playing: false,
-      });
+      };
     case 'INIT_PLAYER':
-      return Object.assign({}, initialState);
+      return { ...initialState };
     default:
       return state;
   }

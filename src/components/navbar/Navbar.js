@@ -93,8 +93,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign(authActions, baseModalActions, navbarActions),
-    dispatch),
+  actions: bindActionCreators({ ...authActions, ...baseModalActions, ...navbarActions }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

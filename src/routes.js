@@ -8,9 +8,10 @@ const routes = function routes(state = initialState, action = {}) {
   switch (action.type) {
     // focus action is dispatched when a new screen comes into focus
     case ActionConst.FOCUS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         scene: action.scene,
-      });
+      };
     default:
       return state;
   }

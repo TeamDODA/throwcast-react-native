@@ -13,7 +13,8 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case types.SEARCH_INIT:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         podcastFetching: true,
         playlistFetching: true,
         stationFetching: true,
@@ -21,27 +22,31 @@ export default function (state = initialState, action) {
         podcasts: [],
         stations: [],
         playlists: [],
-      });
+      };
     case types.SEARCH_PODCASTS_SUCC:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         podcastFetching: null,
         message: null,
         podcasts: action.list,
-      });
+      };
     case types.SEARCH_PLAYLISTS_SUCC:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         playlistFetching: null,
         message: null,
         playlists: action.list,
-      });
+      };
     case types.SEARCH_STATIONS_SUCC:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         stationFetching: null,
         message: null,
         stations: action.list,
-      });
+      };
     case types.SEARCH_CLEAR:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         podcastFetching: null,
         playlistFetching: null,
         stationFetching: null,
@@ -49,7 +54,7 @@ export default function (state = initialState, action) {
         podcasts: [],
         stations: [],
         playlists: [],
-      });
+      };
     default:
       return state;
   }

@@ -9,24 +9,27 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case types.AUTH_INIT:
-      return Object.assign({}, initialState);
+      return { ...initialState };
     case types.AUTH_PENDING:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         pending: true,
         message: 'Loading',
-      });
+      };
     case types.AUTH_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         pending: null,
         message: null,
         token: action.token,
-      });
+      };
     case types.AUTH_FAILURE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         pending: null,
         message: action.message,
         token: null,
-      });
+      };
     default:
       return state;
   }

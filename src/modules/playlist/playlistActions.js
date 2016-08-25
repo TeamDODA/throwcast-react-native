@@ -179,7 +179,7 @@ export function updatePlaylist(playlist, podcast, type) {
     newPodcasts.push(podcast);
     newPodcasts = newPodcasts.map(e => e._id);
   }
-  const update = Object.assign({}, playlist, { podcasts: newPodcasts });
+  const update = { ...playlist, podcasts: newPodcasts };
   return (dispatch, getState) => {
     const { auth } = getState();
     dispatch(playlistsUpdateInit());

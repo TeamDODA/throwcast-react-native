@@ -9,22 +9,23 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case types.PODCASTS_LOADING_INIT:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         fetching: true,
         message: null,
-      });
+      };
     case types.PODCASTS_LOADING_SUCC:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         fetching: null,
         message: null,
         list: action.podcasts,
-      });
+      };
     case types.PODCASTS_LOADING_FAIL:
-      return Object.assign({}, state, {
-        fetching: null,
-        message: null,
-        list: [],
-      });
+      return {
+        ...state,
+        ...initialState,
+      };
     default:
       return state;
   }
