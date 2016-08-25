@@ -6,12 +6,12 @@ const STICKY_HEADER_HEIGHT = 50;
 
 const queueStyles = StyleSheet.create({
   addSubs: {
-    marginTop: 10,
+    top: 10,
     position: 'absolute',
     right: 26,
   },
   addSubs2: {
-    marginTop: 170,
+    top: 240,
     position: 'absolute',
     right: 26,
   },

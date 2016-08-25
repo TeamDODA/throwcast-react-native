@@ -13,6 +13,7 @@ import ListEntry from './ListEntry';
 import { actions as podcastActions } from '../../modules/podcast';
 import { actions as playlistActions } from '../../modules/playlist';
 import { actions as stationActions } from '../../modules/station';
+import { actions as favoriteActions } from '../../modules/favorite';
 import { getQueue } from '../queue/queueActions';
 import { selectPodcast } from '../../modules/player/playerActions';
 import s from './homepageStyles';
@@ -24,6 +25,7 @@ class Homepage extends Component {
     actions.getPodcasts();
     actions.getStations();
     actions.getPlaylists();
+    actions.getFavorites();
   }
 
   render() {
@@ -79,6 +81,7 @@ const mapStateToProps = (state) => ({
   podcasts: state.podcast,
   player: state.player,
   playlists: state.playlist,
+  favorites: state.favorite,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -88,6 +91,7 @@ const mapDispatchToProps = (dispatch) => ({
     { selectPodcast },
     podcastActions,
     stationActions,
+    favoriteActions,
     playlistActions
   ), dispatch),
 });

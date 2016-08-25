@@ -18,6 +18,7 @@ import QueueEntry from './QueueEntry';
 import { actions as bMActions } from '../base-modal';
 import { actions as qActions } from './';
 import { actions as pActions } from '../../modules/player';
+import { actions as fActions } from '../../modules/favorite';
 import { actions as plActions } from '../../modules/playlist';
 import { actions as sActions } from '../../modules/subscription';
 import { DEFAULT_COVER_IMAGE } from '../../constants';
@@ -47,19 +48,23 @@ class Queue extends Component {
   }
 
   renderStickyHeader() {
-    const { queue, subscriptions, actions } = this.props;
-    let onPress = subscriptions.fetching ? null : () => this.toggleSubscription();
+    const { queue, subscriptions, actions, favorites } = this.props;
+    const favInfo = { localField: queue._id, from: queue.type };
+    let onPress = subscriptions.fetching ? null : () => actions.addFavorite(favInfo);
     let pickColor = '#FFF';
     if (queue.type === 'userPlaylists') {
       onPress = () => actions.deletePlaylist(queue._id);
       addSubs = deleteButton;
       pickColor = 'purple';
     }
-    subscriptions.list.forEach(station => {
-      if (station._id === queue._id) {
-        pickColor = 'purple';
-      }
-    });
+    if (favorites.list.stations) {
+      favorites.list.stations.forEach(station => {
+        if (station[0]._id === queue._id) {
+          pickColor = 'purple';
+          onPress = () => actions.deleteFavorite(queue._id);
+        }
+      });
+    }
     return (
       <TouchableHighlight onPress={onPress}>
         <View style={s.stickySection}>
@@ -73,8 +78,9 @@ class Queue extends Component {
   }
 
   renderForeground() {
-    const { queue, subscriptions, actions } = this.props;
-    let onPress = subscriptions.fetching ? null : () => this.toggleSubscription();
+    const { queue, subscriptions, actions, favorites } = this.props;
+    const favInfo = { localField: queue._id, from: queue.type };
+    let onPress = subscriptions.fetching ? null : () => actions.addFavorite(favInfo);
     let pickColor = '#FFF';
     if (queue.type === 'userPlaylists') {
       onPress = () => {
@@ -84,11 +90,14 @@ class Queue extends Component {
       addSubs = deleteButton;
       pickColor = 'purple';
     }
-    subscriptions.list.forEach(station => {
-      if (station._id === queue._id) {
-        pickColor = 'purple';
-      }
-    });
+    if (favorites.list.stations) {
+      favorites.list.stations.forEach(station => {
+        if (station[0]._id === queue._id) {
+          pickColor = 'purple';
+          onPress = () => actions.deleteFavorite(queue._id);
+        }
+      });
+    }
     return (
       <View key="parallax-header" style={s.parallaxHeader}>
         <Text style={s.queueTitle}>
@@ -162,11 +171,12 @@ const mapStateToProps = (state) => ({
   queue: state.queue,
   subscriptions: state.subscription,
   playlist: state.playlist,
+  favorites: state.favorite,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(Object.assign(
-    bMActions, qActions, pActions, sActions, plActions), dispatch),
+    bMActions, qActions, pActions, sActions, plActions, fActions), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Queue);

@@ -11,12 +11,14 @@ import { reducers as queue } from './containers/queue';
 import { reducers as search } from './modules/search';
 import { reducers as station } from './modules/station';
 import { reducers as subscription } from './modules/subscription';
+import { reducers as favorite } from './modules/favorite';
 import routes from './routes';
 
 export default combineReducers({
   auth,
   authForm,
   baseModal,
+  favorite,
   navbar,
   player,
   playerRemote,
