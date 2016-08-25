@@ -5,6 +5,7 @@ import {
   Text,
   TouchableHighlight,
   View,
+  ListView,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -37,32 +38,43 @@ const deleteButton = {
 };
 
 class Queue extends Component {
+  constructor(props) {
+    super(props);
+    this.renderStickyHeader = this.renderStickyHeader.bind(this);
+    this.renderForeground = this.renderForeground.bind(this);
+    this.renderBackground = this.renderBackground.bind(this);
+  }
+
+  componentWillMount() {
+    const { queue, user } = this.props;
+    this.favInfo = { localField: queue._id, from: queue.type };
+    this.isOwner = queue.owner === user._id;
+    this.button = this.isOwner ? deleteButton : favoriteButton;
+    this.podcasts = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    }).cloneWithRows(queue.podcasts);
+  }
+
   renderStickyHeader() {
-    const { actions, favorite, queue, user } = this.props;
-    const favInfo = { localField: queue._id, from: queue.type };
-
-    const isOwner = queue.owner === user._id;
+    const { actions, favorite, queue } = this.props;
     const isFavorite = _.find(favorite[queue.type], { _id: queue._id });
-
-    const pickColor = (isOwner || isFavorite) ? 'purple' : '#FFF';
-    const button = isOwner ? deleteButton : favoriteButton;
-
+    const pickColor = (this.isOwner || isFavorite) ? 'purple' : '#FFF';
     let onPress;
     let icon;
     if (favorite.pending) {
       onPress = null;
       icon = <Spinner type="Arc" size={26} color="#FFFFFF" />;
-    } else if (isOwner && queue.type === 'playlists') {
+    } else if (this.isOwner && queue.type === 'playlists') {
       onPress = () => actions.deletePlaylist(queue._id);
-      icon = <Icon {...button} color={pickColor} onPress={onPress} />;
+      icon = <Icon {...this.button} color={pickColor} onPress={onPress} />;
     } else {
       onPress = isFavorite ?
-        onPress = () => actions.deleteFavorite(favInfo) :
-        onPress = () => actions.addFavorite(favInfo);
-      icon = <Icon {...button} color={pickColor} onPress={onPress} />;
+        () => actions.deleteFavorite(this.favInfo) :
+        () => actions.addFavorite(this.favInfo);
+      icon = <Icon {...this.button} color={pickColor} onPress={onPress} />;
     }
     return (
-      <TouchableHighlight onPress={onPress}>
+      <TouchableHighlight onPress={this.onPress}>
         <View style={s.stickySection}>
           <Text style={s.stickySectionTitle}>{queue.title}</Text>
           <View style={s.addSubs}>
@@ -74,28 +86,22 @@ class Queue extends Component {
   }
 
   renderForeground() {
-    const { actions, favorite, queue, user } = this.props;
-    const favInfo = { localField: queue._id, from: queue.type };
-
-    const isOwner = queue.owner === user._id;
+    const { actions, favorite, queue } = this.props;
     const isFavorite = _.find(favorite[queue.type], { _id: queue._id });
-
-    const pickColor = (isOwner || isFavorite) ? 'purple' : '#FFF';
-    const button = isOwner ? deleteButton : favoriteButton;
-
+    const pickColor = (this.isOwner || isFavorite) ? 'purple' : '#FFF';
     let onPress;
     let icon;
     if (favorite.pending) {
       onPress = null;
       icon = <Spinner type="Arc" size={26} color="#FFFFFF" />;
-    } else if (isOwner && queue.type === 'playlists') {
+    } else if (this.isOwner && queue.type === 'playlists') {
       onPress = () => actions.deletePlaylist(queue._id);
-      icon = <Icon {...button} color={pickColor} onPress={onPress} />;
+      icon = <Icon {...this.button} color={pickColor} onPress={onPress} />;
     } else {
       onPress = isFavorite ?
-        onPress = () => actions.deleteFavorite(favInfo) :
-        onPress = () => actions.addFavorite(favInfo);
-      icon = <Icon {...button} color={pickColor} onPress={onPress} />;
+        () => actions.deleteFavorite(this.favInfo) :
+        () => actions.addFavorite(this.favInfo);
+      icon = <Icon {...this.button} color={pickColor} onPress={onPress} />;
     }
     return (
       <View key="parallax-header" style={s.parallaxHeader}>
@@ -127,7 +133,6 @@ class Queue extends Component {
 
   render() {
     const { queue, player, actions } = this.props;
-    const podcastList = queue.podcasts;
     return (
       <View style={s.background}>
         <ParallaxScrollView
@@ -135,12 +140,13 @@ class Queue extends Component {
           parallaxHeaderHeight={PARALLAX_HEADER_HEIGHT}
           stickyHeaderHeight={STICKY_HEADER_HEIGHT}
           contentBackgroundColor="#121212"
-          renderStickyHeader={() => this.renderStickyHeader()}
-          renderForeground={() => this.renderForeground()}
-          renderBackground={() => this.renderBackground()}
+          renderStickyHeader={this.renderStickyHeader}
+          renderForeground={this.renderForeground}
+          renderBackground={this.renderBackground}
         >
-          <View>
-            {podcastList.map((podcast, index) =>
+          <ListView
+            dataSource={this.podcasts}
+            renderRow={(podcast, index) => (
               <QueueEntry
                 key={index}
                 index={index}
@@ -151,8 +157,8 @@ class Queue extends Component {
                 selectPodcastToAdd={actions.selectPodcastToAdd}
                 updatePlaylist={actions.updatePlaylist}
               />
-            )}
-          </View>
+             )}
+          />
         </ParallaxScrollView>
         <View style={s.backButton}>
           <Icon onPress={Actions.pop} name="ios-arrow-back" size={30} color="#FFF" />
