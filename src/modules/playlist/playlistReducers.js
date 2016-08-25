@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  const newList = state.list.slice();
+  let newList;
   switch (action.type) {
     case types.SELECT_TO_ADD:
       return {
@@ -42,6 +42,7 @@ export default function (state = initialState, action) {
         message: null,
       };
     case types.PLAYLISTS_CREATE_SUCC:
+      newList = state.list.slice();
       newList.push(action.createdList);
       return {
         ...state,
@@ -63,6 +64,7 @@ export default function (state = initialState, action) {
         list: null,
       };
     case types.PLAYLISTS_DELETE_SUCC:
+      newList = state.list.slice();
       newList.forEach((list, index) => {
         if (list._id === action.playlistId) {
           newList.splice(index, 1);
@@ -87,6 +89,7 @@ export default function (state = initialState, action) {
         message: null,
       };
     case types.PLAYLISTS_UPDATE_SUCC:
+      newList = state.list.slice();
       newList.forEach((p, i) => {
         if (p._id === action.playlist._id) {
           newList[i] = action.playlist;
