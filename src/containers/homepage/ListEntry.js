@@ -11,7 +11,7 @@ import s from './entryStyles';
 
 const ListEntry = ({ entry, getQueue, type }) => {
   let description;
-  if (type === 'playlists' || type === 'userPlaylists') {
+  if (type === 'playlists') {
     description = `${entry.podcasts.length} podcasts`;
   } else {
     description = entry.description ? entry.description.short : entry.description.long;

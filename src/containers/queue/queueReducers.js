@@ -3,37 +3,42 @@ const initialState = {
   message: null,
   _id: null,
   title: null,
+  owner: null,
   image: null,
   podcasts: [],
   type: null,
 };
 
 export default function (state = initialState, action) {
+  const { _id, title, owner, image, podcasts } = action;
   switch (action.type) {
     case 'QUEUE_DETAIL':
-      return Object.assign({}, state, {
-        _id: action._id,
-        title: action.title,
-        image: action.image,
-      });
+      return {
+        ...state,
+        _id,
+        title,
+        owner,
+        image,
+        type: action.dataType,
+      };
     case 'QUEUE_LOADING_INIT':
-      return Object.assign({}, state, {
+      return {
+        ...state,
         fetching: true,
         message: null,
-      });
+      };
     case 'QUEUE_LOADING_SUCC':
-      return Object.assign({}, state, {
+      return {
+        ...state,
         fetching: null,
         message: null,
-        podcasts: action.podcasts,
-        type: action.dataType,
-      });
+        podcasts,
+      };
     case 'QUEUE_LOADING_FAIL':
-      return Object.assign({}, state, {
-        fetching: null,
-        message: null,
-        podcasts: [],
-      });
+      return {
+        ...initalState,
+        message,
+      };
     default:
       return state;
   }

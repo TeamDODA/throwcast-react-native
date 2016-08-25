@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
+import _ from 'lodash';
 
 import { PlayerSmallRemote } from '../../components';
 import QueueEntry from './QueueEntry';
@@ -25,7 +26,7 @@ import s from './queueStyles';
 const window = Dimensions.get('window');
 const PARALLAX_HEADER_HEIGHT = 280;
 const STICKY_HEADER_HEIGHT = 50;
-let addSubs = {
+const favoriteButton = {
   name: 'md-checkbox',
   size: 30,
 };
@@ -36,27 +37,27 @@ const deleteButton = {
 
 class Queue extends Component {
   renderStickyHeader() {
-    const { queue, actions, favorite } = this.props;
+    const { actions, favorite, queue, user } = this.props;
     const favInfo = { localField: queue._id, from: queue.type };
+
+    const isOwner = queue.owner === user._id;
+    const isFavorite = _.find(favorite[queue.type], { _id: queue._id });
+
     let onPress = favorite.fetching ? null : () => actions.addFavorite(favInfo);
-    let pickColor = '#FFF';
-    if (queue.type === 'userPlaylists') {
+
+    const pickColor = (isOwner || isFavorite) ? 'purple' : '#FFF';
+    const button = isOwner ? deleteButton : favoriteButton;
+
+    if (queue.owner === user._id) {
       onPress = () => actions.deletePlaylist(queue._id);
-      addSubs = deleteButton;
-      pickColor = 'purple';
     }
-    favorite[queue.type].forEach(fav => {
-      if (fav._id === queue._id) {
-        pickColor = 'purple';
-        // onPress = () => actions.deleteFavorite(queue._id);
-      }
-    });
+
     return (
       <TouchableHighlight onPress={onPress}>
         <View style={s.stickySection}>
           <Text style={s.stickySectionTitle}>{queue.title}</Text>
           <View style={s.addSubs}>
-            <Icon {...addSubs} color={pickColor} onPress={onPress} />
+            <Icon {...button} color={pickColor} onPress={onPress} />
           </View>
         </View>
       </TouchableHighlight>
@@ -64,31 +65,31 @@ class Queue extends Component {
   }
 
   renderForeground() {
-    const { queue, favorite, actions } = this.props;
+    const { actions, favorite, queue, user } = this.props;
     const favInfo = { localField: queue._id, from: queue.type };
+
+    const isOwner = queue.owner === user._id;
+    const isFavorite = _.find(favorite[queue.type], { _id: queue._id });
+
     let onPress = favorite.fetching ? null : () => actions.addFavorite(favInfo);
-    let pickColor = '#FFF';
-    if (queue.type === 'userPlaylists') {
+
+    const pickColor = (isOwner || isFavorite) ? 'purple' : '#FFF';
+    const button = isOwner ? deleteButton : favoriteButton;
+
+    if (queue.owner === user._id) {
       onPress = () => {
         actions.deletePlaylist(queue._id);
         Actions.pop();
       };
-      addSubs = deleteButton;
-      pickColor = 'purple';
     }
-    favorite[queue.type].forEach(fav => {
-      if (fav._id === queue._id) {
-        pickColor = 'purple';
-        onPress = () => actions.deleteFavorite(queue._id);
-      }
-    });
+
     return (
       <View key="parallax-header" style={s.parallaxHeader}>
         <Text style={s.queueTitle}>
           {queue.title}
         </Text>
         <View style={s.addSubs2}>
-          <Icon {...addSubs} color={pickColor} onPress={onPress} />
+          <Icon {...button} color={pickColor} onPress={onPress} />
         </View>
       </View>
     );
@@ -155,7 +156,7 @@ const mapStateToProps = (state) => ({
   queue: state.queue,
   favorite: state.favorite,
   playlist: state.playlist,
-  favorites: state.favorite,
+  user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({

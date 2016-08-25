@@ -8,27 +8,29 @@ export function queueLoadingInit() {
   };
 }
 
-export function queueLoadingSucc(podcasts, dataType) {
+export function queueLoadingSucc({ podcasts }) {
+  console.log(podcasts);
   return {
     type: 'QUEUE_LOADING_SUCC',
     podcasts,
-    dataType,
   };
 }
 
-export function queueLoadingFail(message) {
+export function queueLoadingFail({ message }) {
   return {
     type: 'QUEUE_LOADING_FAIL',
     message,
   };
 }
 
-export function queueDetail({ image, title, _id }) {
+export function queueDetail({ _id, title, owner, image }, dataType) {
   return {
     type: 'QUEUE_DETAIL',
-    title,
-    image,
     _id,
+    title,
+    owner,
+    image,
+    dataType,
   };
 }
 
@@ -38,7 +40,7 @@ export function getQueue(list, type) {
     const { auth } = getState();
     dispatch(showLoadModal());
     dispatch(queueLoadingInit());
-    dispatch(queueDetail(list));
+    dispatch(queueDetail(list, type));
     return fetch(url, {
       method: 'GET',
       headers: {
@@ -47,16 +49,16 @@ export function getQueue(list, type) {
         authorization: `Bearer ${auth.token}`,
       },
     })
-    .then((response) => response.json())
-    .then((response) => {
+    .then(response => response.json())
+    .then(response => {
       if (response.message) {
-        dispatch(queueLoadingFail(response.message));
+        dispatch(queueLoadingFail(response));
       } else {
-        dispatch(queueLoadingSucc(response.podcasts, type));
+        dispatch(queueLoadingSucc(response));
         dispatch(hideModal());
         Actions.queue();
       }
     })
-    .catch((e) => dispatch(queueLoadingFail(e)));
+    .catch(error => dispatch(queueLoadingFail(error)));
   };
 }

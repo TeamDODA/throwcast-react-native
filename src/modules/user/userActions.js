@@ -10,7 +10,7 @@ export function unsetUser() {
 }
 
 export function setUserPlaylists(response) {
-  return { type: types.SET_USER_PLAYLIST, response };
+  return { type: types.SET_USER_PLAYLISTS, response };
 }
 
 export function getUserPlaylists() {
