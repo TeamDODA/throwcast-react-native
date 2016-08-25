@@ -9,7 +9,6 @@ export function queueLoadingInit() {
 }
 
 export function queueLoadingSucc({ podcasts }) {
-  console.log(podcasts);
   return {
     type: 'QUEUE_LOADING_SUCC',
     podcasts,

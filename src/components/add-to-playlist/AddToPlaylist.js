@@ -75,11 +75,11 @@ class AddToPlaylist extends Component {
   }
 
   render() {
-    const { actions, playlist, subscription } = this.props;
+    const { actions, playlist, user } = this.props;
     return (
       <View style={s.container}>
         <ScrollView style={s.innerContainer}>
-          {playlist.list.filter((e) => e.owner === subscription.id).map((entry, index) =>
+          {user.playlists.map((entry, index) =>
             <Entry
               key={index}
               entry={entry}
@@ -101,7 +101,7 @@ class AddToPlaylist extends Component {
 
 const mapStateToProps = (state) => ({
   playlist: state.playlist,
-  subscription: state.subscription,
+  user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({

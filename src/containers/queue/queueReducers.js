@@ -10,7 +10,7 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  const { _id, title, owner, image, podcasts } = action;
+  const { _id, title, owner, image, podcasts, message } = action;
   switch (action.type) {
     case 'QUEUE_DETAIL':
       return {
@@ -36,7 +36,7 @@ export default function (state = initialState, action) {
       };
     case 'QUEUE_LOADING_FAIL':
       return {
-        ...initalState,
+        ...initialState,
         message,
       };
     default:
