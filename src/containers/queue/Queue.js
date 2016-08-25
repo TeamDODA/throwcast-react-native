@@ -160,7 +160,6 @@ const mapStateToProps = (state) => ({
   player: state.player,
   queue: state.queue,
   favorite: state.favorite,
-  playlist: state.playlist,
   user: state.user,
 });
 

@@ -27,20 +27,6 @@ export function favoritesLoadingFail({ message }) {
   };
 }
 
-export function favoritesAddFail({ message }) {
-  return {
-    type: types.FAVORITES_ADD_FAIL,
-    message,
-  };
-}
-
-export function favoritesDeleteFail({ message }) {
-  return {
-    type: types.FAVORITES_DELETE_FAIL,
-    message,
-  };
-}
-
 export function favoritesAddPlaylistSucc(response) {
   return {
     type: types.FAVORITES_ADD_PLAYLIST_SUCC,
@@ -62,24 +48,38 @@ export function favoritesAddStationSucc(response) {
   };
 }
 
-export function favoritesDeletePlaylistSucc(response) {
+export function favoritesAddFail({ message }) {
+  return {
+    type: types.FAVORITES_ADD_FAIL,
+    message,
+  };
+}
+
+export function favoritesDeletePlaylistSucc(_id) {
   return {
     type: types.FAVORITES_DELETE_PLAYLIST_SUCC,
-    response,
+    _id,
   };
 }
 
-export function favoritesDeletePodcastSucc(response) {
+export function favoritesDeletePodcastSucc(_id) {
   return {
     type: types.FAVORITES_DELETE_PODCAST_SUCC,
-    response,
+    _id,
   };
 }
 
-export function favoritesDeleteStationSucc(response) {
+export function favoritesDeleteStationSucc(_id) {
   return {
     type: types.FAVORITES_DELETE_STATION_SUCC,
-    response,
+    _id,
+  };
+}
+
+export function favoritesDeleteFail({ message }) {
+  return {
+    type: types.FAVORITES_DELETE_FAIL,
+    message,
   };
 }
 
@@ -154,8 +154,7 @@ export function deleteFavorite({ from, localField }) {
   return (dispatch, getState) => {
     dispatch(favoritesPendingTrue());
     const { auth } = getState();
-    // NOTE: This is the wrong ID. Figure out how to send the info needed to the server.
-    return fetch(`${BASE_API_URL}/api/users/favorites/${localField}`, {
+    return fetch(`${BASE_API_URL}/api/users/favorites/${from}/${localField}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
@@ -166,9 +165,9 @@ export function deleteFavorite({ from, localField }) {
     .then(response => {
       dispatch(favoritesPendingFalse());
       if (response.status !== 204) {
-        dispatch(favoritesDeleteFail(response.status));
+        dispatch(favoritesDeleteFail({ message: response.status }));
       } else {
-        dispatch(deleteSuccess[from](response));
+        dispatch(deleteSuccess[from](localField));
       }
     })
     .catch(error => {

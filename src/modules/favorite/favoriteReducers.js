@@ -10,7 +10,7 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  const { message, response, removed } = action;
+  const { message, response, _id } = action;
   switch (action.type) {
     case types.FAVORITES_PENDING_TRUE:
       return {
@@ -36,17 +36,6 @@ export default function (state = initialState, action) {
         message,
       };
 
-    case types.FAVORITES_ADD_FAIL:
-      return {
-        ...state,
-        message,
-      };
-    case types.FAVORITES_DELETE_FAIL:
-      return {
-        ...state,
-        message,
-      };
-
     case types.FAVORITES_ADD_PLAYLIST_SUCC:
       return {
         ...state,
@@ -62,22 +51,33 @@ export default function (state = initialState, action) {
         ...state,
         stations: state.stations.concat(response),
       };
+    case types.FAVORITES_ADD_FAIL:
+      return {
+        ...state,
+        message,
+      };
 
     case types.FAVORITES_DELETE_PLAYLIST_SUCC:
       return {
         ...state,
-        playlists: _.without(state.playlists, removed),
+        playlists: _.reject(state.playlists, { _id }),
       };
     case types.FAVORITES_DELETE_PODCAST_SUCC:
       return {
         ...state,
-        podcasts: _.without(state.podcasts, removed),
+        podcasts: _.reject(state.podcasts, { _id }),
       };
     case types.FAVORITES_DELETE_STATION_SUCC:
       return {
         ...state,
-        stations: _.without(state.stations, removed),
+        stations: _.reject(state.stations, { _id }),
       };
+    case types.FAVORITES_DELETE_FAIL:
+      return {
+        ...state,
+        message,
+      };
+
     default:
       return state;
   }
