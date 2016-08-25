@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Text,
   View,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
@@ -41,16 +42,31 @@ class BaseModal extends Component {
     );
   }
 
+  renderLoad() {
+    const AnimatableView = {
+      animation: 'fadeIn',
+      duration: 200,
+    };
+
+    return (
+      <Animatable.View {...AnimatableView} style={s.loadContainer}>
+        <Text style={s.loading}>Loading</Text>
+      </Animatable.View>
+    );
+  }
+
   render() {
     const { baseModal } = this.props;
-    const { playlistModal, searchModal } = baseModal;
-    const show = playlistModal || searchModal;
+    const { loadModal, playlistModal, searchModal } = baseModal;
+    const show = playlistModal || searchModal || loadModal;
     const container = show ? s.showContainer : s.hideContainer;
-    const innerContainer = show ? this.renderInner(show, playlistModal, searchModal) : null;
+    const innerContainer = playlistModal || searchModal ? this.renderInner(show, playlistModal, searchModal) : null;
+    const load = loadModal ? this.renderLoad() : null;
     return (
       <View style={container}>
         <Player />
         {innerContainer}
+        {load}
       </View>
     );
   }

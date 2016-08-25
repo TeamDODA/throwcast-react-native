@@ -13,6 +13,12 @@ export function showSearchModal() {
   };
 }
 
+export function showLoadModal() {
+  return {
+    type: 'LOAD_MODAL_SHOW',
+  };
+}
+
 export function hideModal() {
   return {
     type: 'MODAL_HIDE',

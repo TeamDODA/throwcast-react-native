@@ -1,6 +1,7 @@
 const initialState = {
   playlistModal: false,
   searchModal: false,
+  loadModal: false,
 };
 
 export default function (state = initialState, action) {
@@ -13,10 +14,15 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         searchModal: true,
       });
+    case 'LOAD_MODAL_SHOW':
+      return Object.assign({}, state, {
+        loadModal: true,
+      });
     case 'MODAL_HIDE':
       return Object.assign({}, state, {
         playlistModal: false,
         searchModal: false,
+        loadModal: false,
       });
     default:
       return state;

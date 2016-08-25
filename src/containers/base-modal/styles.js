@@ -13,6 +13,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,.9)',
     height: window.height,
   },
+  loadContainer: {
+    backgroundColor: 'rgba(0,0,0,.9)',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loading: {
+    color: '#FFF',
+    fontSize: 14,
+    fontFamily: 'Helvetica Neue',
+  },
   downButton: {
     backgroundColor: 'black',
     position: 'absolute',

@@ -1,4 +1,5 @@
 import { Actions } from 'react-native-router-flux';
+import { showLoadModal, hideModal } from '../base-modal/baseModalActions';
 import { BASE_API_URL } from '../../constants';
 
 export function queueLoadingInit() {
@@ -35,6 +36,7 @@ export function getQueue(list, type) {
   return (dispatch, getState) => {
     const url = `${BASE_API_URL}/api/${type}/${list._id}/`;
     const { auth } = getState();
+    dispatch(showLoadModal());
     dispatch(queueLoadingInit());
     dispatch(queueDetail(list));
     return fetch(url, {
@@ -51,6 +53,7 @@ export function getQueue(list, type) {
         dispatch(queueLoadingFail(response.message));
       } else {
         dispatch(queueLoadingSucc(response.podcasts, type));
+        dispatch(hideModal());
         Actions.queue();
       }
     })
