@@ -109,6 +109,7 @@ export function getFavorites() {
     })
     .then(response => response.json())
     .then(response => {
+      console.log(response);
       dispatch(favoritesPendingFalse());
       if (response.message) {
         dispatch(favoritesLoadingFail(response));
@@ -124,6 +125,7 @@ export function getFavorites() {
 
 export function addFavorite({ from, localField }) {
   return (dispatch, getState) => {
+    console.log('add', {from, localField});
     dispatch(favoritesPendingTrue());
     const { auth } = getState();
     return fetch(`${BASE_API_URL}/api/favorites/`, {

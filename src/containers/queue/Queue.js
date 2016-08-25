@@ -47,6 +47,7 @@ class Queue extends Component {
 
   componentWillMount() {
     const { queue, user } = this.props;
+
     this.favInfo = { localField: queue._id, from: queue.type };
     this.isOwner = queue.owner === user._id;
     this.button = this.isOwner ? deleteButton : favoriteButton;
@@ -146,7 +147,7 @@ class Queue extends Component {
         >
           <ListView
             dataSource={this.podcasts}
-            renderRow={(podcast, index) => (
+            renderRow={(podcast, si, index) => (
               <QueueEntry
                 key={index}
                 index={index}

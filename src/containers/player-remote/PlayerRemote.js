@@ -52,6 +52,7 @@ class PlayerRemote extends Component {
   }
   renderInfo() {
     const { player, playerRemote } = this.props;
+    console.log(this.props);
     const index = player.currentIndex;
     const podcast = player.podcastList[index];
     return (
