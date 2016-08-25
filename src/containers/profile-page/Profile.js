@@ -14,21 +14,26 @@ import { actions as favoriteActions } from '../../modules/favorite';
 import { getQueue } from '../queue/queueActions';
 import s from './profileStyles';
 
-const Profile = props => {
-  const { actions, favorite, user } = props;
+const FavoriteList = ({ actions, favorite, title, type }) => (
+  <View>
+    <Text style={s.listTitle}>Favorite {title}</Text>
+    <View style={s.scrollContainer}>
+      <ScrollView automaticallyAdjustContentInsets={false} horizontal>
+        {favorite[type].map((entry) =>
+          <ListEntry key={entry._id} {...actions} entry={entry} type="stations" />
+        )}
+      </ScrollView>
+    </View>
+  </View>
+);
+
+const Profile = ({ actions, favorite, user }) => {
+  const props = { actions, favorite };
   return (
     <View style={s.outerContainer}>
       <ScrollView>
         <View style={s.innerContainer}>
-          <Text style={s.listTitle}>Subscriptions</Text>
-          <View style={s.scrollContainer}>
-            <ScrollView automaticallyAdjustContentInsets={false} horizontal>
-              {favorite.stations.map((entry) =>
-                <ListEntry key={entry._id} {...actions} entry={entry} type="stations" />
-              )}
-            </ScrollView>
-          </View>
-          <Text style={s.listTitle}>My playlists</Text>
+          <Text style={s.listTitle}>My Playlists</Text>
           <View style={s.scrollContainer}>
             <ScrollView automaticallyAdjustContentInsets={false} horizontal>
               {user.playlists.map((entry) =>
@@ -36,6 +41,12 @@ const Profile = props => {
               )}
             </ScrollView>
           </View>
+          {!!favorite.stations.length &&
+            <FavoriteList {...props} title="Stations" type="stations" />}
+          {!!favorite.playlists.length &&
+            <FavoriteList {...props} title="Playlists" type="playlists" />}
+          {!!favorite.podcasts.length &&
+            <FavoriteList {...props} title="Podcasts" type="podcasts" />}
         </View>
       </ScrollView>
       <View style={s.header}>
@@ -48,12 +59,7 @@ const Profile = props => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  stations: state.station,
-  playlists: state.playlist,
-  favorite: state.favorite,
-  user: state.user,
-});
+const mapStateToProps = ({ favorite, user }) => ({ favorite, user });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
