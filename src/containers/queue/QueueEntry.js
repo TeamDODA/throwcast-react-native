@@ -27,13 +27,13 @@ const QueueEntry = props => {
     style: s.addButton,
     name: 'md-add',
     size: 30,
-    color: 'purple',
+    color: '#ff1aff',
   };
   const deleteButton = {
     style: s.addButton,
     name: 'md-remove',
     size: 30,
-    color: 'purple',
+    color: '#ff1aff',
   };
 
   if (player.queueId === queue._id && player.currentIndex === index) {

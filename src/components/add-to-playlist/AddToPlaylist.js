@@ -37,7 +37,7 @@ class AddToPlaylist extends Component {
           onChangeText={(text) => this.setState({ text })}
           value={this.state.text}
           placeholder="Create New Playlist"
-          placeholderTextColor="purple"
+          placeholderTextColor="#ff1aff"
         />
         <Icon
           style={s.buttons}

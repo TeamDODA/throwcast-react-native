@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   addButton: {
     marginTop: 10,
     marginLeft: 8,
-    color: 'purple',
+    color: '#ff1aff',
   },
   load: {
     marginTop: 10,

@@ -59,7 +59,7 @@ class Queue extends Component {
   renderStickyHeader() {
     const { actions, favorite, queue } = this.props;
     const isFavorite = _.find(favorite[queue.type], { _id: queue._id });
-    const pickColor = (this.isOwner || isFavorite) ? 'purple' : '#FFF';
+    const pickColor = (this.isOwner || isFavorite) ? '#ff1aff' : '#FFF';
     let onPress;
     let icon;
     if (favorite.pending) {
@@ -89,7 +89,7 @@ class Queue extends Component {
   renderForeground() {
     const { actions, favorite, queue } = this.props;
     const isFavorite = _.find(favorite[queue.type], { _id: queue._id });
-    const pickColor = (this.isOwner || isFavorite) ? 'purple' : '#FFF';
+    const pickColor = (this.isOwner || isFavorite) ? '#ff1aff' : '#FFF';
     let onPress;
     let icon;
     if (favorite.pending) {

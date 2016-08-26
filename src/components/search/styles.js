@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 30,
     marginTop: 10,
-    color: 'purple',
+    color: '#ff1aff',
   },
   buttons: {
     position: 'absolute',

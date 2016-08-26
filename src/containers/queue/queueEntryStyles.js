@@ -17,7 +17,7 @@ const queueEntryStyles = StyleSheet.create({
     height: 66,
   },
   activeTitle: {
-    color: 'purple',
+    color: '#ff1aff',
     fontFamily: 'HelveticaNeue-Medium',
     fontSize: 12,
     paddingLeft: 10,

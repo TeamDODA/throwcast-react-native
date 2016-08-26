@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeBox: {
-    backgroundColor: 'rgba(128,0,128,0.4)',
+    backgroundColor: 'rgba(204, 0, 204, 0.9)',
   },
   inactiveBox: {
     backgroundColor: 'rgba(0,0,0,0.9)',
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   inactiveButton: {
     marginTop: 7,
-    color: 'purple',
+    color: '#ff1aff',
   },
   text: {
     marginTop: 12,

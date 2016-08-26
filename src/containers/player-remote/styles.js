@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   sliderThumb: {
     width: 10,
     height: 10,
-    backgroundColor: 'purple',
+    backgroundColor: '#ff1aff',
     borderRadius: 10 / 2,
     shadowColor: '#FFF',
     shadowOffset: { width: 0, height: 0 },

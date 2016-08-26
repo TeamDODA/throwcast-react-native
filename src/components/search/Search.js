@@ -58,7 +58,7 @@ class Search extends Component {
           onChangeText={(query) => this.setState({ query })}
           value={this.state.query}
           placeholder="Search..."
-          placeholderTextColor="purple"
+          placeholderTextColor="#ff1aff"
         />
         {icon}
       </Animatable.View>

@@ -33,7 +33,7 @@ class PlayerRemote extends Component {
     const podcastId = player.podcastList[player.currentIndex]._id;
     const favInfo = { localField: podcastId, from: 'podcasts' };
     const isFavorite = _.find(favorite.podcasts, { _id: podcastId });
-    const pickColor = isFavorite ? 'purple' : '#FFF';
+    const pickColor = isFavorite ? '#ff1aff' : '#FFF';
     let onPress;
     let icon;
     if (favorite.pending) {
@@ -121,7 +121,7 @@ class PlayerRemote extends Component {
             onSlidingStart={actions.slide}
             onValueChange={(value) => this.slideChange(value)}
             onSlidingComplete={() => this.slideComplete()}
-            minimumTrackTintColor="purple"
+            minimumTrackTintColor="#ff1aff"
             style={s.slider}
             trackStyle={s.sliderTrack}
             thumbStyle={s.sliderThumb}
