@@ -16,6 +16,9 @@ const ListEntry = ({ entry, getQueue, type }) => {
   } else {
     description = entry.description ? entry.description.short : entry.description.long;
   }
+  if (type === 'userPlaylists') {
+    type = 'playlists'; // eslint-disable-line no-param-reassign
+  }
   return (
     <TouchableHighlight onPress={() => getQueue(entry, type)}>
       <View style={s.box}>
