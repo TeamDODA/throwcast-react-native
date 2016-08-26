@@ -29,9 +29,9 @@ class SignIn extends Component {
             onPress={() => actions.signIn(authForm)}
             disabled={auth.pending}
           >
-            <Text style={s.buttonText}>Sign in</Text>
+            <Text style={s.buttonText}>Login</Text>
           </TouchableHighlight>
-          <Text style={s.signUp} onPress={actions.toSignUp}>Sign Up</Text>
+          <Text style={s.signUp} onPress={actions.toSignUp}>Sign up</Text>
           {auth.message && <Text style={s.notification}>{auth.message}</Text>}
         </View>
       </View>

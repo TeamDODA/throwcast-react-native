@@ -28,9 +28,9 @@ const SignUp = props => {
             disabled={auth.pending}
             underlayColor="#99d9f4"
           >
-            <Text style={s.buttonText}>Sign Up</Text>
+            <Text style={s.buttonText}>Sign up</Text>
           </TouchableHighlight>
-          <Text style={s.signIn} onPress={actions.toSignIn}>Sign In</Text>
+          <Text style={s.signIn} onPress={actions.toSignIn}>Login</Text>
           {auth.message && <Text style={s.notification}>{auth.message}</Text>}
         </View>
       </View>
