@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   buttonText: {
-    fontSize: 14,
+    fontSize: 20,
     color: 'white',
     alignSelf: 'center',
   },
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: '#FFF',
     alignSelf: 'center',
-    fontSize: 20,
+    fontSize: 14,
   },
   notification: {
     backgroundColor: 'transparent',

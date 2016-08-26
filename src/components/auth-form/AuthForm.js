@@ -7,7 +7,8 @@ const groupCSS = t.form.Form.stylesheet.formGroup.normal;
 
 Object.assign(textBoxCSS, {
   marginBottom: -5,
-  paddingLeft: 20,
+  marginLeft: 20,
+  marginRight: 20,
   borderWidth: 0,
   color: '#FFF',
 });
