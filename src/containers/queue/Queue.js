@@ -33,8 +33,8 @@ const favoriteButton = {
   size: 30,
 };
 const deleteButton = {
-  name: 'md-remove',
-  size: 30,
+  name: 'ios-trash',
+  size: 35,
 };
 
 class Queue extends Component {
@@ -53,7 +53,7 @@ class Queue extends Component {
     this.button = this.isOwner ? deleteButton : favoriteButton;
     this.podcasts = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
-    }).cloneWithRows(queue.podcasts);
+    }).cloneWithRows(queue.podcasts.splice(0, 30));
   }
 
   renderStickyHeader() {
@@ -154,6 +154,7 @@ class Queue extends Component {
                 queue={queue}
                 podcast={podcast}
                 player={player}
+                owner={this.isOwner}
                 selectPodcast={actions.selectPodcast}
                 selectPodcastToAdd={actions.selectPodcastToAdd}
                 updatePlaylist={actions.updatePlaylist}

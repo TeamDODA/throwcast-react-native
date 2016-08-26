@@ -42,7 +42,7 @@ const Profile = ({ actions, favorite, user, player }) => {
           <View style={s.scrollContainer}>
             <ScrollView automaticallyAdjustContentInsets={false} horizontal>
               {user.playlists.map((entry) =>
-                <ListEntry key={entry._id} {...actions} entry={entry} type="userPlaylists" />
+                <ListEntry key={entry._id} {...actions} entry={entry} type="playlists" />
               )}
             </ScrollView>
           </View>

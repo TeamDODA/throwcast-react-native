@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import s from './queueEntryStyles';
 
 const QueueEntry = (
-  { index, queue, podcast, player, selectPodcast, selectPodcastToAdd, updatePlaylist }) => {
+  { index, queue, podcast, player, selectPodcast, selectPodcastToAdd, updatePlaylist, owner }) => {
   let updateButton;
   let titleStyle;
   let changePodcast = false;
@@ -34,7 +34,7 @@ const QueueEntry = (
     changePodcast = true;
   }
 
-  if (queue.type === 'userPlaylists') {
+  if (owner) {
     updateButton = <Icon {...deleteButton} onPress={() => updatePlaylist(queue, podcast, true)} />;
   } else {
     updateButton = <Icon {...addButton} onPress={() => selectPodcastToAdd(podcast)} />;
