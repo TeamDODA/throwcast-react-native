@@ -53,7 +53,7 @@ class Queue extends Component {
     this.button = this.isOwner ? deleteButton : favoriteButton;
     this.podcasts = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
-    }).cloneWithRows(queue.podcasts.splice(0, 30));
+    }).cloneWithRows(queue.podcasts.slice(0, 100));
   }
 
   renderStickyHeader() {

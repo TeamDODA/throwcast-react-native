@@ -8,8 +8,17 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import s from './queueEntryStyles';
 
-const QueueEntry = (
-  { index, queue, podcast, player, selectPodcast, selectPodcastToAdd, updatePlaylist, owner }) => {
+const QueueEntry = props => {
+  const {
+    index,
+    owner,
+    player,
+    podcast,
+    queue,
+    selectPodcast,
+    selectPodcastToAdd,
+    updatePlaylist,
+  } = props;
   let updateButton;
   let titleStyle;
   let changePodcast = false;
