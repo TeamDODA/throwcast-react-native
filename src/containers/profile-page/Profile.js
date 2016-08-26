@@ -12,6 +12,7 @@ import ListEntry from '../homepage/ListEntry';
 import PodcastEntry from '../homepage/PodcastEntry';
 import { actions as playlistActions } from '../../modules/playlist';
 import { actions as favoriteActions } from '../../modules/favorite';
+import { actions as playerActions } from '../../modules/player';
 import { getQueue } from '../queue/queueActions';
 import s from './profileStyles';
 
@@ -41,7 +42,7 @@ const Profile = ({ actions, favorite, user, player }) => {
           <View style={s.scrollContainer}>
             <ScrollView automaticallyAdjustContentInsets={false} horizontal>
               {user.playlists.map((entry) =>
-                <ListEntry key={entry._id} {...actions} entry={entry} type="playlists" />
+                <ListEntry key={entry._id} {...actions} entry={entry} type="userPlaylists" />
               )}
             </ScrollView>
           </View>
@@ -70,6 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
     getQueue,
     ...favoriteActions,
     ...playlistActions,
+    ...playerActions,
   }, dispatch),
 });
 
