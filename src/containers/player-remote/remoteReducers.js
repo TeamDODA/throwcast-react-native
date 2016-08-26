@@ -42,6 +42,13 @@ export default function (state = initialState, action) {
         duration: 0,
         animation: action.animation,
       };
+    case 'PLAYER_INIT':
+      return {
+        ...state,
+        currentTime: 0,
+        duration: 0,
+        animation: 'slideInRight',
+      };
     default:
       return state;
   }

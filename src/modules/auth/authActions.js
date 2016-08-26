@@ -4,7 +4,7 @@ import store from 'react-native-simple-store';
 import { types } from './';
 import { authFormInit } from '../../components/auth-form/authFormActions';
 import { changeFocus } from '../navbar/navbarActions';
-import { initializePlayer } from '../player/playerActions';
+import { playerInit } from '../player/playerActions';
 import { getFavorites } from '../favorite/favoriteActions';
 import { setUser, unsetUser, getUserPlaylists } from '../user/userActions';
 import { BASE_API_URL } from '../../constants';
@@ -84,7 +84,7 @@ export function signUp(credentials) {
 const navigateTo = function navigateTo(next) {
   return dispatch => store.delete('@Auth:token')
     .then(() => {
-      dispatch(initializePlayer());
+      dispatch(playerInit());
       dispatch(changeFocus('homepage'));
       dispatch(authFormInit());
       dispatch(authInit());

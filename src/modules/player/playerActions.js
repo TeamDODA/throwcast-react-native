@@ -1,8 +1,8 @@
 import { Actions } from 'react-native-router-flux';
 
-export function initializePlayer() {
+export function playerInit() {
   return {
-    type: 'INIT_PLAYER',
+    type: 'PLAYER_INIT',
   };
 }
 
@@ -25,7 +25,7 @@ export function select(queueId, podcasts, currentIndex) {
 export function selectPodcast(queueId, podcasts, index, changePodcast) {
   return (dispatch) => {
     if (changePodcast) {
-      dispatch(initializePlayer());
+      dispatch(playerInit());
       dispatch(select(queueId, podcasts, index));
     }
 
@@ -36,6 +36,12 @@ export function selectPodcast(queueId, podcasts, index, changePodcast) {
 export function togglePlay() {
   return {
     type: 'TOGGLE_PLAY',
+  };
+}
+
+export function stopPlay() {
+  return {
+    type: 'STOP_PLAY',
   };
 }
 
@@ -70,7 +76,8 @@ export function nextPodcast() {
   return (dispatch, getState) => {
     const { player } = getState();
     const animation = player.currentIndex % 2 ? 'slideInRight' : 'bounceInRight';
-    dispatch(next(animation));
+    dispatch(stopPlay());
+    setTimeout(() => dispatch(next(animation)), 10);
   };
 }
 
@@ -78,7 +85,8 @@ export function previousPodcast() {
   return (dispatch, getState) => {
     const { player } = getState();
     const animation = player.currentIndex % 2 ? 'slideInLeft' : 'bounceInLeft';
-    dispatch(previous(animation));
+    dispatch(stopPlay());
+    setTimeout(() => dispatch(previous(animation)), 10);
   };
 }
 

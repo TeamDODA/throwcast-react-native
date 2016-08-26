@@ -17,11 +17,11 @@ class Player extends Component {
     const { player, actions } = this.props;
     const index = player.currentIndex;
     const podcast = player.podcastList[index];
-
+    const uri = player.playing === null ? 'http://' : podcast.enclosure.url;
     return (
       <View>
         <Video
-          source={{ uri: podcast.enclosure.url }}
+          source={{ uri }}
           ref={c => (this.audio = c)}
           volume={1.0}
           muted={false}

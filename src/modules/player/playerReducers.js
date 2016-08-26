@@ -11,6 +11,7 @@ const initialState = {
   muted: false,
 };
 
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'SELECT_PODCAST':
@@ -27,22 +28,29 @@ export default function (state = initialState, action) {
         ...state,
         playing: !state.playing,
       };
+    case 'STOP_PLAY':
+      return {
+        ...state,
+        playing: null,
+      };
     case 'NEXT_PODCAST':
       return {
         ...state,
         currentIndex: state.currentIndex + 1,
+        playing: true,
       };
     case 'PREVIOUS_PODCAST':
       return {
         ...state,
         currentIndex: state.currentIndex - 1,
+        playing: true,
       };
     case 'SLIDE':
       return {
         ...state,
         playing: false,
       };
-    case 'INIT_PLAYER':
+    case 'PLAYER_INIT':
       return { ...initialState };
     default:
       return state;
