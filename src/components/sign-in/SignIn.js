@@ -41,7 +41,7 @@ class SignIn extends Component {
   renderLoading() {
     return (
       <View style={s.loadContainer}>
-        <Spinner type="Wave" size={40} color="#FFFFFF" />
+        <Spinner type="Wave" size={100} color="#FFFFFF" />
       </View>
     );
   }

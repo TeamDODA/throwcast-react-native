@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#121212',
     flex: 1,
     height: window.height,
+    paddingBottom: 40,
   },
   innerContainer: {
     marginTop: 40,

@@ -19,6 +19,7 @@ const queueStyles = StyleSheet.create({
     backgroundColor: '#121212',
     flex: 1,
     height: window.height,
+    paddingBottom: 40,
   },
   backgroundOverlay: {
     position: 'absolute',
@@ -31,7 +32,7 @@ const queueStyles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: '#000',
     width: window.width,
-    height: window.height,
+    height: window.height - 40,
     top: 0,
     bottom: 0,
     left: 0,
