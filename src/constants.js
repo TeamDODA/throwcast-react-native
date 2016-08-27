@@ -1,5 +1,5 @@
 /* eslint-disable */
-export const PROTOCOL = 'http://';
+export const PROTOCOL = 'https://';
 export const DOMAIN = 'api.throwcast.com';
 export const BASE_API_URL = `${PROTOCOL}${DOMAIN}`;
 export const DEFAULT_IMAGE = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTmzX9sOTMC_wum7KdQxZu0xxu0E12uVOsZPgmwsub3ETwdQRNgw';
