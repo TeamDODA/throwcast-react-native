@@ -147,6 +147,9 @@ class Queue extends Component {
         >
           <ListView
             dataSource={this.podcasts}
+            initialListSize={15}
+            pageSize={5}
+            scrollRenderAheadDistance={10}
             renderRow={(podcast, si, index) => (
               <QueueEntry
                 key={index}
