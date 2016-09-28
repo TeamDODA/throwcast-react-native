@@ -110,8 +110,11 @@ export function onLoad({ duration }) {
 }
 
 export function onProgress({ currentTime }) {
-  return (dispatch) => {
-    dispatch(setCurrentTime(currentTime));
+  return (dispatch, getState) => {
+    const { playerRemote } = getState();
+    if (playerRemote.duration) {
+      dispatch(setCurrentTime(currentTime));
+    }
   };
 }
 
