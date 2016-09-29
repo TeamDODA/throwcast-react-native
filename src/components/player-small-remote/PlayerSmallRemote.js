@@ -65,7 +65,7 @@ class PlayerSmallRemote extends Component {
             style={s.slider}
             trackStyle={s.sliderTrack}
             thumbStyle={s.sliderThumb}
-            value={playerRemote.currentTime / playerRemote.duration}
+            value={playerRemote.duration ? playerRemote.currentTime / playerRemote.duration : 0}
           />
         </View>
         <View style={s.infoContainer}>
